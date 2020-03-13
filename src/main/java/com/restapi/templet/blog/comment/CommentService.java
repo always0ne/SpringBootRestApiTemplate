@@ -7,6 +7,8 @@ import com.restapi.templet.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -19,6 +21,8 @@ public class CommentService {
                 .orElseThrow(()->new PostNotFoundException("존재하지 않는 게시글입니다."));
         Comment comment = new Comment();
         commentDto.toEntity(comment);
+        comment.setCreatedDate(LocalDateTime.now());
+        comment.setModifiedDate(LocalDateTime.now());
         Comment addedComment = this.commentRepository.save(comment);
         post.getComments().add(comment);
         this.postRepository.save(post);
@@ -32,6 +36,7 @@ public class CommentService {
                 .orElseThrow(()->new CommentNotFoundException("존재하지 않는 댓글입니다."));
         post.getComments().remove(comment);
         commentDto.toEntity(comment);
+        comment.setModifiedDate(LocalDateTime.now());
         post.getComments().add(this.commentRepository.save(comment));
         this.postRepository.save(post);
     }

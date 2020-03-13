@@ -188,7 +188,10 @@ class PostControllerTest extends BaseControllerTest {
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}",post.getPostId()))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("deletePost"));
+                .andDo(document("deletePost",
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 아이디")
+                        )));
     }
 
 

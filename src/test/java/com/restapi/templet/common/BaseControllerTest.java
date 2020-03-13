@@ -60,6 +60,8 @@ public class BaseControllerTest {
                 .commenterId("댓글 작성자"+i)
                 .message(i+"번째 댓글")
                 .build();
+        comment.setCreatedDate(LocalDateTime.now());
+        comment.setModifiedDate(LocalDateTime.now());
         Comment savedComment = this.commentRepository.save(comment);
         post.getComments().add(savedComment);
         this.postRepository.save(post);

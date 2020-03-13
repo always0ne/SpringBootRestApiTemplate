@@ -73,14 +73,14 @@ Eskiiimo;
 
 `Get` 요청을 사용해서 게시글 목록을 조회 할 수 있다.
 
-operation::getPosts[snippets='curl-request,http-response,links']
+operation::getPosts[snippets='curl-request,http-response']
 
 [[sendPost]]
 === 게시글 작성
 
 `Post` 요청을 사용해서 게시글을 작성 할 수 있다.
 
-operation::sendPost[snippets='curl-request,path-parameters,http-request,http-response,links']
+operation::sendPost[snippets='curl-request,http-request,http-response']
 
 [[getPost]]
 === 게시글 조회
@@ -94,32 +94,32 @@ operation::getPost[snippets='curl-request,path-parameters,http-response,links']
 
 `Put` 요청을 사용해서 게시글을 수정 할 수 있다.
 
-operation::updatePost[snippets='curl-request,path-parameters,http-request,http-response,links']
+operation::updatePost[snippets='curl-request,path-parameters,http-request,http-response']
 
 [[deletePost]]
 === 게시글 삭제
 
 `Delete` 요청을 사용해서 게시글을 삭제 할 수 있다.
 
-operation::deletePost[snippets='curl-request,path-parameters,http-response,links']
+operation::deletePost[snippets='curl-request,path-parameters,http-response']
 
 [[sendComment]]
 === 댓글 작성
 
 `Post` 요청을 사용해서 댓글을 작성 할 수 있다.
 
-operation::sendComment[snippets='curl-request,path-parameters,http-request,http-response,links']
+operation::sendComment[snippets='curl-request,path-parameters,http-request,http-response']
 
 [[updateComment]]
 === 댓글 수정
 
 `Put` 요청을 사용해서 댓글을 수정 할 수 있다.
 
-operation::updateComment[snippets='curl-request,path-parameters,http-request,http-response,links']
+operation::updateComment[snippets='curl-request,path-parameters,http-request,http-response']
 
 [[deleteComment]]
 === 댓글 삭제
 
 `Delete` 요청을 사용해서 댓글을 삭제 할 수 있다.
 
-operation::deleteComment[snippets='curl-request,path-parameters,http-response,links']
+operation::deleteComment[snippets='curl-request,path-parameters,http-response']

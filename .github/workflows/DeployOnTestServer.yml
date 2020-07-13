@@ -1,18 +1,18 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Deploy on Test Server
 
 on:
-  push:
-    branches: [ master, develop ]
   pull_request:
-    branches: [ master, develop ]
+    types: [closed] # when PR closed
+    branches: [ develop ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
 
     steps:
     - uses: actions/checkout@v2
@@ -22,5 +22,15 @@ jobs:
         java-version: 11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      ## Build Project
     - name: Build with Gradle
       run: ./gradlew build
+      # Docker Package 배포
+    - name: Publish Image
+      uses: matootie/github-docker@v3.0.0
+      with:
+        accessToken: ${{ secrets.TOKEN }}
+        tag: |
+          latest
+          ${{github.sha}}
+        imageName: test

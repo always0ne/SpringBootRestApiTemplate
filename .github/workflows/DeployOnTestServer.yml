@@ -40,5 +40,4 @@ jobs:
         command: sudo docker stop testserver && sudo docker rm testserver && sudo docker run -d  -p 8080:8080 --name=testserver --restart=unless-stopped docker.pkg.github.com/always0ne/${{github.repository}}/release:${{github.sha}}
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.PRIVATE_KEY}}

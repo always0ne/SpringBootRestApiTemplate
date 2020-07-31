@@ -1,4 +1,4 @@
-package com.restapi.templet.blog.comment;
+package com.restapi.templet.blog.comment.request;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommentDto {
+public class AddCommentRequest {
     private String commenterId;
     private String message;
 }

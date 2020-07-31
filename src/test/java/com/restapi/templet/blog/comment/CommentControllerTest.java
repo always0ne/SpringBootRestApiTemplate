@@ -1,7 +1,10 @@
 package com.restapi.templet.blog.comment;
 
+import com.restapi.templet.blog.comment.request.AddCommentRequest;
+import com.restapi.templet.blog.comment.request.UpdateCommentRequest;
 import com.restapi.templet.blog.post.Post;
 import com.restapi.templet.common.BaseControllerTest;
+import org.hibernate.sql.Update;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -25,13 +28,13 @@ class CommentControllerTest extends BaseControllerTest {
     @DisplayName("댓글 쓰기")
     void saveComment() throws Exception {
         Post post = this.getneratePost(1);
-        CommentDto commentDto = CommentDto.builder()
+        AddCommentRequest addCommentRequest = AddCommentRequest.builder()
                 .commenterId("댓글 작성자")
                 .message("댓글 테스트")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(commentDto)))
+                .content(this.objectMapper.writeValueAsString(addCommentRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("sendComment",
@@ -55,13 +58,12 @@ class CommentControllerTest extends BaseControllerTest {
     void updateComment() throws Exception {
         Post post = this.getneratePost(1);
         long commentId = this.addComment(post, 1);
-        CommentDto commentDto = CommentDto.builder()
-                .commenterId("댓글 작성자")
+        UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(commentDto)))
+                .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("updateComment",
@@ -70,7 +72,6 @@ class CommentControllerTest extends BaseControllerTest {
                                 parameterWithName("commentId").description("댓글 번호")
                         ),
                         requestFields(
-                                fieldWithPath("commenterId").description("댓글 작성자 Id"),
                                 fieldWithPath("message").description("댓글")
                         )));
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))

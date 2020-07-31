@@ -1,6 +1,6 @@
 package com.restapi.templet.blog.post;
 
-import com.restapi.templet.blog.post.dto.PostDto;
+import com.restapi.templet.blog.post.request.AddPostRequest;
 import com.restapi.templet.common.BaseControllerTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,14 +64,14 @@ class PostControllerTest extends BaseControllerTest {
     @Transactional
     @DisplayName("포스트 저장")
     void savePost() throws Exception {
-        PostDto postDto = PostDto.builder()
+        AddPostRequest addPostRequest = AddPostRequest.builder()
                 .title("포스트 제목")
                 .writerId("웹마스터")
                 .body("포스트 입력 테스트입니다.")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(postDto)))
+                .content(this.objectMapper.writeValueAsString(addPostRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("sendPost",
@@ -151,7 +151,7 @@ class PostControllerTest extends BaseControllerTest {
     @DisplayName("포스트 수정")
     void updatePost() throws Exception {
         Post post = this.getneratePost(1);
-        PostDto postDto = PostDto.builder()
+        AddPostRequest addPostRequest = AddPostRequest.builder()
                 .title("수정된 포스트")
                 .writerId("작성자1")
                 .body("포스트 수정 테스트입니다.")
@@ -159,7 +159,7 @@ class PostControllerTest extends BaseControllerTest {
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(postDto)))
+                .content(this.objectMapper.writeValueAsString(addPostRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("updatePost",

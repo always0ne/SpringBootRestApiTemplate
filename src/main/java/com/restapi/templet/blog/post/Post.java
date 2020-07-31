@@ -2,7 +2,6 @@ package com.restapi.templet.blog.post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.templet.blog.comment.Comment;
-import com.restapi.templet.blog.post.dto.PostDetailDto;
 import com.restapi.templet.common.Date;
 import lombok.Builder;
 import lombok.Getter;
@@ -66,18 +65,7 @@ public class Post extends Date {
         this.comments.set(this.comments.indexOf(comment), comment);
     }
 
-    public PostDetailDto toDetailDto() {
+    public void increaseViews() {
         this.views++;
-        if (this.comments == null)
-            this.comments = new ArrayList<Comment>();
-        return PostDetailDto.builder()
-                .title(this.title)
-                .body(this.body)
-                .wirterId(this.writerId)
-                .comments(this.comments)
-                .createdDate(this.getCreatedDate())
-                .modifiedDate(this.getModifiedDate())
-                .views(this.views)
-                .build();
     }
 }

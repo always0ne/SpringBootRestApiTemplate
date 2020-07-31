@@ -1,14 +1,13 @@
-package com.restapi.templet.blog.post.dto;
+package com.restapi.templet.blog.post.request;
 
 import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostDto {
+public class AddPostRequest {
     private String title;
     private String writerId;
     private String body;

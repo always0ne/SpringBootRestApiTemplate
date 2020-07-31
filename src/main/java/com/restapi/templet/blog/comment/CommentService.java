@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -38,7 +36,7 @@ public class CommentService {
         Comment comment = this.commentRepository.findByCommentId(commentId)
                 .orElseThrow(() -> new CommentNotFoundException("존재하지 않는 댓글입니다."));
 
-        post.updateComment(comment,commentDto.getMessage());
+        post.updateComment(comment, commentDto.getMessage());
     }
 
     @Transactional

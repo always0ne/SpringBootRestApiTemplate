@@ -1,6 +1,5 @@
 package com.restapi.templet.blog.post.dto;
 
-import com.restapi.templet.blog.post.Post;
 import lombok.*;
 
 @Getter

@@ -70,8 +70,8 @@ class PostControllerTest extends BaseControllerTest {
                 .body("포스트 입력 테스트입니다.")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(this.objectMapper.writeValueAsString(postDto)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(postDto)))
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("sendPost",
@@ -80,7 +80,7 @@ class PostControllerTest extends BaseControllerTest {
                                 fieldWithPath("writerId").description("작성자 아이디"),
                                 fieldWithPath("body").description("게시글 내용")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("포스트 제목"))
                 .andExpect(jsonPath("writerId").value("웹마스터"))
@@ -93,9 +93,9 @@ class PostControllerTest extends BaseControllerTest {
     @DisplayName("포스트 조회")
     void getPost() throws Exception {
         Post post = this.getneratePost(1);
-        this.addComment(post,1);
-        this.addComment(post,2);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
+        this.addComment(post, 1);
+        this.addComment(post, 2);
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("게시글1"))
                 .andExpect(jsonPath("writerId").value("작성자1"))
@@ -157,7 +157,7 @@ class PostControllerTest extends BaseControllerTest {
                 .body("포스트 수정 테스트입니다.")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}",post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(postDto)))
                 .andExpect(status().isOk())
@@ -172,7 +172,7 @@ class PostControllerTest extends BaseControllerTest {
                                 fieldWithPath("body").description("게시글 내용")
                         )
                 ));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("수정된 포스트"))
                 .andExpect(jsonPath("writerId").value("작성자1"))
@@ -185,7 +185,7 @@ class PostControllerTest extends BaseControllerTest {
     @DisplayName("포스트 삭제")
     void deletePost() throws Exception {
         Post post = this.getneratePost(1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}",post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("deletePost",

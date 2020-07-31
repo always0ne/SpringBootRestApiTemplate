@@ -1,7 +1,6 @@
 package com.restapi.templet.common;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,17 +17,17 @@ public class Date {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime  createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    public Date(){
+    public Date() {
         this.createdDate = LocalDateTime.now();
         this.modifiedDate = LocalDateTime.now();
     }
 
-    protected void update(){
+    protected void update() {
         this.modifiedDate = LocalDateTime.now();
     }
 }

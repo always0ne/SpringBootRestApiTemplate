@@ -17,11 +17,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs(uriScheme= "https",uriHost = "templet.restapi.com" ,uriPort = 443)
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "templet.restapi.com", uriPort = 443)
 @Transactional
 @Import(RestDocsConfiguration.class)
 @ActiveProfiles("test")
@@ -44,18 +42,18 @@ public class BaseControllerTest {
     @Transactional
     protected Post getneratePost(int i) {
         Post post = Post.builder()
-                .title("게시글"+i)
-                .writerId("작성자"+ i)
+                .title("게시글" + i)
+                .writerId("작성자" + i)
                 .body("게시글 본문입니다.")
                 .build();
         return this.postRepository.save(post);
     }
 
     @Transactional
-    protected long addComment(Post post, int i){
+    protected long addComment(Post post, int i) {
         Comment comment = Comment.builder()
-                .commenterId("댓글 작성자"+i)
-                .message(i+"번째 댓글")
+                .commenterId("댓글 작성자" + i)
+                .message(i + "번째 댓글")
                 .build();
         Comment savedComment = this.commentRepository.save(comment);
         post.addComment(savedComment);

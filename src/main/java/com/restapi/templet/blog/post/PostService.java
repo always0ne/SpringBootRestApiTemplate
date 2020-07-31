@@ -9,13 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
+
     @Transactional
     public Page<Post> getPosts(Pageable pageable) {
         return this.postRepository.findAll(pageable);
@@ -35,15 +34,15 @@ public class PostService {
     @Transactional
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
-                .orElseThrow(()->new PostNotFoundException("존재하지 않는 게시글입니다."));
+                .orElseThrow(() -> new PostNotFoundException("존재하지 않는 게시글입니다."));
         return post.toDetailDto();
     }
 
     @Transactional
     public void updatePost(Long postId, PostDto postDto) {
         Post post = this.postRepository.findByPostId(postId)
-                .orElseThrow(()->new PostNotFoundException("존재하지 않는 게시글입니다."));
-        post.updatePost(postDto.getTitle(),postDto.getBody());
+                .orElseThrow(() -> new PostNotFoundException("존재하지 않는 게시글입니다."));
+        post.updatePost(postDto.getTitle(), postDto.getBody());
     }
 
     @Transactional

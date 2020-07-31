@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value ="/docs/index.html")
+@RequestMapping(value = "/docs/index.html")
 public class DocsController {
 }

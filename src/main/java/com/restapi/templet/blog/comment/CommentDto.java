@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.Column;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,9 +14,4 @@ import javax.persistence.Column;
 public class CommentDto {
     private String commenterId;
     private String message;
-
-    public void toEntity(Comment comment){
-        comment.setCommenterId(this.commenterId);
-        comment.setMessage(this.message);
-    }
 }

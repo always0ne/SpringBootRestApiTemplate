@@ -11,11 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 public class Post extends Date {
     @Id
     @JsonIgnore
@@ -37,12 +34,41 @@ public class Post extends Date {
 
     @JsonIgnore
     @OneToMany
-    @Builder.Default
     @JoinColumn(name = "post_id")
-    private List<Comment> comments = new ArrayList<Comment>();
+    private List<Comment> comments;
+
+    @Builder
+    public Post(String writerId, String title, String body){
+        super();
+        this.writerId = writerId;
+        this.title = title;
+        this.body = body;
+        this.views = (long)0;
+    }
+
+    public void updatePost(String title, String body){
+        this.title = title;
+        this.body = body;
+        this.update();
+    }
+
+    public Long addComment(Comment comment){
+        if(this.comments == null)
+            this.comments = new ArrayList<Comment>();
+        this.comments.add(comment);
+        return comment.getCommentId();
+    }
+
+    public void updateComment(Comment comment, String message){
+        comment.updateComment(message);
+        this.comments.set(this.comments.indexOf(comment),comment);
+    }
 
     public PostDetailDto toDetailDto(){
-        PostDetailDto postDetailDto = PostDetailDto.builder()
+        this.views++;
+        if(this.comments==null)
+            this.comments = new ArrayList<Comment>();
+        return PostDetailDto.builder()
                 .title(this.title)
                 .body(this.body)
                 .wirterId(this.writerId)
@@ -51,6 +77,5 @@ public class Post extends Date {
                 .modifiedDate(this.getModifiedDate())
                 .views(this.views)
                 .build();
-        return postDetailDto;
     }
 }

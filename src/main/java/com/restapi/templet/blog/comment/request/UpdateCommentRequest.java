@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class addCommentRequest {
-    private String commenterId;
+public class UpdateCommentRequest {
     private String message;
 }

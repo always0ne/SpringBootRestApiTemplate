@@ -76,7 +76,7 @@ class CommentControllerTest extends BaseControllerTest {
                         )));
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("comments[0].commenterId").value("댓글 작성자"))
+                .andExpect(jsonPath("comments[0].commenterId").value("댓글 작성자1"))
                 .andExpect(jsonPath("comments[0].message").value("댓글 수정 테스트"));
     }
     

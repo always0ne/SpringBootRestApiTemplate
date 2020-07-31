@@ -18,38 +18,32 @@ public class PostService {
     private final PostRepository postRepository;
     @Transactional
     public Page<Post> getPosts(Pageable pageable) {
-        Page<Post> posts = this.postRepository.findAll(pageable);
-        return posts;
+        return this.postRepository.findAll(pageable);
     }
 
     @Transactional
     public Long savePost(PostDto postDto) {
-        Post newPost = new Post();
-        postDto.toEntity(newPost);
-        newPost.setViews((long)0);
-        newPost.setCreatedDate(LocalDateTime.now());
-        newPost.setModifiedDate(LocalDateTime.now());
-        Post post= this.postRepository.save(newPost);
-        return post.getPostId();
+        Post newPost = Post.builder()
+                .writerId(postDto.getWriterId())
+                .title(postDto.getTitle())
+                .body(postDto.getBody())
+                .build();
+
+        return this.postRepository.save(newPost).getPostId();
     }
 
     @Transactional
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(()->new PostNotFoundException("존재하지 않는 게시글입니다."));
-        post.setViews(post.getViews()+1);
-        PostDetailDto postDetailDto = post.toDetailDto();
-        this.postRepository.save(post);
-        return postDetailDto;
+        return post.toDetailDto();
     }
 
     @Transactional
     public void updatePost(Long postId, PostDto postDto) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(()->new PostNotFoundException("존재하지 않는 게시글입니다."));
-        postDto.toEntity(post);
-        post.setModifiedDate(LocalDateTime.now());
-        this.postRepository.save(post);
+        post.updatePost(postDto.getTitle(),postDto.getBody());
     }
 
     @Transactional

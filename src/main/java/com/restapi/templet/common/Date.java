@@ -12,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class Date {
@@ -23,4 +22,13 @@ public class Date {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public Date(){
+        this.createdDate = LocalDateTime.now();
+        this.modifiedDate = LocalDateTime.now();
+    }
+
+    protected void update(){
+        this.modifiedDate = LocalDateTime.now();
+    }
 }

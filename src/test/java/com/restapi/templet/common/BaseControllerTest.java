@@ -47,10 +47,7 @@ public class BaseControllerTest {
                 .title("게시글"+i)
                 .writerId("작성자"+ i)
                 .body("게시글 본문입니다.")
-                .views((long)0)
                 .build();
-        post.setCreatedDate(LocalDateTime.now());
-        post.setModifiedDate(LocalDateTime.now());
         return this.postRepository.save(post);
     }
 
@@ -60,10 +57,8 @@ public class BaseControllerTest {
                 .commenterId("댓글 작성자"+i)
                 .message(i+"번째 댓글")
                 .build();
-        comment.setCreatedDate(LocalDateTime.now());
-        comment.setModifiedDate(LocalDateTime.now());
         Comment savedComment = this.commentRepository.save(comment);
-        post.getComments().add(savedComment);
+        post.addComment(savedComment);
         this.postRepository.save(post);
         return savedComment.getCommentId();
 

@@ -153,7 +153,7 @@ class PostControllerTest extends BaseControllerTest {
         Post post = this.getneratePost(1);
         PostDto postDto = PostDto.builder()
                 .title("수정된 포스트")
-                .writerId("웹마스터")
+                .writerId("작성자1")
                 .body("포스트 수정 테스트입니다.")
                 .build();
 
@@ -175,7 +175,7 @@ class PostControllerTest extends BaseControllerTest {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("수정된 포스트"))
-                .andExpect(jsonPath("writerId").value("웹마스터"))
+                .andExpect(jsonPath("writerId").value("작성자1"))
                 .andExpect(jsonPath("body").value("포스트 수정 테스트입니다."))
                 .andExpect(jsonPath("views").value(1));
     }

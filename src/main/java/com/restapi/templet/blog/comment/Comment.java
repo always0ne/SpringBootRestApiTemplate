@@ -7,11 +7,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
+@EqualsAndHashCode(of = "commentId", callSuper = false)
 public class Comment extends Date {
 
     @Id
@@ -23,4 +21,15 @@ public class Comment extends Date {
     @Column(columnDefinition = "TEXT",nullable = false)
     private String message;
 
+    @Builder
+    public Comment(String commenterId, String message){
+        super();
+        this.commenterId = commenterId;
+        this.message = message;
+    }
+
+    public void updateComment(String message){
+        this.message = message;
+        this.update();
+    }
 }

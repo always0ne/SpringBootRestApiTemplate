@@ -1,15 +1,16 @@
 package com.restapi.templet.blog.comment;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.restapi.templet.blog.comment.request.AddCommentRequest;
+import com.restapi.templet.blog.comment.request.UpdateCommentRequest;
 import com.restapi.templet.blog.post.Post;
 import com.restapi.templet.common.BaseControllerTest;
+import org.hibernate.sql.Update;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
@@ -18,6 +19,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @DisplayName("댓글 테스트")
 class CommentControllerTest extends BaseControllerTest {
 
@@ -25,14 +27,14 @@ class CommentControllerTest extends BaseControllerTest {
     @Transactional
     @DisplayName("댓글 쓰기")
     void saveComment() throws Exception {
-        Post post =this.getneratePost(1);
-        CommentDto commentDto = CommentDto.builder()
+        Post post = this.getneratePost(1);
+        AddCommentRequest addCommentRequest = AddCommentRequest.builder()
                 .commenterId("댓글 작성자")
                 .message("댓글 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts/{postId}",post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(commentDto)))
+                .content(this.objectMapper.writeValueAsString(addCommentRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("sendComment",
@@ -43,7 +45,7 @@ class CommentControllerTest extends BaseControllerTest {
                                 fieldWithPath("commenterId").description("댓글 작성자 Id"),
                                 fieldWithPath("message").description("댓글")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("comments[0].commenterId").value("댓글 작성자"))
                 .andExpect(jsonPath("comments[0].message").value("댓글 테스트"));
@@ -54,15 +56,14 @@ class CommentControllerTest extends BaseControllerTest {
     @Transactional
     @DisplayName("댓글 수정하기")
     void updateComment() throws Exception {
-        Post post =this.getneratePost(1);
-        long commentId = this.addComment(post,1);
-        CommentDto commentDto = CommentDto.builder()
-                .commenterId("댓글 작성자")
+        Post post = this.getneratePost(1);
+        long commentId = this.addComment(post, 1);
+        UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}",post.getPostId(),commentId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(commentDto)))
+                .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("updateComment",
@@ -71,24 +72,23 @@ class CommentControllerTest extends BaseControllerTest {
                                 parameterWithName("commentId").description("댓글 번호")
                         ),
                         requestFields(
-                                fieldWithPath("commenterId").description("댓글 작성자 Id"),
                                 fieldWithPath("message").description("댓글")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}",post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("comments[0].commenterId").value("댓글 작성자"))
+                .andExpect(jsonPath("comments[0].commenterId").value("댓글 작성자1"))
                 .andExpect(jsonPath("comments[0].message").value("댓글 수정 테스트"));
     }
-    
+
 
     @Test
     @Transactional
     @DisplayName("댓글 지우기")
     void deleteComment() throws Exception {
 
-        Post post =this.getneratePost(1);
-        long commentId = this.addComment(post,1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}",post.getPostId(),commentId))
+        Post post = this.getneratePost(1);
+        long commentId = this.addComment(post, 1);
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("deleteComment",

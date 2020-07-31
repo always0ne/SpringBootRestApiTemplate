@@ -8,7 +8,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 public class CommentResource extends EntityModel<Comment> {
 
-    public CommentResource(Comment comment,Link... links) {
+    public CommentResource(Comment comment, Link... links) {
         super(comment, links);
         add(linkTo(PostController.class).slash(comment.getCommentId()).withSelfRel());
         add(linkTo(PostController.class).slash(comment.getCommentId()).withRel("updateComment"));

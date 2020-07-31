@@ -1,7 +1,7 @@
 package com.restapi.templet.blog.post;
 
 import com.restapi.templet.blog.post.dto.PostDetailDto;
-import com.restapi.templet.blog.post.dto.PostDto;
+import com.restapi.templet.blog.post.request.AddPostRequest;
 import com.restapi.templet.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,11 +21,11 @@ public class PostService {
     }
 
     @Transactional
-    public Long savePost(PostDto postDto) {
+    public Long savePost(AddPostRequest addPostRequest) {
         Post newPost = Post.builder()
-                .writerId(postDto.getWriterId())
-                .title(postDto.getTitle())
-                .body(postDto.getBody())
+                .writerId(addPostRequest.getWriterId())
+                .title(addPostRequest.getTitle())
+                .body(addPostRequest.getBody())
                 .build();
 
         return this.postRepository.save(newPost).getPostId();
@@ -35,14 +35,23 @@ public class PostService {
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(() -> new PostNotFoundException("존재하지 않는 게시글입니다."));
-        return post.toDetailDto();
+        post.increaseViews();
+        return PostDetailDto.builder()
+                .title(post.getTitle())
+                .body(post.getBody())
+                .wirterId(post.getWriterId())
+                .comments(post.getComments())
+                .createdDate(post.getCreatedDate())
+                .modifiedDate(post.getModifiedDate())
+                .views(post.getViews())
+                .build();
     }
 
     @Transactional
-    public void updatePost(Long postId, PostDto postDto) {
+    public void updatePost(Long postId, AddPostRequest addPostRequest) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(() -> new PostNotFoundException("존재하지 않는 게시글입니다."));
-        post.updatePost(postDto.getTitle(), postDto.getBody());
+        post.updatePost(addPostRequest.getTitle(), addPostRequest.getBody());
     }
 
     @Transactional

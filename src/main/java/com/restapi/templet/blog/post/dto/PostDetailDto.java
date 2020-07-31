@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 public class PostDetailDto {
@@ -29,9 +28,7 @@ public class PostDetailDto {
         this.views = views;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
-        if (comments.isEmpty())
-            this.comments = null;
-        else {
+        if (comments != null) {
             List<CommentResource> commentList = new ArrayList<CommentResource>();
             for (Comment comment : comments) {
                 CommentResource commentResource = new CommentResource(comment);
@@ -39,6 +36,5 @@ public class PostDetailDto {
             }
             this.comments = commentList;
         }
-
     }
 }

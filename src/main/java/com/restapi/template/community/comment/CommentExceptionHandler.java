@@ -1,28 +1,23 @@
-package com.restapi.template.error;
+package com.restapi.template.community.comment;
 
 import com.restapi.template.community.comment.exception.CommentNotFoundException;
-import com.restapi.template.community.post.exception.PostNotFoundException;
+import com.restapi.template.common.ErrorResponse;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-
 @ControllerAdvice
-public class ExceptionHandleController {
-
-    @ExceptionHandler(PostNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    public ErrorResponse handlePostNotFound(PostNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, exception);
-    }
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class CommentExceptionHandler {
 
     @ExceptionHandler(CommentNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleCommentNotFound(CommentNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, exception);
+        return new ErrorResponse(HttpStatus.NOT_FOUND,1201 ,exception.getMessage());
     }
 }

@@ -6,7 +6,7 @@ import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.community.post.request.ModifyPostRequest;
 import com.restapi.template.community.post.response.PostListResponse;
 import com.restapi.template.community.post.response.PostResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/blog/posts", produces = MediaTypes.HAL_JSON_VALUE)
 public class PostController {
-    @Autowired
-    PostService postService;
+
+    private final PostService postService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

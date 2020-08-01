@@ -1,4 +1,4 @@
-package com.restapi.template.blog.comment.request;
+package com.restapi.template.community.comment.request;
 
 import lombok.*;
 

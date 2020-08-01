@@ -1,7 +1,7 @@
-package com.restapi.template.blog.comment;
+package com.restapi.template.community.comment;
 
-import com.restapi.template.blog.comment.request.AddCommentRequest;
-import com.restapi.template.blog.comment.request.UpdateCommentRequest;
+import com.restapi.template.community.comment.request.AddCommentRequest;
+import com.restapi.template.community.comment.request.UpdateCommentRequest;
 import com.restapi.template.common.DocsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;

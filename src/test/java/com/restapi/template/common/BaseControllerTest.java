@@ -1,10 +1,10 @@
 package com.restapi.template.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restapi.template.blog.comment.Comment;
-import com.restapi.template.blog.comment.CommentRepository;
-import com.restapi.template.blog.post.Post;
-import com.restapi.template.blog.post.PostRepository;
+import com.restapi.template.community.comment.Comment;
+import com.restapi.template.community.comment.CommentRepository;
+import com.restapi.template.community.post.Post;
+import com.restapi.template.community.post.PostRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

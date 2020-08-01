@@ -1,9 +1,9 @@
 package com.restapi.template.community.comment;
 
+import com.restapi.template.common.DocsController;
 import com.restapi.template.community.comment.request.AddCommentRequest;
 import com.restapi.template.community.comment.request.UpdateCommentRequest;
-import com.restapi.template.common.DocsController;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/blog/posts/{postId}", produces = MediaTypes.HAL_JSON_VALUE)
 public class CommentController {
-    @Autowired
-    CommentService commentService;
+
+    private final CommentService commentService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

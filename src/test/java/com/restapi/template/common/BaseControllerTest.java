@@ -1,6 +1,7 @@
 package com.restapi.template.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restapi.template.testfactory.AccountFactory;
 import com.restapi.template.testfactory.CommentFactory;
 import com.restapi.template.testfactory.PostFactory;
 import org.junit.jupiter.api.Disabled;
@@ -34,5 +35,8 @@ public class BaseControllerTest {
 
     @Autowired
     protected CommentFactory commentFactory;
+
+    @Autowired
+    protected AccountFactory accountFactory;
 
 }

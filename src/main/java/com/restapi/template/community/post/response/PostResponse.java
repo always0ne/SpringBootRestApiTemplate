@@ -1,7 +1,7 @@
-package com.restapi.template.blog.post.response;
+package com.restapi.template.community.post.response;
 
-import com.restapi.template.blog.post.PostController;
-import com.restapi.template.blog.post.dto.PostDetailDto;
+import com.restapi.template.community.post.PostController;
+import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.common.DocsController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;

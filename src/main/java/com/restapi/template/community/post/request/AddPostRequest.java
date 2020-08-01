@@ -1,4 +1,4 @@
-package com.restapi.template.blog.post.request;
+package com.restapi.template.community.post.request;
 
 import lombok.*;
 

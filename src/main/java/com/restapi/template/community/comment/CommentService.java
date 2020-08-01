@@ -1,9 +1,9 @@
-package com.restapi.template.blog.comment;
+package com.restapi.template.community.comment;
 
-import com.restapi.template.blog.comment.request.AddCommentRequest;
-import com.restapi.template.blog.comment.request.UpdateCommentRequest;
-import com.restapi.template.blog.post.Post;
-import com.restapi.template.blog.post.PostRepository;
+import com.restapi.template.community.comment.request.AddCommentRequest;
+import com.restapi.template.community.comment.request.UpdateCommentRequest;
+import com.restapi.template.community.post.Post;
+import com.restapi.template.community.post.PostRepository;
 import com.restapi.template.exception.CommentNotFoundException;
 import com.restapi.template.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;

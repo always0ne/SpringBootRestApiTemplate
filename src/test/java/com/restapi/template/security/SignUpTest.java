@@ -43,15 +43,15 @@ class SignUpTest extends BaseControllerTest {
                 .andDo(document("idcheck"));
     }
 
-/*    @Test
+    @Test
     @Transactional
     @DisplayName("아이디 중복 조회하기(사용 불가능할 때)")
     void idCheckFailBecauseExists() throws Exception {
         this.accountFactory.generateUser(1);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/auth/checkid/{userId}","TestUser1"))
-                .andExpect(status().is5xxServerError())
+                .andExpect(status().isAccepted())
                 .andDo(print())
                 .andDo(document("idcheckfail"));
-    }*/
+    }
 }

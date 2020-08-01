@@ -1,4 +1,4 @@
-package com.restapi.template.error;
+package com.restapi.template.common;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -10,14 +10,14 @@ public class ErrorResponse {
 
     private LocalDateTime timestamp;
     private int status;
-    private String error;
+    private int error;
     private String message;
 
-    public ErrorResponse(HttpStatus Httpstatus, Exception e) {
+    public ErrorResponse(HttpStatus Httpstatus,int errCode, String message) {
         this.timestamp = LocalDateTime.now();
         this.status = Httpstatus.value();
-        this.error = Httpstatus.toString();
-        this.message = e.getMessage();
+        this.error = errCode;
+        this.message = message;
     }
 
 

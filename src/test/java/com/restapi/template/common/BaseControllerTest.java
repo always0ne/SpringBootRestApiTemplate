@@ -1,10 +1,8 @@
 package com.restapi.template.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restapi.template.community.comment.Comment;
-import com.restapi.template.community.comment.CommentRepository;
-import com.restapi.template.community.post.Post;
-import com.restapi.template.community.post.PostRepository;
+import com.restapi.template.testfactory.CommentFactory;
+import com.restapi.template.testfactory.PostFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +13,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "templet.restapi.com", uriPort = 443)
-@Transactional
 @Import(RestDocsConfiguration.class)
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
@@ -28,37 +24,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class BaseControllerTest {
 
     @Autowired
-    protected PostRepository postRepository;
-
-    @Autowired
-    protected CommentRepository commentRepository;
-
-    @Autowired
     protected MockMvc mockMvc;
 
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @Transactional
-    protected Post getneratePost(int i) {
-        Post post = Post.builder()
-                .title("게시글" + i)
-                .writerId("작성자" + i)
-                .body("게시글 본문입니다.")
-                .build();
-        return this.postRepository.save(post);
-    }
+    @Autowired
+    protected PostFactory postFactory;
 
-    @Transactional
-    protected long addComment(Post post, int i) {
-        Comment comment = Comment.builder()
-                .commenterId("댓글 작성자" + i)
-                .message(i + "번째 댓글")
-                .build();
-        Comment savedComment = this.commentRepository.save(comment);
-        post.addComment(savedComment);
-        this.postRepository.save(post);
-        return savedComment.getCommentId();
+    @Autowired
+    protected CommentFactory commentFactory;
 
-    }
 }

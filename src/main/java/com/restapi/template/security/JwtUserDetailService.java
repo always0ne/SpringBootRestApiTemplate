@@ -1,6 +1,6 @@
 package com.restapi.template.security;
 
-import com.restapi.template.exception.UserNotFoundException;
+import com.restapi.template.account.exception.UserNotFoundException;
 import com.restapi.template.account.AccountRepository;
 import com.restapi.template.account.UserStatus;
 import lombok.RequiredArgsConstructor;

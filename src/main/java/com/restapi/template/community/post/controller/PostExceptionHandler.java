@@ -1,6 +1,6 @@
-package com.restapi.template.community.comment;
+package com.restapi.template.community.post.controller;
 
-import com.restapi.template.community.comment.exception.CommentNotFoundException;
+import com.restapi.template.community.post.exception.PostNotFoundException;
 import com.restapi.template.common.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class CommentExceptionHandler {
+public class PostExceptionHandler {
 
-    @ExceptionHandler(CommentNotFoundException.class)
+    @ExceptionHandler(PostNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResponse handleCommentNotFound(CommentNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND,1201 ,exception.getMessage());
+    public ErrorResponse handleCommentNotFound(PostNotFoundException exception) {
+        return new ErrorResponse(HttpStatus.NOT_FOUND, 1101, exception.getMessage());
     }
 }

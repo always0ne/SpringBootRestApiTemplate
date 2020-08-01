@@ -1,4 +1,4 @@
-package com.restapi.template.security;
+package com.restapi.template.security.controller;
 
 import com.restapi.template.common.ErrorResponse;
 import com.restapi.template.common.exception.ThisIsNotYoursException;
@@ -24,9 +24,9 @@ public class SecurityExceptionHandler {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleUserNotFound(UserNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, 0002, exception.getMessage());
+        return new ErrorResponse(HttpStatus.FORBIDDEN, 0002, exception.getMessage());
     }
 }

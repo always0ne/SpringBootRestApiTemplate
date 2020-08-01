@@ -1,6 +1,7 @@
-package com.restapi.template.community.comment;
+package com.restapi.template.community.comment.controller;
 
 import com.restapi.template.common.DocsController;
+import com.restapi.template.community.comment.service.CommentService;
 import com.restapi.template.community.comment.request.AddCommentRequest;
 import com.restapi.template.community.comment.request.UpdateCommentRequest;
 import lombok.RequiredArgsConstructor;

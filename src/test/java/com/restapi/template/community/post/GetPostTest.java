@@ -24,8 +24,8 @@ class GetPostTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("포스트 목록 조회")
-    void getPosts() throws Exception {
+    @DisplayName("포스트 목록 조회(성공)")
+    void getPostsSuccess() throws Exception {
         this.postFactory.generatePost(1);
         this.postFactory.generatePost(2);
         this.postFactory.generatePost(3);
@@ -62,8 +62,8 @@ class GetPostTest extends BaseControllerTest {
 
     @Test
     @Transactional
-    @DisplayName("포스트 조회")
-    void getPost() throws Exception {
+    @DisplayName("포스트 조회(성공)")
+    void getPostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
@@ -108,8 +108,8 @@ class GetPostTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("나의 포스트 조회")
-    void getMyPost() throws Exception {
+    @DisplayName("나의 포스트 조회(성공)")
+    void getMyPostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
@@ -159,7 +159,7 @@ class GetPostTest extends BaseControllerTest {
     @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("포스트 조회(게시글이 없을때)")
-    void getPostNoPost() throws Exception {
+    void getPostNoPostFailBecauseNotFound() throws Exception {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", 1))
                 .andExpect(status().isNotFound())
                 .andDo(print());

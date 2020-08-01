@@ -1,7 +1,9 @@
-package com.restapi.template.community.post;
+package com.restapi.template.community.post.controller;
 
 import com.restapi.template.common.DocsController;
-import com.restapi.template.community.comment.CommentController;
+import com.restapi.template.community.comment.controller.CommentController;
+import com.restapi.template.community.post.Post;
+import com.restapi.template.community.post.service.PostService;
 import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.community.post.request.ModifyPostRequest;
 import com.restapi.template.community.post.response.PostListResponse;

@@ -22,8 +22,8 @@ class InsertPostTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("포스트 저장")
-    void insertPost() throws Exception {
+    @DisplayName("포스트 저장(성공)")
+    void insertPostSuccess() throws Exception {
         ModifyPostRequest modifyPostRequest = ModifyPostRequest.builder()
                 .title("포스트 제목")
                 .body("포스트 입력 테스트입니다.")

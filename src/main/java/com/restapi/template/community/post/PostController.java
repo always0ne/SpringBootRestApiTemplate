@@ -1,9 +1,9 @@
-package com.restapi.template.blog.post;
+package com.restapi.template.community.post;
 
-import com.restapi.template.blog.comment.CommentController;
-import com.restapi.template.blog.post.request.AddPostRequest;
-import com.restapi.template.blog.post.response.PostListResponse;
-import com.restapi.template.blog.post.response.PostResponse;
+import com.restapi.template.community.comment.CommentController;
+import com.restapi.template.community.post.request.AddPostRequest;
+import com.restapi.template.community.post.response.PostListResponse;
+import com.restapi.template.community.post.response.PostResponse;
 import com.restapi.template.common.DocsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,7 +1,7 @@
-package com.restapi.template.blog.post;
+package com.restapi.template.community.post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.restapi.template.blog.comment.Comment;
+import com.restapi.template.community.comment.Comment;
 import com.restapi.template.common.Date;
 import lombok.Builder;
 import lombok.Getter;

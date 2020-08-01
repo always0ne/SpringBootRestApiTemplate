@@ -1,4 +1,4 @@
-package com.restapi.template.blog.comment;
+package com.restapi.template.community.comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

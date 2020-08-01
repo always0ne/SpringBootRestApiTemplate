@@ -1,7 +1,7 @@
-package com.restapi.template.blog.post;
+package com.restapi.template.community.post;
 
-import com.restapi.template.blog.post.dto.PostDetailDto;
-import com.restapi.template.blog.post.request.AddPostRequest;
+import com.restapi.template.community.post.dto.PostDetailDto;
+import com.restapi.template.community.post.request.AddPostRequest;
 import com.restapi.template.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

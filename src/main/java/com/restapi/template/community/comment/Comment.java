@@ -1,4 +1,4 @@
-package com.restapi.template.blog.comment;
+package com.restapi.template.community.comment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.template.common.Date;

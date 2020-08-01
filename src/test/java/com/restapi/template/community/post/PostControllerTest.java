@@ -1,7 +1,7 @@
-package com.restapi.template.blog.post;
+package com.restapi.template.community.post;
 
-import com.restapi.template.blog.post.request.AddPostRequest;
 import com.restapi.template.common.BaseControllerTest;
+import com.restapi.template.community.post.request.AddPostRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

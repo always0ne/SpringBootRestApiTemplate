@@ -1,4 +1,4 @@
-package com.restapi.template.blog.post;
+package com.restapi.template.community.post;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

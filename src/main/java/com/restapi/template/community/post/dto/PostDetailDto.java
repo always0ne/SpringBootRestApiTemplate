@@ -1,7 +1,7 @@
-package com.restapi.template.blog.post.dto;
+package com.restapi.template.community.post.dto;
 
-import com.restapi.template.blog.comment.Comment;
-import com.restapi.template.blog.comment.CommentResource;
+import com.restapi.template.community.comment.Comment;
+import com.restapi.template.community.comment.CommentResource;
 import lombok.*;
 
 import java.time.LocalDateTime;

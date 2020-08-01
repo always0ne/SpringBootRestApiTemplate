@@ -1,8 +1,8 @@
-package com.restapi.template.blog.comment;
+package com.restapi.template.community.comment;
 
-import com.restapi.template.blog.comment.request.AddCommentRequest;
-import com.restapi.template.blog.comment.request.UpdateCommentRequest;
-import com.restapi.template.blog.post.Post;
+import com.restapi.template.community.comment.request.AddCommentRequest;
+import com.restapi.template.community.comment.request.UpdateCommentRequest;
+import com.restapi.template.community.post.Post;
 import com.restapi.template.common.BaseControllerTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

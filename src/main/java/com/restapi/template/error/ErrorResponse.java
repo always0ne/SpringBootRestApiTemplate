@@ -1,4 +1,4 @@
-package com.restapi.template.exception;
+package com.restapi.template.error;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

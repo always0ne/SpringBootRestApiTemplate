@@ -8,6 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AddCommentRequest {
-    private String commenterId;
     private String message;
 }

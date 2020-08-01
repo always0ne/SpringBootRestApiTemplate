@@ -17,8 +17,8 @@ class SignUpTest extends BaseControllerTest {
 
     @Test
     @Transactional
-    @DisplayName("회원 가입하기")
-    void signUp() throws Exception {
+    @DisplayName("회원 가입하기(성공)")
+    void signUpSuccess() throws Exception {
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .id("TestUser1")
                 .name("테스트 유저 1")

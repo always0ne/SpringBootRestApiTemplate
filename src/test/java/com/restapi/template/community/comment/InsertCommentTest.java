@@ -25,8 +25,8 @@ class InsertCommentTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("댓글 쓰기")
-    void saveComment() throws Exception {
+    @DisplayName("댓글 쓰기(성공)")
+    void saveCommentSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         AddCommentRequest addCommentRequest = AddCommentRequest.builder()
                 .message("댓글 테스트")

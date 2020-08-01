@@ -17,8 +17,8 @@ class SignInTest extends BaseControllerTest {
 
     @Test
     @Transactional
-    @DisplayName("토큰 발급 받기")
-    void signIn() throws Exception {
+    @DisplayName("토큰 발급 받기(성공)")
+    void signInSuccess() throws Exception {
         SignInRequest signInRequest = SignInRequest.builder()
                 .id(this.accountFactory.generateUser(1).getUserId())
                 .password("password")
@@ -30,5 +30,21 @@ class SignInTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("signin"));
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("토큰 발급 받기(실패)")
+    void signInFailBecauseUserNotFound() throws Exception {
+        SignInRequest signInRequest = SignInRequest.builder()
+                .id("TestUser1")
+                .password("password")
+                .build();
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/auth/signin")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(signInRequest)))
+                .andExpect(status().isForbidden())
+                .andDo(print());
     }
 }

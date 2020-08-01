@@ -1,5 +1,7 @@
-package com.restapi.template.community.comment;
+package com.restapi.template.community.comment.service;
 
+import com.restapi.template.community.comment.Comment;
+import com.restapi.template.community.comment.CommentRepository;
 import com.restapi.template.community.comment.request.AddCommentRequest;
 import com.restapi.template.community.comment.request.UpdateCommentRequest;
 import com.restapi.template.community.post.Post;

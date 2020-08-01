@@ -1,5 +1,6 @@
-package com.restapi.template.security;
+package com.restapi.template.security.controller;
 
+import com.restapi.template.security.service.AuthService;
 import com.restapi.template.security.request.SignInRequest;
 import com.restapi.template.security.request.SignUpRequest;
 import com.restapi.template.security.response.SignInResponse;

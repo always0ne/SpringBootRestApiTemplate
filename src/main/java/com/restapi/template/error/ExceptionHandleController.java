@@ -1,5 +1,7 @@
-package com.restapi.template.exception;
+package com.restapi.template.error;
 
+import com.restapi.template.community.comment.exception.CommentNotFoundException;
+import com.restapi.template.community.post.exception.PostNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

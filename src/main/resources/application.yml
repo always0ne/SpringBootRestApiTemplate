@@ -1,25 +1,28 @@
 spring:
-    jpa:
-        open-in-view: false
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
         show-sql: true
-        hibernate:
-            format_sql: true
-            ddl-auto: create
-    jackson:
-        deserialization:
-            fail-on-unknown-properties : true
-    http:
-        encoding:
-            charset: UTF-8
-            enabled: true
-            force: true
+        format_sql: true
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 logging:
-    level:
-        org:
-            hibernate:
-                SQL: DEBUG
-                type:
-                    descriptor:
-                        sql:
-                            BasicBinder: TRACE
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

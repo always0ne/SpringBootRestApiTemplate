@@ -1,8 +1,9 @@
-package com.restapi.template.security;
+package com.restapi.template.security.service;
 
 import com.restapi.template.account.Account;
 import com.restapi.template.account.AccountRepository;
 import com.restapi.template.account.UserStatus;
+import com.restapi.template.security.JwtTokenProvider;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import com.restapi.template.security.exception.UserNotFoundException;
 import com.restapi.template.security.response.SignInResponse;

@@ -20,9 +20,8 @@ class DeleteCommentTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("댓글 지우기")
-    void deleteComment() throws Exception {
-
+    @DisplayName("댓글 지우기(성공)")
+    void deleteCommentSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         long commentId = this.commentFactory.addComment(post, 1);
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId))
@@ -33,5 +32,38 @@ class DeleteCommentTest extends BaseControllerTest {
                                 parameterWithName("postId").description("게시글 번호"),
                                 parameterWithName("commentId").description("댓글 번호")
                         )));
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser("TestUser1")
+    @DisplayName("댓글 지우기(포스트가 없을때)")
+    void deleteCommentFailBecausePostNotExist() throws Exception {
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", 1, 1))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser("TestUser1")
+    @DisplayName("댓글 지우기(댓글이 없을때)")
+    void deleteCommentFailBecauseCommentNotExist() throws Exception {
+        Post post = this.postFactory.generatePost(1);
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), 1))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser("TestUser2")
+    @DisplayName("댓글 지우기(내 댓글이 아닐때)")
+    void deleteCommentFailBecauseCommentIsNotMine() throws Exception {
+        Post post = this.postFactory.generatePost(1);
+        long commentId = this.commentFactory.addComment(post, 1);
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId))
+                .andExpect(status().isForbidden())
+                .andDo(print());
     }
 }

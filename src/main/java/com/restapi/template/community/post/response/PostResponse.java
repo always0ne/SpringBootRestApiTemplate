@@ -1,6 +1,6 @@
 package com.restapi.template.community.post.response;
 
-import com.restapi.template.community.post.PostController;
+import com.restapi.template.community.post.controller.PostController;
 import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.common.DocsController;
 import org.springframework.hateoas.EntityModel;

@@ -24,8 +24,8 @@ class UpdatePostTest extends BaseControllerTest {
     @Test
     @Transactional
     @WithMockUser("TestUser1")
-    @DisplayName("포스트 수정")
-    void updatePost() throws Exception {
+    @DisplayName("포스트 수정(성공)")
+    void updatePostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         ModifyPostRequest modifyPostRequest = ModifyPostRequest.builder()
                 .title("수정된 포스트")
@@ -51,5 +51,40 @@ class UpdatePostTest extends BaseControllerTest {
                 .andExpect(jsonPath("title").value("수정된 포스트"))
                 .andExpect(jsonPath("body").value("포스트 수정 테스트입니다."))
                 .andExpect(jsonPath("views").value(1));
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser("TestUser1")
+    @DisplayName("포스트 수정(포스트가 없을때)")
+    void updatePostFailBecausePostNotExist() throws Exception {
+        ModifyPostRequest modifyPostRequest = ModifyPostRequest.builder()
+                .title("수정된 포스트")
+                .body("포스트 수정 테스트입니다.")
+                .build();
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser("TestUser2")
+    @DisplayName("포스트 수정(내 포스트가 아닐때)")
+    void updatePostFailBecausePostIsNotMine() throws Exception {
+        Post post = this.postFactory.generatePost(1);
+        ModifyPostRequest modifyPostRequest = ModifyPostRequest.builder()
+                .title("수정된 포스트")
+                .body("포스트 수정 테스트입니다.")
+                .build();
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", post.getPostId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
+                .andExpect(status().isForbidden())
+                .andDo(print());
     }
 }

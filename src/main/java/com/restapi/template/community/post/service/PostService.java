@@ -1,5 +1,7 @@
-package com.restapi.template.community.post;
+package com.restapi.template.community.post.service;
 
+import com.restapi.template.community.post.Post;
+import com.restapi.template.community.post.PostRepository;
 import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.community.post.request.ModifyPostRequest;
 import com.restapi.template.community.post.exception.PostNotFoundException;
@@ -36,7 +38,7 @@ public class PostService {
     @Transactional
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
-                .orElseThrow(() -> new PostNotFoundException());
+                .orElseThrow(PostNotFoundException::new);
         post.increaseViews();
         return PostDetailDto.builder()
                 .title(post.getTitle())

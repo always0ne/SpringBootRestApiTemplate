@@ -1,7 +1,7 @@
 package com.restapi.template.community.post.response;
 
 import com.restapi.template.community.post.Post;
-import com.restapi.template.community.post.PostController;
+import com.restapi.template.community.post.controller.PostController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 

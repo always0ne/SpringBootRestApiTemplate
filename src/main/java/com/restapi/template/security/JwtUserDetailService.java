@@ -1,8 +1,8 @@
 package com.restapi.template.security;
 
-import com.restapi.template.account.exception.UserNotFoundException;
 import com.restapi.template.account.AccountRepository;
 import com.restapi.template.account.UserStatus;
+import com.restapi.template.security.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +18,6 @@ public class JwtUserDetailService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String userId) {
         return accountRepository.findByUserIdAndState(userId, UserStatus.NORMAL)
-                .orElseThrow( () -> new UserNotFoundException(userId));
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 }

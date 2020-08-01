@@ -38,7 +38,7 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenValidMilSecond))
-                .signWith(this.key, SignatureAlgorithm.RS256)
+                .signWith(this.key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -64,7 +64,7 @@ public class JwtTokenProvider {
 
     public Authentication getAuthentication(Claims claims) {
         UserDetails userDetails = jwtUserDetailService.loadUserByUsername(this.getUserId(claims));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
     }
 
     public String getUserId(Claims claims) {

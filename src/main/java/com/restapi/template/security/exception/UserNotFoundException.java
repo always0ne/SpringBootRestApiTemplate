@@ -1,4 +1,4 @@
-package com.restapi.template.account.exception;
+package com.restapi.template.security.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String userId) {

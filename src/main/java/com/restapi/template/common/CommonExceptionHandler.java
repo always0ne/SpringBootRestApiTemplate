@@ -12,10 +12,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Objects;
 
+/**
+ * 공통적으로 발생하는 Exception Handler
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CommonExceptionHandler {
-
+    /**
+     * 본인 소유가 아닌 컨텐츠 수정 요청 발생
+     *
+     * @param exception 수정권한이 없습니다.
+     * @return FORBIDDEN
+     */
     @ExceptionHandler(ThisIsNotYoursException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
@@ -23,6 +34,12 @@ public class CommonExceptionHandler {
         return new ErrorResponse(HttpStatus.FORBIDDEN, 1002, exception.getMessage());
     }
 
+    /**
+     * 형식에 맞지 않는 BODY요청이 왔을 때
+     *
+     * @param exception 잘못된 데이터입니다.
+     * @return BAD_REQUEST
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

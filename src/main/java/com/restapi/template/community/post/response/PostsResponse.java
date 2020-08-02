@@ -7,9 +7,21 @@ import org.springframework.hateoas.Link;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-public class PostListResponse extends EntityModel<Post> {
-
-    public PostListResponse(Post post, Link... links) {
+/**
+ * 게시글 리스트 응답
+ *
+ * @author always0ne
+ * @version 1.0
+ */
+public class PostsResponse extends EntityModel<Post> {
+    /**
+     * 게시글 리스트 응답
+     * self Link, APIDocs Link
+     *
+     * @param post  게시글 데이터
+     * @param links 추가 링크
+     */
+    public PostsResponse(Post post, Link... links) {
         super(post, links);
         add(linkTo(PostController.class).slash(post.getPostId()).withSelfRel());
     }

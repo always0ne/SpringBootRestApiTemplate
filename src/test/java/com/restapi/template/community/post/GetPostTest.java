@@ -43,6 +43,8 @@ class GetPostTest extends BaseControllerTest {
                                 fieldWithPath("_embedded.postList[].title").description("게시글 제목"),
                                 fieldWithPath("_embedded.postList[].writerId").description("작성자 아이디"),
                                 fieldWithPath("_embedded.postList[].views").description("조회수"),
+                                fieldWithPath("_embedded.postList[].body").description("본문"),
+                                fieldWithPath("_embedded.postList[].comments").description("댓글"),
                                 fieldWithPath("_embedded.postList[].createdDate").description("작성일"),
                                 fieldWithPath("_embedded.postList[].modifiedDate").description("수정일"),
                                 fieldWithPath("_embedded.postList[]._links.self.href").description("게시글 데이터 링크"),

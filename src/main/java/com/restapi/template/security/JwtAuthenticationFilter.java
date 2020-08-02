@@ -12,11 +12,24 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * JWT 인증 필터
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * JWT 토큰 검증
+     *
+     * @param request     SubletRequest
+     * @param response    SubletResponse
+     * @param filterChain FilterChain
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         Claims claims = jwtTokenProvider.resolveToken((HttpServletRequest) request);

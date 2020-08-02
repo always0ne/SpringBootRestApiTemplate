@@ -1,5 +1,5 @@
 = SpringBoot Templet REST API Guide
-Eskiiimo;
+Always0ne;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -60,7 +60,6 @@ Eskiiimo;
 | 요청한 리소스가 없음.
 |===
 
-
 [[overview-hypermedia]]
 == 하이퍼미디어
 
@@ -68,58 +67,79 @@ Eskiiimo;
 응답은 http://stateless.co/hal_specification.html[Hypertext Application from resource to resource. Language (HAL)] 형식을 따른다.
 링크는 `_links`라는 키로 제공한다. 본 API의 사용자(클라이언트)는 URI를 직접 생성하지 않아야 하며, 리소스에서 제공하는 링크를 사용해야 한다.
 
+[[signin]]
+=== 인증하기
+
+`Post` 요청을 사용해서 인증할수있다.
+
+operation::signin[snippets='http-request,http-response']
+
+[[signup]]
+=== 회원가입하기
+
+`Post` 요청을 사용해서 회원가입을 할 수있다.
+
+operation::signup[snippets='http-request,http-response']
+
+[[checkid]]
+=== 회원가입하기
+
+`Get` 요청을 사용해서 아이디 중복확인을 할 수있다.
+
+operation::idcheck[snippets='http-request,http-response']
+
 [[getPosts]]
 === 게시글 목록 조회
 
 `Get` 요청을 사용해서 게시글 목록을 조회 할 수 있다.
 
-operation::getPosts[snippets='curl-request,http-response']
+operation::getPosts[snippets='http-request,http-response']
 
 [[sendPost]]
 === 게시글 작성
 
 `Post` 요청을 사용해서 게시글을 작성 할 수 있다.
 
-operation::sendPost[snippets='curl-request,http-request,http-response']
+operation::sendPost[snippets='http-request,http-response']
 
 [[getPost]]
 === 게시글 조회
 
 `Get` 요청을 사용해서 게시글을 조회 할 수 있다.
 
-operation::getPost[snippets='curl-request,path-parameters,http-response,links']
+operation::getPost[snippets='path-parameters,http-request,http-response']
 
 [[updatePost]]
 === 게시글 수정
 
 `Put` 요청을 사용해서 게시글을 수정 할 수 있다.
 
-operation::updatePost[snippets='curl-request,path-parameters,http-request,http-response']
+operation::updatePost[snippets='path-parameters,http-request,http-response']
 
 [[deletePost]]
 === 게시글 삭제
 
 `Delete` 요청을 사용해서 게시글을 삭제 할 수 있다.
 
-operation::deletePost[snippets='curl-request,path-parameters,http-response']
+operation::deletePost[snippets='path-parameters,http-request,http-response']
 
 [[sendComment]]
 === 댓글 작성
 
 `Post` 요청을 사용해서 댓글을 작성 할 수 있다.
 
-operation::sendComment[snippets='curl-request,path-parameters,http-request,http-response']
+operation::sendComment[snippets='path-parameters,http-request,http-response']
 
 [[updateComment]]
 === 댓글 수정
 
 `Put` 요청을 사용해서 댓글을 수정 할 수 있다.
 
-operation::updateComment[snippets='curl-request,path-parameters,http-request,http-response']
+operation::updateComment[snippets='path-parameters,http-request,http-response']
 
 [[deleteComment]]
 === 댓글 삭제
 
 `Delete` 요청을 사용해서 댓글을 삭제 할 수 있다.
 
-operation::deleteComment[snippets='curl-request,path-parameters,http-response']
+operation::deleteComment[snippets='path-parameters,http-request,http-response']

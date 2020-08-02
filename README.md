@@ -14,4 +14,4 @@ comment		1200
 system		2000
 
 ```
-Rest Api Docs  링크 참조 https://always0ne.github.io/SpringBootRestApiTemplet/
+Rest Api Docs  링크 참조 https://always0ne.github.io/SpringBootRestApiTemplate/

@@ -47,7 +47,7 @@ public class AuthService {
     }
 
     public void idCheck(String id) {
-        if (!this.accountRepository.findByUserIdAndStateIsNot(id, UserStatus.WITHDRAWAL).isEmpty())
+        if (this.accountRepository.findByUserIdAndStateIsNot(id, UserStatus.WITHDRAWAL).isPresent())
             throw new IdAlreadyExistsException(id);
     }
 }

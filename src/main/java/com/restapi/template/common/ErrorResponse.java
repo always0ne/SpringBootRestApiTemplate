@@ -5,15 +5,32 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * 에러 응답
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 @Getter
 public class ErrorResponse {
+    /**
+     * 발생 시각
+     */
+    private final LocalDateTime timestamp;
+    /**
+     * 상태 코드
+     */
+    private final int status;
+    /**
+     * 에러 코드
+     */
+    private final int error;
+    /**
+     * 에러 메시지
+     */
+    private final String message;
 
-    private LocalDateTime timestamp;
-    private int status;
-    private int error;
-    private String message;
-
-    public ErrorResponse(HttpStatus Httpstatus,int errCode, String message) {
+    public ErrorResponse(HttpStatus Httpstatus, int errCode, String message) {
         this.timestamp = LocalDateTime.now();
         this.status = Httpstatus.value();
         this.error = errCode;

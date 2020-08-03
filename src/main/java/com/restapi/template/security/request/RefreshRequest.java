@@ -1,4 +1,4 @@
-package com.restapi.template.security.response;
+package com.restapi.template.security.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 인증토큰 발급 응답
+ * 인증토큰 갱신 요청
  *
  * @author always0ne
  * @version 1.0
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignInResponse {
+public class RefreshRequest {
     /**
      * accessToken
      */

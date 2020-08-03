@@ -29,6 +29,6 @@ public class CommentExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleCommentNotFound(CommentNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, 1201, exception.getMessage());
+        return new ErrorResponse(HttpStatus.NOT_FOUND, "1201", exception.getMessage());
     }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 인증토큰 발급 응답
+ * 인증토큰 갱신 응답
  *
  * @author always0ne
  * @version 1.0
@@ -15,13 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignInResponse {
+public class RefreshResponse {
     /**
      * accessToken
      */
     private String accessToken;
-    /**
-     * accessToken
-     */
-    private String refreshToken;
 }

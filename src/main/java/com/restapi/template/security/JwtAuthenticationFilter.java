@@ -33,10 +33,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         Claims claims = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-        if (claims != null && jwtTokenProvider.validateToken(claims))
-            SecurityContextHolder
-                    .getContext()
+        if (claims != null) {
+            jwtTokenProvider.validateAccessToken(claims);
+            SecurityContextHolder.getContext()
                     .setAuthentication(jwtTokenProvider.getAuthentication(claims));
+        }
         filterChain.doFilter(request, response);
     }
 }

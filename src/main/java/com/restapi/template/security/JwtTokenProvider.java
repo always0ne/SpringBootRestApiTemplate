@@ -1,20 +1,25 @@
 package com.restapi.template.security;
 
+import com.restapi.template.security.exception.TokenExpiredException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * JWT 토큰 처리기
@@ -28,17 +33,27 @@ public class JwtTokenProvider {
     /**
      * Secret Key
      */
+    @Value("${jwt.secretKey}")
+    private String secretKey;
+    /**
+     * encrypted Secret Key
+     */
     private Key key;
     /**
-     * AccessToken 유효시간(1시간)
+     * AccessToken 유효시간(10분)
      */
-    private final long tokenValidMilSecond = 1000L * 60 * 60; // 1시간
+    private final long accessTokenValidMilSecond = 1000L * 60 * 10;
+    /**
+     * RefreshToken 유효시간(일주일)
+     */
+    private final long refreshTokenValidMilSecond = 1000L * 60 * 60 * 24 * 7;
 
-    private final JwtUserDetailService jwtUserDetailService;
-
+    /**
+     * SecretKey 암호화 하면서 초기화
+     */
     @PostConstruct
     protected void init() {
-        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        this.key = Keys.hmacShaKeyFor(this.secretKey.getBytes());
     }
 
     /**
@@ -48,7 +63,30 @@ public class JwtTokenProvider {
      * @param roles  사용자에게 허용할 권한
      * @return AccessToken
      */
-    public String createToken(String userId, List<String> roles) {
+    public String createAccessToken(String userId, List<String> roles) {
+        return generateToken(userId, roles, accessTokenValidMilSecond);
+    }
+
+    /**
+     * RefreshToken 생성
+     *
+     * @param userId 발급할 사용자의 아이디
+     * @param roles  사용자에게 허용할 권한
+     * @return AccessToken
+     */
+    public String createRefreshToken(String userId, List<String> roles) {
+        return generateToken(userId, roles, refreshTokenValidMilSecond);
+    }
+
+    /**
+     * JWTToken 생성
+     *
+     * @param userId              발급할 사용자의 아이디
+     * @param roles               사용자에게 허용할 권한
+     * @param tokenValidMilSecond 토큰 유효시간
+     * @return AccessToken
+     */
+    private String generateToken(String userId, List<String> roles, long tokenValidMilSecond) {
         Claims claims = Jwts.claims().setSubject(userId);
         claims.put("roles", roles);
         Date now = new Date();
@@ -62,17 +100,28 @@ public class JwtTokenProvider {
 
     /**
      * Http Request 에서 JWT 토큰의 데이터 추출
+     * Authorization 헤더에 Bearer <Token> 형태로 되어야 함
      *
      * @param req Http 요청
      * @return 토큰 데이터
      */
     public Claims resolveToken(HttpServletRequest req) {
-        String token = req.getHeader("Authentication");
+        String token = req.getHeader("Authorization");
         if (token == null)
             return null;
         else
-            token.replace("Bearer ", "");
+            token = token.replace("Bearer ", "");
 
+        return getClaimsFromToken(token);
+    }
+
+    /**
+     * 토큰에서 토큰 데이터를 추출
+     *
+     * @param token JWT 토큰
+     * @return 토큰 데이터
+     */
+    public Claims getClaimsFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
@@ -84,22 +133,22 @@ public class JwtTokenProvider {
      * JWT 토큰의 유효시간 검증
      *
      * @param claims JWT 토큰 데이터
-     * @return 토큰의 유효 여부
      */
-    public boolean validateToken(Claims claims) {
-        return !claims
-                .getExpiration().before(new Date());
+    public void validateAccessToken(Claims claims) {
+        if (claims.getExpiration().before(new Date()))
+            throw new TokenExpiredException();
     }
 
     /**
-     * 인증 발급
+     * Spring Security 인증토큰 발급
+     * accessToken 은 주기가 짧기 때문에 검사없이 허용한다.
+     * 매번 DB에 검증 하기엔 OverHead 가 너무 큼
      *
      * @param claims JWT 토큰 데이터
      * @return Spring Security 인증토큰
      */
     public Authentication getAuthentication(Claims claims) {
-        UserDetails userDetails = jwtUserDetailService.loadUserByUsername(this.getUserId(claims));
-        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(this.getUserId(claims), "", this.getAuthorities(claims));
     }
 
     /**
@@ -108,8 +157,18 @@ public class JwtTokenProvider {
      * @param claims JWT 토큰 데이터
      * @return UserId
      */
-    private String getUserId(Claims claims) {
-        return claims
-                .getSubject();
+    public String getUserId(Claims claims) {
+        return claims.getSubject();
+    }
+
+    /**
+     * JWT 토큰 데이터 에서 UserID 추출
+     *
+     * @param claims JWT 토큰 데이터
+     * @return 사용자 권한 정보
+     */
+    private Collection<? extends GrantedAuthority> getAuthorities(Claims claims) {
+        List<String> roles = claims.get("roles", List.class);
+        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 }

@@ -1,7 +1,7 @@
 package com.restapi.template.community.post.controller;
 
 import com.restapi.template.common.DocsController;
-import com.restapi.template.community.comment.controller.CommentController;
+import com.restapi.template.common.response.LinksResponse;
 import com.restapi.template.community.post.Post;
 import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.community.post.request.ModifyPostRequest;
@@ -12,13 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.PagedModel;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -39,7 +39,7 @@ public class PostController {
      * 모든 게시글 조회(Paged)
      * body랑 comments가 조회 안되게 수정필요
      *
-     * @param pageable 페이지 정보
+     * @param pageable  페이지 정보
      * @param assembler 어셈블러
      * @return 페이징 처리된 게시글
      */
@@ -50,27 +50,34 @@ public class PostController {
             PagedResourcesAssembler<Post> assembler
     ) {
         Page<Post> posts = this.postService.getPosts(pageable);
-        PagedModel<PostsResponse> pagedResources = assembler.toModel(posts, e -> new PostsResponse(e));
-        pagedResources.add(linkTo(DocsController.class).slash("getPosts").withRel("profile"));
-        return pagedResources;
+
+        PagedModel<PostsResponse> postsResponses = assembler.toModel(posts, post -> new PostsResponse(post));
+        postsResponses.add(linkTo(DocsController.class).slash("#getPosts").withRel("profile"));
+
+        return postsResponses;
     }
 
     /**
      * 게시글 작성
      *
      * @param modifyPostRequest 게시글 정보
-     * @return 게시글 ID
+     * @param response          헤더 설정을 위한 response 객체
+     * @return self 링크, API Docs 링크
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RepresentationModel savePost(
-            @RequestBody ModifyPostRequest modifyPostRequest
+    public LinksResponse savePost(
+            @RequestBody ModifyPostRequest modifyPostRequest,
+            HttpServletResponse response
+
     ) {
         Long postId = this.postService.savePost(modifyPostRequest);
-        RepresentationModel response = new RepresentationModel();
-        response.add(linkTo(PostController.class).slash(postId).withSelfRel());
-        response.add(linkTo(DocsController.class).slash("#sendPost").withRel("profile"));
-        return response;
+
+        response.setHeader("Location", linkTo(PostController.class).slash(postId).toUri().toString());
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#sendPost").withRel("profile")
+        );
     }
 
     /**
@@ -90,7 +97,6 @@ public class PostController {
             postResponse.add(linkTo(PostController.class).slash(postId).withRel("updatePost"));
             postResponse.add(linkTo(PostController.class).slash(postId).withRel("deletePost"));
         }
-        postResponse.add(linkTo(CommentController.class, postId).withRel("sendComment"));
         return postResponse;
     }
 
@@ -99,33 +105,38 @@ public class PostController {
      *
      * @param postId            게시글 Id
      * @param modifyPostRequest 게시글 정보
-     * @return 수정된 게시글 데이터 링크, API Docs 링크
+     * @return self 링크, API Docs 링크
      */
     @PutMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
-    public RepresentationModel updatePost(
+    public LinksResponse updatePost(
             @PathVariable Long postId,
             @RequestBody ModifyPostRequest modifyPostRequest
     ) {
         this.postService.updatePost(postId, modifyPostRequest);
-        RepresentationModel response = new RepresentationModel();
-        response.add(linkTo(PostController.class).slash(postId).withSelfRel());
-        response.add(linkTo(DocsController.class).slash("#updatePost").withRel("profile"));
-        return response;
+
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#updatePost").withRel("profile")
+        );
     }
 
     /**
      * 게시글 삭제
      *
      * @param postId 게시글 ID
-     * @return API Docs 링크
+     * @return self 링크, API Docs 링크
      */
     @DeleteMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
-    public Link deletePost(
+    public LinksResponse deletePost(
             @PathVariable Long postId
     ) {
         this.postService.deletePost(postId);
-        return linkTo(DocsController.class).slash("#deletePost").withRel("profile");
+
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#deletePost").withRel("profile")
+        );
     }
 }

@@ -1,6 +1,6 @@
 package com.restapi.template.community.comment.controller;
 
-import com.restapi.template.common.ErrorResponse;
+import com.restapi.template.common.response.ErrorResponse;
 import com.restapi.template.community.comment.exception.CommentNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

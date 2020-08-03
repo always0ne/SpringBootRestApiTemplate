@@ -1,6 +1,7 @@
 package com.restapi.template.common;
 
 import com.restapi.template.common.exception.ThisIsNotYoursException;
+import com.restapi.template.common.response.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

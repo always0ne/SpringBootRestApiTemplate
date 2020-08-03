@@ -1,4 +1,4 @@
-package com.restapi.template.common;
+package com.restapi.template.common.response;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

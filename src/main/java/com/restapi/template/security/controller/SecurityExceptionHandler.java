@@ -1,6 +1,6 @@
 package com.restapi.template.security.controller;
 
-import com.restapi.template.common.ErrorResponse;
+import com.restapi.template.common.response.ErrorResponse;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import org.springframework.core.Ordered;

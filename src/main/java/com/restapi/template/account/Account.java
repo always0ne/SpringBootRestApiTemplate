@@ -61,6 +61,8 @@ public class Account {
 
     /**
      * Refresh Token 갱신
+     *
+     * @param refreshToken RefreshToken
      */
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;

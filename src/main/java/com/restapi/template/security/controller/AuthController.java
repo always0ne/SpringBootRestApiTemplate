@@ -70,6 +70,7 @@ public class AuthController {
     /**
      * RefreshToken 으로 AccessToken 재발급 받기
      *
+     * @param refreshRequest 토큰 갱신 요청
      * @return AccessToken
      */
     @PostMapping("/refresh")

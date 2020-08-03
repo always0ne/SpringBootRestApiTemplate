@@ -100,7 +100,7 @@ public class JwtTokenProvider {
 
     /**
      * Http Request 에서 JWT 토큰의 데이터 추출
-     * Authorization 헤더에 Bearer <Token> 형태로 되어야 함
+     * Authorization 헤더에 Bearer [Token] 형태로 되어야 함
      *
      * @param req Http 요청
      * @return 토큰 데이터

@@ -4,6 +4,7 @@ import com.restapi.template.common.DocsController;
 import com.restapi.template.common.response.LinksResponse;
 import com.restapi.template.community.post.Post;
 import com.restapi.template.community.post.dto.PostDetailDto;
+import com.restapi.template.community.post.dto.PostsDto;
 import com.restapi.template.community.post.request.ModifyPostRequest;
 import com.restapi.template.community.post.response.PostResponse;
 import com.restapi.template.community.post.response.PostsResponse;
@@ -30,7 +31,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/blog/posts", produces = MediaTypes.HAL_JSON_VALUE)
+@RequestMapping(value = "/board/posts", produces = MediaTypes.HAL_JSON_VALUE)
 public class PostController {
 
     private final PostService postService;
@@ -47,11 +48,10 @@ public class PostController {
     @ResponseStatus(HttpStatus.OK)
     public PagedModel<PostsResponse> getPosts(
             Pageable pageable,
-            PagedResourcesAssembler<Post> assembler
+            PagedResourcesAssembler<PostsDto> assembler
     ) {
-        Page<Post> posts = this.postService.getPosts(pageable);
-
-        PagedModel<PostsResponse> postsResponses = assembler.toModel(posts, post -> new PostsResponse(post));
+        Page<PostsDto> posts = this.postService.getPosts(pageable);
+        PagedModel<PostsResponse> postsResponses = assembler.toModel(posts, postsDto -> new PostsResponse(postsDto));
         postsResponses.add(linkTo(DocsController.class).slash("#getPosts").withRel("profile"));
 
         return postsResponses;

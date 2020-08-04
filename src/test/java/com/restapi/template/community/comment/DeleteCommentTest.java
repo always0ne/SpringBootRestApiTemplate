@@ -24,7 +24,7 @@ class DeleteCommentTest extends BaseControllerTest {
     void deleteCommentSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
         long commentId = this.commentFactory.addComment(post, 1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}/{commentId}", post.getPostId(), commentId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("deleteComment",
@@ -39,7 +39,7 @@ class DeleteCommentTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("댓글 지우기(포스트가 없을때)")
     void deleteCommentFailBecausePostNotExist() throws Exception {
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", 1, 1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}/{commentId}", 1, 1))
                 .andExpect(status().isNotFound())
                 .andDo(print());
     }
@@ -50,7 +50,7 @@ class DeleteCommentTest extends BaseControllerTest {
     @DisplayName("댓글 지우기(댓글이 없을때)")
     void deleteCommentFailBecauseCommentNotExist() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), 1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}/{commentId}", post.getPostId(), 1))
                 .andExpect(status().isNotFound())
                 .andDo(print());
     }
@@ -62,7 +62,7 @@ class DeleteCommentTest extends BaseControllerTest {
     void deleteCommentFailBecauseCommentIsNotMine() throws Exception {
         Post post = this.postFactory.generatePost(1);
         long commentId = this.commentFactory.addComment(post, 1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}/{commentId}", post.getPostId(), commentId))
                 .andExpect(status().isForbidden())
                 .andDo(print());
     }

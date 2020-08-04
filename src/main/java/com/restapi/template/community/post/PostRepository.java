@@ -1,5 +1,7 @@
 package com.restapi.template.community.post;
 
+import com.restapi.template.community.post.dto.PostDetailDto;
+import com.restapi.template.community.post.dto.PostsDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,5 +29,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param pageable 페이지 정보
      * @return 모든 게시글(Page)
      */
-    Page<Post> findAll(Pageable pageable);
+    Page<PostsDto> findAllProjectedBy(Pageable pageable);
 }

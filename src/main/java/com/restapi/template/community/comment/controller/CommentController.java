@@ -21,7 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/blog/posts/{postId}", produces = MediaTypes.HAL_JSON_VALUE)
+@RequestMapping(value = "/board/posts/{postId}", produces = MediaTypes.HAL_JSON_VALUE)
 public class CommentController {
 
     private final CommentService commentService;

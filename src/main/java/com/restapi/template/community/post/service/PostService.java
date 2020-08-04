@@ -4,6 +4,7 @@ import com.restapi.template.common.exception.ThisIsNotYoursException;
 import com.restapi.template.community.post.Post;
 import com.restapi.template.community.post.PostRepository;
 import com.restapi.template.community.post.dto.PostDetailDto;
+import com.restapi.template.community.post.dto.PostsDto;
 import com.restapi.template.community.post.exception.PostNotFoundException;
 import com.restapi.template.community.post.request.ModifyPostRequest;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class PostService {
      * @return 페이징 처리가 된 게시글
      */
     @Transactional
-    public Page<Post> getPosts(Pageable pageable) {
-        return this.postRepository.findAll(pageable);
+    public Page<PostsDto> getPosts(Pageable pageable) {
+        return this.postRepository.findAllProjectedBy(pageable);
     }
 
     /**
@@ -64,11 +65,11 @@ public class PostService {
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(PostNotFoundException::new);
-        post.increaseViews();
+
         return PostDetailDto.builder()
                 .title(post.getTitle())
                 .body(post.getBody())
-                .wirterId(post.getWriterId())
+                .writerId(post.getWriterId())
                 .comments(post.getComments())
                 .createdDate(post.getCreatedDate())
                 .modifiedDate(post.getModifiedDate())

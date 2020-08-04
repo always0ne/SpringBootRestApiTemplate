@@ -32,7 +32,7 @@ class UpdatePostTest extends BaseControllerTest {
                 .body("포스트 수정 테스트입니다.")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
                 .andExpect(status().isOk())
@@ -46,11 +46,10 @@ class UpdatePostTest extends BaseControllerTest {
                                 fieldWithPath("body").description("게시글 내용")
                         )
                 ));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("수정된 포스트"))
-                .andExpect(jsonPath("body").value("포스트 수정 테스트입니다."))
-                .andExpect(jsonPath("views").value(1));
+                .andExpect(jsonPath("body").value("포스트 수정 테스트입니다."));
     }
 
     @Test
@@ -63,7 +62,7 @@ class UpdatePostTest extends BaseControllerTest {
                 .body("포스트 수정 테스트입니다.")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", 1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
                 .andExpect(status().isNotFound())
@@ -81,7 +80,7 @@ class UpdatePostTest extends BaseControllerTest {
                 .body("포스트 수정 테스트입니다.")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}", post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
                 .andExpect(status().isForbidden())

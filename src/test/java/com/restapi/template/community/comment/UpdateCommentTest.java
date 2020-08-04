@@ -32,7 +32,7 @@ class UpdateCommentTest extends BaseControllerTest {
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", post.getPostId(), commentId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isOk())
@@ -45,7 +45,7 @@ class UpdateCommentTest extends BaseControllerTest {
                         requestFields(
                                 fieldWithPath("message").description("댓글")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("comments[0].message").value("댓글 수정 테스트"));
     }
@@ -58,7 +58,7 @@ class UpdateCommentTest extends BaseControllerTest {
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", 1, 1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", 1, 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isNotFound())
@@ -74,7 +74,7 @@ class UpdateCommentTest extends BaseControllerTest {
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", post.getPostId(), 1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", post.getPostId(), 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isNotFound())
@@ -91,7 +91,7 @@ class UpdateCommentTest extends BaseControllerTest {
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/blog/posts/{postId}/{commentId}", post.getPostId(), commentId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", post.getPostId(), commentId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isForbidden())

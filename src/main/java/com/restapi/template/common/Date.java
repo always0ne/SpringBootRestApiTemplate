@@ -25,12 +25,12 @@ public class Date {
      */
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdDate;
+    protected LocalDateTime createdDate;
     /**
      * 수정시각
      */
     @LastModifiedDate
-    private LocalDateTime modifiedDate;
+    protected LocalDateTime modifiedDate;
 
     public Date() {
         this.createdDate = LocalDateTime.now();
@@ -40,7 +40,7 @@ public class Date {
     /**
      * 수정시각 업데이트
      */
-    protected void update() {
+    protected void updateModifyDate() {
         this.modifiedDate = LocalDateTime.now();
     }
 }

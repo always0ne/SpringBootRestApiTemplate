@@ -32,7 +32,7 @@ class GetPostTest extends BaseControllerTest {
         this.postFactory.generatePost(4);
         this.postFactory.generatePost(5);
         this.postFactory.generatePost(6);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts")
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts")
                 .param("page", "1")
                 .param("size", "2")
                 .param("sort", "title,DESC"))
@@ -40,12 +40,10 @@ class GetPostTest extends BaseControllerTest {
                 .andDo(print())
                 .andDo(document("getPosts",
                         responseFields(
+                                fieldWithPath("_embedded.postList[].postId").description("게시글 아이디"),
                                 fieldWithPath("_embedded.postList[].title").description("게시글 제목"),
                                 fieldWithPath("_embedded.postList[].writerId").description("작성자 아이디"),
                                 fieldWithPath("_embedded.postList[].views").description("조회수"),
-                                fieldWithPath("_embedded.postList[].body").description("본문"),
-                                fieldWithPath("_embedded.postList[].comments").description("댓글"),
-                                fieldWithPath("_embedded.postList[].createdDate").description("작성일"),
                                 fieldWithPath("_embedded.postList[].modifiedDate").description("수정일"),
                                 fieldWithPath("_embedded.postList[]._links.self.href").description("게시글 데이터 링크"),
                                 fieldWithPath("_links.self.href").description("Self 링크"),
@@ -69,12 +67,11 @@ class GetPostTest extends BaseControllerTest {
         Post post = this.postFactory.generatePost(1);
         this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("게시글1"))
                 .andExpect(jsonPath("writerId").value("TestUser1"))
                 .andExpect(jsonPath("body").value("게시글 본문입니다."))
-                .andExpect(jsonPath("views").value(1))
                 .andDo(print())
                 .andDo(document("getPost",
                         pathParameters(
@@ -115,12 +112,11 @@ class GetPostTest extends BaseControllerTest {
         Post post = this.postFactory.generatePost(1);
         this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("게시글1"))
                 .andExpect(jsonPath("writerId").value("TestUser1"))
                 .andExpect(jsonPath("body").value("게시글 본문입니다."))
-                .andExpect(jsonPath("views").value(1))
                 .andDo(print())
                 .andDo(document("getMyPost",
                         pathParameters(
@@ -162,7 +158,7 @@ class GetPostTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("포스트 조회(게시글이 없을때)")
     void getPostNoPostFailBecauseNotFound() throws Exception {
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", 1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", 1))
                 .andExpect(status().isNotFound())
                 .andDo(print());
     }

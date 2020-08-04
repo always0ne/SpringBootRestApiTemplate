@@ -21,7 +21,7 @@ class DeletePostTest extends BaseControllerTest {
     @DisplayName("포스트 삭제(성공)")
     void deletePostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("deletePost",

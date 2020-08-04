@@ -1,7 +1,7 @@
 package com.restapi.template.community.post.response;
 
-import com.restapi.template.community.post.Post;
 import com.restapi.template.community.post.controller.PostController;
+import com.restapi.template.community.post.dto.PostsDto;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 
@@ -13,7 +13,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
  * @author always0ne
  * @version 1.0
  */
-public class PostsResponse extends EntityModel<Post> {
+public class PostsResponse extends EntityModel<PostsDto> {
     /**
      * 게시글 리스트 응답
      * self Link, APIDocs Link
@@ -21,7 +21,7 @@ public class PostsResponse extends EntityModel<Post> {
      * @param post  게시글 데이터
      * @param links 추가 링크
      */
-    public PostsResponse(Post post, Link... links) {
+    public PostsResponse(PostsDto post, Link... links) {
         super(post, links);
         add(linkTo(PostController.class).slash(post.getPostId()).withSelfRel());
     }

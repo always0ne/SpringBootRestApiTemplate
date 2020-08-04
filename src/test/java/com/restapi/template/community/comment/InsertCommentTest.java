@@ -31,7 +31,7 @@ class InsertCommentTest extends BaseControllerTest {
         AddCommentRequest addCommentRequest = AddCommentRequest.builder()
                 .message("댓글 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts/{postId}", post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/board/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(addCommentRequest)))
                 .andExpect(status().isCreated())
@@ -43,7 +43,7 @@ class InsertCommentTest extends BaseControllerTest {
                         requestFields(
                                 fieldWithPath("message").description("댓글")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("comments[0].commenterId").value("TestUser1"))
                 .andExpect(jsonPath("comments[0].message").value("댓글 테스트"));

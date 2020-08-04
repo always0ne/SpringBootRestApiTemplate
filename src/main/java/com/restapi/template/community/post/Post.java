@@ -25,7 +25,6 @@ public class Post extends Date {
      * pk
      */
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     /**
@@ -53,22 +52,28 @@ public class Post extends Date {
      *
      * @see com.restapi.template.community.comment.Comment
      */
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
     @Builder
-    public Post(String writerId, String title, String body) {
+    public Post(Long id, String writerId, String title, String body) {
         super();
+        this.postId = id;
         this.writerId = writerId;
         this.title = title;
         this.body = body;
         this.views = (long) 0;
     }
 
+    @PostLoad
+    private void onSelect(){
+        this.views++;
+    }
+
     /**
      * 게시글 수정
-     * 데이터 변경 후 수정일 갱신
+     * 데이터 변경
      *
      * @param title 글 제목
      * @param body  글 본문
@@ -76,7 +81,7 @@ public class Post extends Date {
     public void updatePost(String title, String body) {
         this.title = title;
         this.body = body;
-        this.update();
+        this.updateModifyDate();
     }
 
     /**
@@ -101,12 +106,5 @@ public class Post extends Date {
     public void updateComment(Comment comment, String message) {
         comment.updateComment(message);
         this.comments.set(this.comments.indexOf(comment), comment);
-    }
-
-    /**
-     * 조회수 증가
-     */
-    public void increaseViews() {
-        this.views++;
     }
 }

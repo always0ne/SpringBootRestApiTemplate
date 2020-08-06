@@ -6,7 +6,6 @@ import com.restapi.template.account.UserStatus;
 import com.restapi.template.security.JwtTokenProvider;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
-import com.restapi.template.security.exception.InvalidRefreshTokenException;
 import com.restapi.template.security.request.RefreshRequest;
 import com.restapi.template.security.response.RefreshResponse;
 import com.restapi.template.security.response.SignInResponse;
@@ -98,10 +97,7 @@ public class AuthService {
      * @return AccessToken
      */
     public RefreshResponse refreshAccessToken(RefreshRequest refreshRequest) {
-        String accessId = jwtTokenProvider.getUserId(jwtTokenProvider.getClaimsFromToken(refreshRequest.getAccessToken()));
         String refreshId = jwtTokenProvider.getUserId(jwtTokenProvider.getClaimsFromToken(refreshRequest.getRefreshToken()));
-        if (!accessId.equals(refreshId))
-            throw new InvalidRefreshTokenException();
         Account account = accountRepository.findByUserIdAndStateAndRefreshToken(refreshId, UserStatus.NORMAL, refreshRequest.getRefreshToken())
                 .orElseThrow(() -> new CantSignInException(refreshId));
 

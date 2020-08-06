@@ -4,7 +4,6 @@ import com.restapi.template.common.response.ErrorResponse;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import com.restapi.template.security.exception.InvalidRefreshTokenException;
-import com.restapi.template.security.exception.TokenExpiredException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.SignatureException;
@@ -66,19 +65,6 @@ public class SecurityExceptionHandler {
     }
 
     /**
-     * 토큰 만료 예외 발생
-     *
-     * @param exception 토큰 만료시간이 지남
-     * @return FORBIDDEN
-     */
-    @ExceptionHandler(TokenExpiredException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ResponseBody
-    public ErrorResponse handleTokenExpired(TokenExpiredException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0004", exception.getMessage());
-    }
-
-    /**
      * 서명이 유효하지 않은 예외 발생
      *
      * @param exception 서명이 서버와 다름
@@ -88,7 +74,7 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleSignature(SignatureException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0005", "유효하지 않은 토큰입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0004", "유효하지 않은 토큰입니다.");
     }
 
     /**
@@ -101,7 +87,7 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleMalformedJwt(MalformedJwtException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0006", "손상된 토큰입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0005", "손상된 토큰입니다.");
     }
 
     /**
@@ -114,6 +100,6 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleMalformedJwt(DecodingException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0007", "잘못된 인증입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0006", "잘못된 인증입니다.");
     }
 }

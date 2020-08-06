@@ -1,6 +1,5 @@
 package com.restapi.template.security;
 
-import com.restapi.template.security.exception.TokenExpiredException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -127,16 +126,6 @@ public class JwtTokenProvider {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    /**
-     * JWT 토큰의 유효시간 검증
-     *
-     * @param claims JWT 토큰 데이터
-     */
-    public void validateAccessToken(Claims claims) {
-        if (claims.getExpiration().before(new Date()))
-            throw new TokenExpiredException();
     }
 
     /**

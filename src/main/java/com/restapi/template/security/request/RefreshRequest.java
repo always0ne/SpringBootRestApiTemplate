@@ -19,9 +19,5 @@ public class RefreshRequest {
     /**
      * accessToken
      */
-    private String accessToken;
-    /**
-     * accessToken
-     */
     private String refreshToken;
 }

@@ -3,6 +3,7 @@ package com.restapi.template.security;
 import com.restapi.template.common.BaseControllerTest;
 import com.restapi.template.security.request.RefreshRequest;
 import com.restapi.template.security.response.SignInResponse;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -20,23 +21,26 @@ class RefreshTest extends BaseControllerTest {
     @Transactional
     @DisplayName("토큰 재발급 받기(성공)")
     void signInSuccess() throws Exception {
+        SignInResponse signInResponse = accountFactory.generateUser(1);
+        RefreshRequest refreshRequest = RefreshRequest.builder()
+                .refreshToken(signInResponse.getRefreshToken())
+                .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/auth/refresh")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(accountFactory.generateUser(1))))
+                .content(this.objectMapper.writeValueAsString(refreshRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("refresh"));
     }
 
     @Test
+    @Disabled       // Admin Api 개발 이후 활성화
     @Transactional
-    @DisplayName("토큰 재발급 받기(토큰의 계정 정보가 다를 때 실패)")
+    @DisplayName("토큰 재발급 받기(계정이 제제당했을 때)")
     void signInFailBecauseDifferentUserToken() throws Exception {
         SignInResponse signInResponse1 = accountFactory.generateUser(1);
-        SignInResponse signInResponse2 = accountFactory.generateUser(2);
         RefreshRequest refreshRequest = RefreshRequest.builder()
-                .accessToken(signInResponse1.getAccessToken())
-                .refreshToken(signInResponse2.getAccessToken())
+                .refreshToken(signInResponse1.getRefreshToken())
                 .build();
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/auth/refresh")
@@ -52,8 +56,7 @@ class RefreshTest extends BaseControllerTest {
     void signInFailBecauseMalFormed() throws Exception {
         SignInResponse signInResponse = accountFactory.generateUser(1);
         RefreshRequest refreshRequest = RefreshRequest.builder()
-                .accessToken(signInResponse.getAccessToken())
-                .refreshToken(signInResponse.getAccessToken() + "e")
+                .refreshToken(signInResponse.getRefreshToken() + "e")
                 .build();
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/auth/refresh")

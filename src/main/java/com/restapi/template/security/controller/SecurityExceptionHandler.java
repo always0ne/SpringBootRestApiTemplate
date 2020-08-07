@@ -4,6 +4,7 @@ import com.restapi.template.common.response.ErrorResponse;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import com.restapi.template.security.exception.InvalidRefreshTokenException;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.SignatureException;
@@ -101,5 +102,18 @@ public class SecurityExceptionHandler {
     @ResponseBody
     public ErrorResponse handleMalformedJwt(DecodingException exception) {
         return new ErrorResponse(HttpStatus.FORBIDDEN, "0006", "잘못된 인증입니다.");
+    }
+
+    /**
+     * 토큰 만료 예외 발생
+     *
+     * @param exception 토큰 만료시간이 지남
+     * @return FORBIDDEN
+     */
+    @ExceptionHandler(ExpiredJwtException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public ErrorResponse handleTokenExpired(ExpiredJwtException exception) {
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0007", "만료된 토큰입니다.");
     }
 }

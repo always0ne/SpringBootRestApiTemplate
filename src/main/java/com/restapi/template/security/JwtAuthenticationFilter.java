@@ -49,13 +49,13 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 SecurityContextHolder.getContext().setAuthentication(jwtTokenProvider.getAuthentication(claims));
             filterChain.doFilter(request, response);
         } catch (SignatureException e) {
-            sendErrorMessage((HttpServletResponse) response, "0004", "유효하지 않은 토큰입니다.");
+            sendErrorMessage((HttpServletResponse) response, "0003", "유효하지 않은 토큰입니다.");
         } catch (MalformedJwtException e) {
-            sendErrorMessage((HttpServletResponse) response, "0005", "손상된 토큰입니다.");
+            sendErrorMessage((HttpServletResponse) response, "0004", "손상된 토큰입니다.");
         } catch (DecodingException e) {
-            sendErrorMessage((HttpServletResponse) response, "0006", "잘못된 인증입니다.");
+            sendErrorMessage((HttpServletResponse) response, "0005", "잘못된 인증입니다.");
         } catch (ExpiredJwtException e) {
-            sendErrorMessage((HttpServletResponse) response, "0007", "만료된 토큰입니다.");
+            sendErrorMessage((HttpServletResponse) response, "0006", "만료된 토큰입니다.");
         }
     }
 
@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     private void sendErrorMessage(HttpServletResponse res, String error, String message) throws IOException {
         res.setStatus(HttpServletResponse.SC_FORBIDDEN);
         res.setContentType(MediaType.APPLICATION_JSON.toString());
-        res.getWriter().write(this.objectMapper.writeValueAsString(new ErrorResponse(HttpStatus.FORBIDDEN,error, message)));
+        res.getWriter().write(this.objectMapper.writeValueAsString(new ErrorResponse(HttpStatus.FORBIDDEN, error, message)));
 
     }
 }

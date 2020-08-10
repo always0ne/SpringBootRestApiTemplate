@@ -85,6 +85,7 @@ public class AuthService {
      * @param id 사용자 ID
      * @throws IdAlreadyExistsException 이미 사용중인 아이디입니다.
      */
+    @Transactional(readOnly = true)
     public void idCheck(String id) {
         if (this.accountRepository.findByUserIdAndStateIsNot(id, UserStatus.WITHDRAWAL).isPresent())
             throw new IdAlreadyExistsException(id);
@@ -96,6 +97,7 @@ public class AuthService {
      * @param refreshRequest AccessToken, RefreshToken
      * @return AccessToken
      */
+    @Transactional
     public RefreshResponse refreshAccessToken(RefreshRequest refreshRequest) {
         String refreshId = jwtTokenProvider.getUserId(jwtTokenProvider.getClaimsFromToken(refreshRequest.getRefreshToken()));
         Account account = accountRepository.findByUserIdAndStateAndRefreshToken(refreshId, UserStatus.NORMAL, refreshRequest.getRefreshToken())

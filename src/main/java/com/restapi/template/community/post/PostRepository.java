@@ -1,10 +1,10 @@
 package com.restapi.template.community.post;
 
-import com.restapi.template.community.post.dto.PostDetailDto;
 import com.restapi.template.community.post.dto.PostsDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -14,6 +14,7 @@ import java.util.Optional;
  * @author always0ne
  * @version 1.0
  */
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     /**
      * 게시글 아이디로 조회

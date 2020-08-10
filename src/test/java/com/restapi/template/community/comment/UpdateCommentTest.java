@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -23,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UpdateCommentTest extends BaseControllerTest {
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기(성공)")
     void updateCommentSuccess() throws Exception {
@@ -51,7 +49,6 @@ class UpdateCommentTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기(포스트가 없을때)")
     void updateCommentFailBecausePostNotExist() throws Exception {
@@ -62,11 +59,11 @@ class UpdateCommentTest extends BaseControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isNotFound())
+                .andExpect(jsonPath("error").value("1101"))
                 .andDo(print());
     }
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기(댓글이 없을때)")
     void updateCommentFailBecauseCommentNotExist() throws Exception {
@@ -78,11 +75,11 @@ class UpdateCommentTest extends BaseControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isNotFound())
+                .andExpect(jsonPath("error").value("1201"))
                 .andDo(print());
     }
 
     @Test
-    @Transactional
     @WithMockUser("TestUser2")
     @DisplayName("댓글 수정하기(내 댓글이 아닐때)")
     void updateCommentFailBecauseCommentIsNotMine() throws Exception {
@@ -95,6 +92,7 @@ class UpdateCommentTest extends BaseControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isForbidden())
+                .andExpect(jsonPath("error").value("1002"))
                 .andDo(print());
     }
 }

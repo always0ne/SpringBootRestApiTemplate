@@ -1,6 +1,5 @@
 package com.restapi.template.testfactory;
 
-import com.restapi.template.security.response.RefreshResponse;
 import com.restapi.template.security.response.SignInResponse;
 import com.restapi.template.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class AccountFactory {
     @Transactional
     public SignInResponse generateUser(int i) {
          return authService.signUp(
-                "TestUser" + i,
+                 "TestUser" + i,
                 "password",
                 "테스트 유저 " + i
         );

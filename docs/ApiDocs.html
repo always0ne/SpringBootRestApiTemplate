@@ -445,6 +445,72 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#overview-http-verbs">HTTP 동사</a></li>
 <li><a href="#overview-http-status-codes">HTTP 상태 코드</a></li>
+<li><a href="#overview-errors">오류</a>
+<ul class="sectlevel2">
+<li><a href="#AuthError">Auth Error</a>
+<ul class="sectlevel3">
+<li><a href="#E0001">Error0002</a>
+<ul class="sectlevel4">
+<li><a href="#E0001_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#E0002">Error0002</a>
+<ul class="sectlevel4">
+<li><a href="#E0002_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#E0003">Error0002</a>
+<ul class="sectlevel4">
+<li><a href="#E0003_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#E0004">Error0004</a>
+<ul class="sectlevel4">
+<li><a href="#E0004_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#E0005">Error0005</a>
+<ul class="sectlevel4">
+<li><a href="#E0005_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#E0006">Error0006</a>
+<ul class="sectlevel4">
+<li><a href="#E0006_response_body">Response body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#CommunityError">Community Error</a>
+<ul class="sectlevel3">
+<li><a href="#E1002">Error1002</a>
+<ul class="sectlevel4">
+<li><a href="#E1002_response_body">Response body</a></li>
+</ul>
+</li>
+<li><a href="#PostError">Post Error</a>
+<ul class="sectlevel4">
+<li><a href="#E1101">Error1101</a></li>
+</ul>
+</li>
+<li><a href="#CommentError">Comment Error</a>
+<ul class="sectlevel4">
+<li><a href="#E1201">Error1201</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#SystemError">System Error</a>
+<ul class="sectlevel3">
+<li><a href="#E2001">Error2001</a>
+<ul class="sectlevel4">
+<li><a href="#E2001_response_body">Response body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#overview-hypermedia">하이퍼미디어</a>
 <ul class="sectlevel2">
 <li><a href="#signin">인증하기</a>
@@ -613,6 +679,189 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="overview-errors"><a class="link" href="#overview-errors">오류</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>에러 응답이 발생했을 때 (상태 코드 &gt;= 400), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다.</p>
+</div>
+<div class="sect2">
+<h3 id="AuthError"><a class="link" href="#AuthError">Auth Error</a></h3>
+<div class="sect3">
+<h4 id="E0001"><a class="link" href="#E0001">Error0002</a></h4>
+<div class="sect4">
+<h5 id="E0001_response_body"><a class="link" href="#E0001_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:36.7685786",
+  "status" : 202,
+  "error" : "0001",
+  "message" : "ID: TestUser1 이미 사용중인 아이디입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="E0002"><a class="link" href="#E0002">Error0002</a></h4>
+<div class="sect4">
+<h5 id="E0002_response_body"><a class="link" href="#E0002_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:34.8413614",
+  "status" : 403,
+  "error" : "0002",
+  "message" : "ID: TestUser1 회원가입이 되어있지 않거나 잠긴 계정입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="E0003"><a class="link" href="#E0003">Error0002</a></h4>
+<div class="sect4">
+<h5 id="E0003_response_body"><a class="link" href="#E0003_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:32.7591424",
+  "status" : 403,
+  "error" : "0003",
+  "message" : "유효하지 않은 토큰입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="E0004"><a class="link" href="#E0004">Error0004</a></h4>
+<div class="sect4">
+<h5 id="E0004_response_body"><a class="link" href="#E0004_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:32.8598709",
+  "status" : 403,
+  "error" : "0004",
+  "message" : "손상된 토큰입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="E0005"><a class="link" href="#E0005">Error0005</a></h4>
+<div class="sect4">
+<h5 id="E0005_response_body"><a class="link" href="#E0005_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:08.8265993",
+  "status" : 403,
+  "error" : "0005",
+  "message" : "잘못된 인증입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="E0006"><a class="link" href="#E0006">Error0006</a></h4>
+<div class="sect4">
+<h5 id="E0006_response_body"><a class="link" href="#E0006_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:09.1188304",
+  "status" : 403,
+  "error" : "0006",
+  "message" : "만료된 토큰입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CommunityError"><a class="link" href="#CommunityError">Community Error</a></h3>
+<div class="sect3">
+<h4 id="E1002"><a class="link" href="#E1002">Error1002</a></h4>
+<div class="sect4">
+<h5 id="E1002_response_body"><a class="link" href="#E1002_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:15.8891236",
+  "status" : 403,
+  "error" : "1002",
+  "message" : "수정 권한이 없습니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="PostError"><a class="link" href="#PostError">Post Error</a></h4>
+<div class="sect4">
+<h5 id="E1101"><a class="link" href="#E1101">Error1101</a></h5>
+<div class="sect5">
+<h6 id="E1101_response_body"><a class="link" href="#E1101_response_body">Response body</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:16.0566768",
+  "status" : 404,
+  "error" : "1101",
+  "message" : "존재하지 않는 게시글입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CommentError"><a class="link" href="#CommentError">Comment Error</a></h4>
+<div class="sect4">
+<h5 id="E1201"><a class="link" href="#E1201">Error1201</a></h5>
+<div class="sect5">
+<h6 id="E1201_response_body"><a class="link" href="#E1201_response_body">Response body</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:15.8044162",
+  "status" : 404,
+  "error" : "1201",
+  "message" : "존재하지 않는 댓글입니다."
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="SystemError"><a class="link" href="#SystemError">System Error</a></h3>
+<div class="sect3">
+<h4 id="E2001"><a class="link" href="#E2001">Error2001</a></h4>
+<div class="sect4">
+<h5 id="E2001_response_body"><a class="link" href="#E2001_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "timestamp" : "2020-08-10T10:51:11.9723816",
+  "status" : 400,
+  "error" : "2001",
+  "message" : "Unrecognized field \"message\" "
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="overview-hypermedia"><a class="link" href="#overview-hypermedia">하이퍼미디어</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -657,10 +906,11 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 189
+Content-Length: 380
 
 {
-  "authToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk2MzM1OTg5LCJleHAiOjE1OTYzMzk1ODl9.mG3Ga5v7rQQipZqBeDpeSMtEi_VRMiiMSpJVdIrNhBk"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk3MDI0Mjk0LCJleHAiOjE1OTcwMjQ4OTR9._eQMWnK6OBGlzOq0C8Dd6RoDvo0g4_3euENkNLtw9YA",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk3MDI0Mjk0LCJleHAiOjE1OTc2MjkwOTR9.Z2T7YkWnJMMQ0nuNIz6LTnyLdWzaVHNCFJDtoOfPee0"
 }</code></pre>
 </div>
 </div>
@@ -704,10 +954,11 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 189
+Content-Length: 380
 
 {
-  "authToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk2MzM1OTkxLCJleHAiOjE1OTYzMzk1OTF9.jOZJxYV8imm3sObo1S_C-TqKxiRfA6e-E5YVTjR-5Oo"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk3MDI0Mjk2LCJleHAiOjE1OTcwMjQ4OTZ9.ls9txn610Y2l2KTSB7108iQDuPlFigQdzfBs_bxzT9g",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk3MDI0Mjk2LCJleHAiOjE1OTc2MjkwOTZ9.OhLKMzm7qQMIJE5IscfqepKLLYTljf4pKK0EWaJA2B8"
 }</code></pre>
 </div>
 </div>
@@ -759,7 +1010,7 @@ X-Frame-Options: DENY
 <h4 id="getPosts_http_request"><a class="link" href="#getPosts_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /blog/posts?page=1&amp;size=2&amp;sort=title%2CDESC HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /board/posts?page=1&amp;size=2&amp;sort=title%2CDESC HTTP/1.1
 Host: templet.restapi.com</code></pre>
 </div>
 </div>
@@ -780,52 +1031,52 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 1480
+Content-Length: 1405
 
 {
   "_embedded" : {
     "postList" : [ {
-      "createdDate" : "2020-08-02T11:39:46.9632323",
-      "modifiedDate" : "2020-08-02T11:39:46.9632323",
-      "writerId" : "TestUser4",
+      "postId" : 5,
       "title" : "게시글4",
+      "writerId" : "TestUser4",
       "views" : 0,
+      "modifiedDate" : "2020-08-10T10:51:25",
       "_links" : {
         "self" : {
-          "href" : "https://templet.restapi.com/blog/posts/5"
+          "href" : "https://templet.restapi.com/board/posts/5"
         }
       }
     }, {
-      "createdDate" : "2020-08-02T11:39:46.9612365",
-      "modifiedDate" : "2020-08-02T11:39:46.9612365",
-      "writerId" : "TestUser3",
+      "postId" : 4,
       "title" : "게시글3",
+      "writerId" : "TestUser3",
       "views" : 0,
+      "modifiedDate" : "2020-08-10T10:51:25",
       "_links" : {
         "self" : {
-          "href" : "https://templet.restapi.com/blog/posts/4"
+          "href" : "https://templet.restapi.com/board/posts/4"
         }
       }
     } ]
   },
   "_links" : {
     "first" : {
-      "href" : "https://templet.restapi.com/blog/posts?page=0&amp;size=2&amp;sort=title,desc"
+      "href" : "https://templet.restapi.com/board/posts?page=0&amp;size=2&amp;sort=title,desc"
     },
     "prev" : {
-      "href" : "https://templet.restapi.com/blog/posts?page=0&amp;size=2&amp;sort=title,desc"
+      "href" : "https://templet.restapi.com/board/posts?page=0&amp;size=2&amp;sort=title,desc"
     },
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts?page=1&amp;size=2&amp;sort=title,desc"
+      "href" : "https://templet.restapi.com/board/posts?page=1&amp;size=2&amp;sort=title,desc"
     },
     "next" : {
-      "href" : "https://templet.restapi.com/blog/posts?page=2&amp;size=2&amp;sort=title,desc"
+      "href" : "https://templet.restapi.com/board/posts?page=2&amp;size=2&amp;sort=title,desc"
     },
     "last" : {
-      "href" : "https://templet.restapi.com/blog/posts?page=2&amp;size=2&amp;sort=title,desc"
+      "href" : "https://templet.restapi.com/board/posts?page=2&amp;size=2&amp;sort=title,desc"
     },
     "profile" : {
-      "href" : "https://templet.restapi.com/docs/index.html/getPosts"
+      "href" : "https://templet.restapi.com/docs/index.html#getPosts"
     }
   },
   "page" : {
@@ -848,7 +1099,7 @@ Content-Length: 1480
 <h4 id="sendPost_http_request"><a class="link" href="#sendPost_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /blog/posts HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /board/posts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 Host: templet.restapi.com
@@ -868,6 +1119,7 @@ Host: templet.restapi.com
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
+Location: https://templet.restapi.com/board/posts/1
 Content-Type: application/hal+json;charset=UTF-8
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -876,12 +1128,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 205
+Content-Length: 206
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/1"
+      "href" : "https://templet.restapi.com/board/posts/1"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#sendPost"
@@ -900,7 +1152,7 @@ Content-Length: 205
 <div class="sect3">
 <h4 id="getPost_path_parameters"><a class="link" href="#getPost_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -923,7 +1175,7 @@ Content-Length: 205
 <h4 id="getPost_http_request"><a class="link" href="#getPost_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /blog/posts/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /board/posts/1 HTTP/1.1
 Host: templet.restapi.com</code></pre>
 </div>
 </div>
@@ -944,57 +1196,57 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 1510
+Content-Length: 1519
 
 {
   "title" : "게시글1",
   "writerId" : "TestUser1",
   "body" : "게시글 본문입니다.",
-  "views" : 1,
-  "createdDate" : "2020-08-02T11:39:46.8046555",
-  "modifiedDate" : "2020-08-02T11:39:46.8046555",
+  "views" : 0,
+  "createdDate" : "2020-08-10T10:51:25.8462948",
+  "modifiedDate" : "2020-08-10T10:51:25.8462948",
   "comments" : [ {
-    "createdDate" : "2020-08-02T11:39:46.8096425",
-    "modifiedDate" : "2020-08-02T11:39:46.8096425",
+    "createdDate" : "2020-08-10T10:51:25.8572644",
+    "modifiedDate" : "2020-08-10T10:51:25.8572644",
     "commenterId" : "TestUser1",
     "message" : "1번째 댓글",
     "_links" : {
       "self" : {
-        "href" : "https://templet.restapi.com/blog/posts/1"
+        "href" : "https://templet.restapi.com/board/posts/1"
       },
       "updateComment" : {
-        "href" : "https://templet.restapi.com/blog/posts/1"
+        "href" : "https://templet.restapi.com/board/posts/1"
       },
       "deleteComment" : {
-        "href" : "https://templet.restapi.com/blog/posts/1"
+        "href" : "https://templet.restapi.com/board/posts/1"
       }
     }
   }, {
-    "createdDate" : "2020-08-02T11:39:46.814629",
-    "modifiedDate" : "2020-08-02T11:39:46.8156255",
+    "createdDate" : "2020-08-10T10:51:25.8672381",
+    "modifiedDate" : "2020-08-10T10:51:25.8672381",
     "commenterId" : "TestUser2",
     "message" : "2번째 댓글",
     "_links" : {
       "self" : {
-        "href" : "https://templet.restapi.com/blog/posts/2"
+        "href" : "https://templet.restapi.com/board/posts/2"
       },
       "updateComment" : {
-        "href" : "https://templet.restapi.com/blog/posts/2"
+        "href" : "https://templet.restapi.com/board/posts/2"
       },
       "deleteComment" : {
-        "href" : "https://templet.restapi.com/blog/posts/2"
+        "href" : "https://templet.restapi.com/board/posts/2"
       }
     }
   } ],
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/1"
+      "href" : "https://templet.restapi.com/board/posts/1"
+    },
+    "sendComment" : {
+      "href" : "https://templet.restapi.com/board/posts/1"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#getPost"
-    },
-    "sendComment" : {
-      "href" : "https://templet.restapi.com/blog/posts/1"
     }
   }
 }</code></pre>
@@ -1010,7 +1262,7 @@ Content-Length: 1510
 <div class="sect3">
 <h4 id="updatePost_path_parameters"><a class="link" href="#updatePost_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1033,7 +1285,7 @@ Content-Length: 1510
 <h4 id="updatePost_http_request"><a class="link" href="#updatePost_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /blog/posts/2 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /board/posts/2 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 91
 Host: templet.restapi.com
@@ -1061,12 +1313,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 207
+Content-Length: 208
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/2"
+      "href" : "https://templet.restapi.com/board/posts/2"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#updatePost"
@@ -1085,7 +1337,7 @@ Content-Length: 207
 <div class="sect3">
 <h4 id="deletePost_path_parameters"><a class="link" href="#deletePost_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1108,7 +1360,7 @@ Content-Length: 207
 <h4 id="deletePost_http_request"><a class="link" href="#deletePost_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /blog/posts/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /board/posts/1 HTTP/1.1
 Host: templet.restapi.com</code></pre>
 </div>
 </div>
@@ -1129,12 +1381,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 207
+Content-Length: 208
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/1"
+      "href" : "https://templet.restapi.com/board/posts/1"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#deletePost"
@@ -1153,7 +1405,7 @@ Content-Length: 207
 <div class="sect3">
 <h4 id="sendComment_path_parameters"><a class="link" href="#sendComment_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1176,7 +1428,7 @@ Content-Length: 207
 <h4 id="sendComment_http_request"><a class="link" href="#sendComment_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /blog/posts/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /board/posts/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 38
 Host: templet.restapi.com
@@ -1203,12 +1455,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 210
+Content-Length: 209
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/1/1"
+      "href" : "https://templet.restapi.com/board/posts/1"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#sendComment"
@@ -1227,7 +1479,7 @@ Content-Length: 210
 <div class="sect3">
 <h4 id="updateComment_path_parameters"><a class="link" href="#updateComment_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}/{commentId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}/{commentId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1254,7 +1506,7 @@ Content-Length: 210
 <h4 id="updateComment_http_request"><a class="link" href="#updateComment_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /blog/posts/2/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /board/posts/2/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 45
 Host: templet.restapi.com
@@ -1281,12 +1533,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 212
+Content-Length: 211
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/2/1"
+      "href" : "https://templet.restapi.com/board/posts/2"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#updateComment"
@@ -1305,7 +1557,7 @@ Content-Length: 212
 <div class="sect3">
 <h4 id="deleteComment_path_parameters"><a class="link" href="#deleteComment_path_parameters">Path parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /blog/posts/{postId}/{commentId}</caption>
+<caption class="title">Table 1. /board/posts/{postId}/{commentId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1332,7 +1584,7 @@ Content-Length: 212
 <h4 id="deleteComment_http_request"><a class="link" href="#deleteComment_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /blog/posts/3/2 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /board/posts/3/2 HTTP/1.1
 Host: templet.restapi.com</code></pre>
 </div>
 </div>
@@ -1353,12 +1605,12 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 212
+Content-Length: 211
 
 {
   "_links" : {
     "self" : {
-      "href" : "https://templet.restapi.com/blog/posts/3/2"
+      "href" : "https://templet.restapi.com/board/posts/3"
     },
     "profile" : {
       "href" : "https://templet.restapi.com/docs/index.html#deleteComment"
@@ -1374,7 +1626,7 @@ Content-Length: 212
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-02 11:27:14 +0900
+Last updated 2020-08-10 10:30:35 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">

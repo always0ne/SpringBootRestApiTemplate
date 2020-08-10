@@ -3,10 +3,8 @@ package com.restapi.template.security.controller;
 import com.restapi.template.common.response.ErrorResponse;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
-import com.restapi.template.security.exception.InvalidRefreshTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -53,19 +51,6 @@ public class SecurityExceptionHandler {
     }
 
     /**
-     * 잘못된 RefreshToken 예외 발생
-     *
-     * @param exception 토큰의 유저데이터 불일치
-     * @return FORBIDDEN
-     */
-    @ExceptionHandler(InvalidRefreshTokenException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ResponseBody
-    public ErrorResponse handleInvalidRefreshToken(InvalidRefreshTokenException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0003", exception.getMessage());
-    }
-
-    /**
      * 서명이 유효하지 않은 예외 발생
      *
      * @param exception 서명이 서버와 다름
@@ -75,7 +60,7 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleSignature(SignatureException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0004", "유효하지 않은 토큰입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0003", "유효하지 않은 토큰입니다.");
     }
 
     /**
@@ -88,20 +73,7 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleMalformedJwt(MalformedJwtException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0005", "손상된 토큰입니다.");
-    }
-
-    /**
-     * Bearer가 아닌 방식으로 인증 예외
-     *
-     * @param exception 인증 양식을 지키지 않음
-     * @return FORBIDDEN
-     */
-    @ExceptionHandler(DecodingException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ResponseBody
-    public ErrorResponse handleMalformedJwt(DecodingException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0006", "잘못된 인증입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0004", "손상된 토큰입니다.");
     }
 
     /**
@@ -114,6 +86,6 @@ public class SecurityExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleTokenExpired(ExpiredJwtException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "0007", "만료된 토큰입니다.");
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "0006", "만료된 토큰입니다.");
     }
 }

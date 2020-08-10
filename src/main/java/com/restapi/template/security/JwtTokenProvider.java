@@ -3,6 +3,7 @@ package com.restapi.template.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -85,7 +86,7 @@ public class JwtTokenProvider {
      * @param tokenValidMilSecond 토큰 유효시간
      * @return AccessToken
      */
-    private String generateToken(String userId, List<String> roles, long tokenValidMilSecond) {
+    protected String generateToken(String userId, List<String> roles, long tokenValidMilSecond) {
         Claims claims = Jwts.claims().setSubject(userId);
         claims.put("roles", roles);
         Date now = new Date();
@@ -108,8 +109,10 @@ public class JwtTokenProvider {
         String token = req.getHeader("Authorization");
         if (token == null)
             return null;
-        else
+        else if (token.contains("Bearer"))
             token = token.replace("Bearer ", "");
+        else
+            throw new DecodingException("");
 
         return getClaimsFromToken(token);
     }

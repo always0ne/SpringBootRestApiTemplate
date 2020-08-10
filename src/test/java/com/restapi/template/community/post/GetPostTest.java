@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
@@ -22,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class GetPostTest extends BaseControllerTest {
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("포스트 목록 조회(성공)")
     void getPostsSuccess() throws Exception {
@@ -61,7 +59,6 @@ class GetPostTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @DisplayName("포스트 조회(성공)")
     void getPostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
@@ -105,7 +102,6 @@ class GetPostTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("나의 포스트 조회(성공)")
     void getMyPostSuccess() throws Exception {
@@ -154,12 +150,12 @@ class GetPostTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("포스트 조회(게시글이 없을때)")
     void getPostNoPostFailBecauseNotFound() throws Exception {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", 1))
                 .andExpect(status().isNotFound())
+                .andExpect(jsonPath("error").value("1101"))
                 .andDo(print());
     }
 }

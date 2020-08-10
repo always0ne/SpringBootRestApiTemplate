@@ -1,6 +1,5 @@
 package com.restapi.template.community.post;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.template.common.Date;
 import com.restapi.template.community.comment.Comment;
 import lombok.Builder;
@@ -67,7 +66,7 @@ public class Post extends Date {
     }
 
     @PostLoad
-    private void onSelect(){
+    private void onSelect() {
         this.views++;
     }
 

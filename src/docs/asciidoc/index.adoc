@@ -60,6 +60,55 @@ Always0ne;
 | 요청한 리소스가 없음.
 |===
 
+[[overview-errors]]
+== 오류
+
+에러 응답이 발생했을 때 (상태 코드 >= 400), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다.
+[[AuthError]]
+=== Auth Error
+[[E0001]]
+==== Error0001
+operation::0001[snippets='response-body']
+[[E0002]]
+==== Error0002
+operation::0002[snippets='response-body']
+[[E0003]]
+==== Error0003
+operation::0003[snippets='response-body']
+[[E0004]]
+==== Error0004
+operation::0004[snippets='response-body']
+[[E0005]]
+==== Error0005
+operation::0005[snippets='response-body']
+[[E0006]]
+==== Error0006
+operation::0006[snippets='response-body']
+
+[[CommunityError]]
+=== Community Error
+[[E1002]]
+==== Error1002
+operation::1002[snippets='response-body']
+
+[[PostError]]
+==== Post Error
+[[E1101]]
+===== Error1101
+operation::1101[snippets='response-body']
+
+[[CommentError]]
+==== Comment Error
+[[E1201]]
+===== Error1201
+operation::1201[snippets='response-body']
+
+[[SystemError]]
+=== System Error
+[[E2001]]
+==== Error2001
+operation::2001[snippets='response-body']
+
 [[overview-hypermedia]]
 == 하이퍼미디어
 

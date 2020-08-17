@@ -47,6 +47,11 @@ public class Post extends Date {
     @Column(nullable = false)
     private Long views;
     /**
+     * 댓글수
+     */
+    @Column(nullable = false)
+    private Long commentNum;
+    /**
      * 댓글들
      *
      * @see com.restapi.template.community.comment.Comment
@@ -63,10 +68,13 @@ public class Post extends Date {
         this.title = title;
         this.body = body;
         this.views = (long) 0;
+        this.commentNum = (long) 0;
     }
 
-    @PostLoad
-    private void onSelect() {
+    /**
+     * 조회수 증가
+     */
+    public void increaseViews() {
         this.views++;
     }
 
@@ -93,6 +101,7 @@ public class Post extends Date {
         if (this.comments == null)
             this.comments = new ArrayList<Comment>();
         this.comments.add(comment);
+        this.commentNum++;
         return comment.getCommentId();
     }
 
@@ -105,5 +114,15 @@ public class Post extends Date {
     public void updateComment(Comment comment, String message) {
         comment.updateComment(message);
         this.comments.set(this.comments.indexOf(comment), comment);
+    }
+
+    /**
+     * 댓글 삭제
+     *
+     * @param comment 댓글
+     */
+    public void deleteComment(Comment comment) {
+        this.comments.remove(comment);
+        this.commentNum--;
     }
 }

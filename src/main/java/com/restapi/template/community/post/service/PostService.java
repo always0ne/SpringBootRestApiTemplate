@@ -65,7 +65,7 @@ public class PostService {
     public PostDetailDto getPost(Long postId) {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(PostNotFoundException::new);
-
+        post.increaseViews();
         return PostDetailDto.builder()
                 .title(post.getTitle())
                 .body(post.getBody())

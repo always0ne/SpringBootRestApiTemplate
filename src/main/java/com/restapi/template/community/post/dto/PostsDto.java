@@ -34,6 +34,10 @@ public class PostsDto {
      */
     private Long views;
     /**
+     * 댓글수
+     */
+    private Long commentNum;
+    /**
      * 수정일
      */
     private LocalDateTime modifiedDate;

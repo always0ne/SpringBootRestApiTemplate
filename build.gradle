@@ -54,13 +54,12 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude module: 'junit'
 	}
-
-
 }
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
 	set('outputsDir',file("build/generated-docs"))
+	set('docsDir',file("docs"))
 }
 
 test {
@@ -77,6 +76,12 @@ task copyRestDocs(type: Copy) {
 	dependsOn asciidoctor
 	from "${asciidoctor.outputDir}/html5"
 	into "${sourceSets.main.output.resourcesDir}/static/docs"
+	from "${asciidoctor.outputDir}/html5"
+	into "${docsDir}"
+	rename{
+		String fileName->
+			fileName.replace("index.html","ApiDocs.html")
+	}
 }
 
 bootJar {

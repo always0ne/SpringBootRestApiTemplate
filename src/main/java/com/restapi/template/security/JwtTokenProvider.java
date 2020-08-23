@@ -140,7 +140,7 @@ public class JwtTokenProvider {
      * @return Spring Security 인증토큰
      */
     public Authentication getAuthentication(Claims claims) {
-        return new UsernamePasswordAuthenticationToken(this.getUserId(claims), "", this.getAuthorities(claims));
+        return new UsernamePasswordAuthenticationToken(this.getUserId(claims), "", getAuthorities(claims));
     }
 
     /**

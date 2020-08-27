@@ -154,7 +154,7 @@ public class JwtTokenProvider {
     }
 
     /**
-     * JWT 토큰 데이터 에서 UserID 추출
+     * JWT 토큰 데이터 Roles 추출
      *
      * @param claims JWT 토큰 데이터
      * @return 사용자 권한 정보

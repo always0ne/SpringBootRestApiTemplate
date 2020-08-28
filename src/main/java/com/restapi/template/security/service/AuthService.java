@@ -4,6 +4,7 @@ import com.restapi.template.account.Account;
 import com.restapi.template.account.AccountRepository;
 import com.restapi.template.account.UserStatus;
 import com.restapi.template.security.JwtTokenProvider;
+import com.restapi.template.security.UserRole;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import com.restapi.template.security.request.RefreshRequest;
@@ -69,8 +70,8 @@ public class AuthService {
                 .password(passwordEncoder.encode(password))
                 .name(name)
                 .state(UserStatus.NORMAL)
-                .roles(Collections.singletonList("ROLE_USER"))
-                .refreshToken(jwtTokenProvider.createRefreshToken(id, Collections.singletonList("ROLE_USER")))
+                .roles(Collections.singletonList(UserRole.ROLE_USER))
+                .refreshToken(jwtTokenProvider.createRefreshToken(id, Collections.singletonList(UserRole.ROLE_USER)))
                 .build());
 
         return SignInResponse.builder()

@@ -1,5 +1,6 @@
 package com.restapi.template.account;
 
+import com.restapi.template.security.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,7 +58,7 @@ public class Account {
      * 사용자 권한
      */
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    private List<UserRole> roles;
 
     /**
      * Refresh Token 갱신

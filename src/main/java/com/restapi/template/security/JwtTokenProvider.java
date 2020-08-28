@@ -63,7 +63,7 @@ public class JwtTokenProvider {
      * @param roles  사용자에게 허용할 권한
      * @return AccessToken
      */
-    public String createAccessToken(String userId, List<String> roles) {
+    public String createAccessToken(String userId, List<UserRole> roles) {
         return generateToken(userId, roles, accessTokenValidMilSecond);
     }
 
@@ -74,7 +74,7 @@ public class JwtTokenProvider {
      * @param roles  사용자에게 허용할 권한
      * @return AccessToken
      */
-    public String createRefreshToken(String userId, List<String> roles) {
+    public String createRefreshToken(String userId, List<UserRole> roles) {
         return generateToken(userId, roles, refreshTokenValidMilSecond);
     }
 
@@ -86,7 +86,7 @@ public class JwtTokenProvider {
      * @param tokenValidMilSecond 토큰 유효시간
      * @return AccessToken
      */
-    protected String generateToken(String userId, List<String> roles, long tokenValidMilSecond) {
+    protected String generateToken(String userId, List<UserRole> roles, long tokenValidMilSecond) {
         Claims claims = Jwts.claims().setSubject(userId);
         claims.put("roles", roles);
         Date now = new Date();

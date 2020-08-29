@@ -29,6 +29,8 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 //for Slack Logback
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 //	compile 'eu.bitwalker:UserAgentUtils:1.21'
 //	compile 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
 //	implementation 'org.apache.commons:commons-text:1.8'

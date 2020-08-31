@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.restapi.template.errorbot.util.JsonUtils.toPrettyJson;
 import static com.restapi.template.errorbot.util.MDCUtil.*;
+import static org.apache.commons.text.StringEscapeUtils.unescapeJava;
 
 @RequiredArgsConstructor
 public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
@@ -62,11 +63,6 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
         List<SlackField> fields = new ArrayList<>();
 
         fields.add(generateSlackField(
-                "Error Message",
-                errorLog.getErrorInfo().getMessage(),
-                false));
-
-        fields.add(generateSlackField(
                 "Request URL",
                 errorLog.getRequestInfo().getPath(),
                 true));
@@ -83,7 +79,7 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
 
         fields.add(generateSlackField(
                 "Request Body",
-                toPrettyJson(errorLog.getRequestInfo().getBody()),
+                unescapeJava(toPrettyJson(errorLog.getRequestInfo().getBody())),
                 false));
 
         fields.add(generateSlackField(

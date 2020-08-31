@@ -8,6 +8,12 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+/**
+ * Json 변환에 사용되는 모듈
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 public class JsonUtils {
     private final ObjectMapper mapper;
 
@@ -30,6 +36,11 @@ public class JsonUtils {
         return getInstance().mapper;
     }
 
+    /**
+     * 객체를 Json으로 변환
+     *
+     * @return Json화 된 객체
+     */
     public static String toJson(Object object) {
         try {
             return getMapper().writeValueAsString(object);
@@ -38,6 +49,11 @@ public class JsonUtils {
         }
     }
 
+    /**
+     * Json을 객체로 변환
+     *
+     * @return Json에서 추출한 객체
+     */
     public static <T> T fromJson(String jsonStr, Class<T> cls) {
         try {
             return getMapper().readValue(jsonStr, cls);
@@ -46,6 +62,11 @@ public class JsonUtils {
         }
     }
 
+    /**
+     * Json을 보기 좋게 변환
+     *
+     * @return 가독성이 좋아진 Json
+     */
     public static String toPrettyJson(String json) {
         Object jsonObject = JsonUtils.fromJson(json, Object.class);
         try {

@@ -42,6 +42,8 @@ public class LogContextConfig implements InitializingBean {
 
     /**
      * Request를 여러번 읽을수 있도록 캐싱하는 필터 등록
+     *
+     * @return MultiReadableHttpServletRequestFilter 빈 등록
      */
     @Bean
     public FilterRegistrationBean<MultiReadableHttpServletRequestFilter> multiReadableHttpServletRequestFilterRegistrationBean() {
@@ -55,6 +57,8 @@ public class LogContextConfig implements InitializingBean {
 
     /**
      * Request 정보를 수집하는 필터 등록
+     *
+     * @return CollectRequestDataFilter 빈 등록
      */
     @Bean
     public FilterRegistrationBean<CollectRequestDataFilter> collectRequestDataFilterRegistrationBean() {

@@ -17,6 +17,11 @@ com.restapi.template.community.post.request
 com.restapi.template.community.post.response
 com.restapi.template.community.post.service
 com.restapi.template.configs
+com.restapi.template.errorbot
+com.restapi.template.errorbot.config
+com.restapi.template.errorbot.embedded
+com.restapi.template.errorbot.filter
+com.restapi.template.errorbot.util
 com.restapi.template.security
 com.restapi.template.security.controller
 com.restapi.template.security.exception

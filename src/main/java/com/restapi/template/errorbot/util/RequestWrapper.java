@@ -80,6 +80,7 @@ public class RequestWrapper {
      * 요청의 Body를 반환
      *
      * @return Request Body
+     * @throws IOException 문자열을 읽는 도중 나올수 있는 예외
      */
     public String body() throws IOException {
         String body = null;

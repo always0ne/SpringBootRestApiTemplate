@@ -30,6 +30,9 @@ public class MDCUtil {
 
     /**
      * 객체를 Json으로 변환 후 MDC에 추가
+     *
+     * @param key   키값
+     * @param value 추가할 데이터
      */
     public static void setJsonValueAndPutMDC(String key, Object value) {
         try {
@@ -41,6 +44,9 @@ public class MDCUtil {
 
     /**
      * MDC에서 키값으로 데이터 조회
+     *
+     * @param key 키값
+     * @return key에 매핑된 값
      */
     public static String getFromMDC(String key) {
         return mdc.get(key);

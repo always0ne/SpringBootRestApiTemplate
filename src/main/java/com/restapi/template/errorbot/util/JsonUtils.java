@@ -39,6 +39,7 @@ public class JsonUtils {
     /**
      * 객체를 Json으로 변환
      *
+     * @param object Json으로 변환할 객체
      * @return Json화 된 객체
      */
     public static String toJson(Object object) {
@@ -52,6 +53,8 @@ public class JsonUtils {
     /**
      * Json을 객체로 변환
      *
+     * @param jsonStr Json 문자열
+     * @param cls     변환할 객체
      * @return Json에서 추출한 객체
      */
     public static <T> T fromJson(String jsonStr, Class<T> cls) {
@@ -65,6 +68,7 @@ public class JsonUtils {
     /**
      * Json을 보기 좋게 변환
      *
+     * @param json Json 문자열
      * @return 가독성이 좋아진 Json
      */
     public static String toPrettyJson(String json) {

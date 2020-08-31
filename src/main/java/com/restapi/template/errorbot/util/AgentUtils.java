@@ -1,6 +1,9 @@
 package com.restapi.template.errorbot.util;
 
-import eu.bitwalker.useragentutils.*;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ public class AgentUtils {
     /**
      * UserAgent 정보 매핑
      *
+     * @param request 요청 정보
      * @return 매핑된 User Agent 정보
      */
     public static Map<String, String> getAgentDetail(HttpServletRequest request) {
@@ -32,6 +36,7 @@ public class AgentUtils {
     /**
      * 헤더에서 User-Agent 정보 추출
      *
+     * @param request 요청 정보
      * @return User Agent 정보
      */
     public static UserAgent getUserAgent(HttpServletRequest request) {
@@ -44,6 +49,9 @@ public class AgentUtils {
 
     /**
      * 헤더에서 접속자의 OS 정보 추출
+     *
+     * @param userAgent   사용자 정보
+     * @param agentDetail UserAgent 를 매핑할 객체
      */
     public static void getUserOsInfo(UserAgent userAgent, Map<String, String> agentDetail) {
         OperatingSystem operatingSystem = OperatingSystem.UNKNOWN;
@@ -57,6 +65,9 @@ public class AgentUtils {
 
     /**
      * 헤더에서 접속자 브라우저 정보 추출
+     *
+     * @param userAgent   사용자 정보
+     * @param agentDetail UserAgent 를 매핑할 객체
      */
     public static void getBrowserInfo(UserAgent userAgent, Map<String, String> agentDetail) {
         Browser browser = Browser.UNKNOWN;

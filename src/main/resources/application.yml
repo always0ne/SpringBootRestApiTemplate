@@ -19,6 +19,16 @@ spring:
 jwt:
   secretKey: "This Data Must Be Managed By Secret NOT HERE THIS IS JUST EXAMPLE"
 
+log:
+  slack:
+    enabled: true
+    webHookUrl: "Slack WebHook URL"
+    channel: "chanelName"
+    userName: "[API]ErrorReportBot"
+  database:
+    enabled: true
+  level: ERROR
+
 logging:
   level:
     org:

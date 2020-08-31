@@ -57,7 +57,7 @@ public class Account {
     /**
      * 사용자 권한
      */
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<UserRole> roles;
 
     /**

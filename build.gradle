@@ -23,27 +23,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
 
 //DataBase
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 //for Slack Logback
-//	compile 'eu.bitwalker:UserAgentUtils:1.21'
-//	compile 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
-//	implementation 'org.apache.commons:commons-text:1.8'
+	compile 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
+	implementation 'org.apache.commons:commons-text:1.8'
+	compile 'eu.bitwalker:UserAgentUtils:1.21'
 
 //for JWt Auth
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 	compile 'io.jsonwebtoken:jjwt-api:0.11.2'
 	runtime 'io.jsonwebtoken:jjwt-impl:0.11.2',
-			// Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
-			//'org.bouncycastle:bcprov-jdk15on:1.60',
-			'io.jsonwebtoken:jjwt-jackson:0.11.2' // or 'io.jsonwebtoken:jjwt-gson:0.11.2' for gson
-
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
+			'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
 // Test And RestDocs
 	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'

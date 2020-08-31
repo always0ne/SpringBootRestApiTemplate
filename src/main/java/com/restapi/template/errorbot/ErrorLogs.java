@@ -43,11 +43,11 @@ public class ErrorLogs {
     @Column(name = "ERROR_DATETIME")
     private final LocalDateTime errorDatetime = LocalDateTime.now();
 
-    public ErrorLogs(ILoggingEvent eventObject) {
+    public ErrorLogs(ILoggingEvent eventObject, String uri, String parameter, String header, String body, String agent) {
         this.userInfo = SecurityContextHolder.getContext().getAuthentication().getName();
         this.systemInfo = new SystemInfo("RestApiTemplate");
         this.errorInfo = new ErrorInfo(eventObject);
-        this.requestInfo = new RequestInfo();
+        this.requestInfo = new RequestInfo(uri, parameter, header, body, agent);
     }
 
     public void markAsAlert() {

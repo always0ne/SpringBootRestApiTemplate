@@ -2,7 +2,6 @@ package com.restapi.template.errorbot;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restapi.template.errorbot.config.LogConfig;
 import lombok.RequiredArgsConstructor;
 import net.gpedro.integrations.slack.SlackApi;
@@ -15,17 +14,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.restapi.template.errorbot.util.JsonUtils.toPrettyJson;
+import static com.restapi.template.errorbot.util.MDCUtil.*;
+
 @RequiredArgsConstructor
 public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
     private final LogConfig logConfig;
     private final ErrorLogsRepository errorLogsRepository;
-    private final ObjectMapper objectMapper;
 
     @Override
     protected void append(ILoggingEvent eventObject) {
         if (eventObject.getLevel().isGreaterOrEqual(logConfig.getLevel())) {
-            ErrorLogs errorLog = new ErrorLogs(eventObject);
+            ErrorLogs errorLog = new ErrorLogs(
+                    eventObject,
+                    getFromMDC(REQUEST_URI_MDC),
+                    getFromMDC(PARAMETER_MAP_MDC),
+                    getFromMDC(HEADER_MAP_MDC),
+                    getFromMDC(BODY_MDC),
+                    getFromMDC(AGENT_DETAIL_MDC)
+            );
             if (logConfig.getDatabase().isEnabled())
                 errorLogsRepository.save(errorLog);
             if (logConfig.getSlack().isEnabled())
@@ -75,7 +83,7 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
 
         fields.add(generateSlackField(
                 "Request Body",
-                errorLog.getRequestInfo().getBody(),
+                toPrettyJson(errorLog.getRequestInfo().getBody()),
                 false));
 
         fields.add(generateSlackField(
@@ -85,7 +93,7 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
 
         fields.add(generateSlackField(
                 "User Agent",
-                errorLog.getRequestInfo().getAgentDetail(),
+                toPrettyJson(errorLog.getRequestInfo().getAgentDetail()),
                 true));
 
         fields.add(generateSlackField(
@@ -119,15 +127,5 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
         slackField.setValue(value);
         slackField.setShorten(shorten);
         return slackField;
-    }
-
-    private String toPrettyJson(String rawJson) {
-        try {
-            return objectMapper
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(objectMapper.readValue(rawJson, Object.class));
-        } catch (Exception e) {
-            return "";
-        }
     }
 }

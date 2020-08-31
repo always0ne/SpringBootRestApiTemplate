@@ -2,12 +2,14 @@ package com.restapi.template.errorbot.embedded;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
+@NoArgsConstructor
 @AllArgsConstructor
 public class RequestInfo {
     @Column(name = "PATH", length = 2048)
@@ -24,8 +26,4 @@ public class RequestInfo {
 
     @Column(name = "AGENT_DETAIL", columnDefinition = "TEXT")
     private String agentDetail;
-
-    public RequestInfo() {
-
-    }
 }

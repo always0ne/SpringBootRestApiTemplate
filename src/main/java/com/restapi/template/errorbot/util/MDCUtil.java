@@ -5,8 +5,14 @@ import org.slf4j.spi.MDCAdapter;
 
 import static com.restapi.template.errorbot.util.JsonUtils.toJson;
 
+/**
+ * 장에 발생 시 Request 정보를 가지고 있기 위한 MDC 모듈
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 public class MDCUtil {
-    private static MDCAdapter mdc = MDC.getMDCAdapter();
+    private static final MDCAdapter mdc = MDC.getMDCAdapter();
 
     public static final String HEADER_MAP_MDC = "HEADER_MAP_MDC";
 
@@ -22,6 +28,12 @@ public class MDCUtil {
         mdc.put(key, value);
     }
 
+    /**
+     * 객체를 Json으로 변환 후 MDC에 추가
+     *
+     * @param key   키값
+     * @param value 추가할 데이터
+     */
     public static void setJsonValueAndPutMDC(String key, Object value) {
         try {
             if (value != null)
@@ -30,10 +42,19 @@ public class MDCUtil {
         }
     }
 
+    /**
+     * MDC에서 키값으로 데이터 조회
+     *
+     * @param key 키값
+     * @return key에 매핑된 값
+     */
     public static String getFromMDC(String key) {
         return mdc.get(key);
     }
 
+    /**
+     * MDC 초기화
+     */
     public static void clear() {
         MDC.clear();
     }

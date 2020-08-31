@@ -10,6 +10,7 @@
 - H2 Database
 - Spring Data Jpa
 - JWT Authorization By JJWT
+- Error Logback Notification(Slack)
 
 
 ```

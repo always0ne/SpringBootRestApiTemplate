@@ -20,6 +20,8 @@ jwt:
   secretKey: "This Data Must Be Managed By Secret NOT HERE THIS IS JUST EXAMPLE"
 
 log:
+  serverName: "Rest Api Template"
+  level: ERROR
   slack:
     enabled: true
     webHookUrl: "Slack WebHook URL"
@@ -27,7 +29,6 @@ log:
     userName: "[API]ErrorReportBot"
   database:
     enabled: true
-  level: ERROR
 
 logging:
   level:

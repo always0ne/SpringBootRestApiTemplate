@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "log")
 public class LogConfig {
 
+    private String serverName;
+
     private Level level;
 
     private Slack slack;

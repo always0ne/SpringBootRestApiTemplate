@@ -29,6 +29,7 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
         if (eventObject.getLevel().isGreaterOrEqual(logConfig.getLevel())) {
             ErrorLogs errorLog = new ErrorLogs(
                     eventObject,
+                    logConfig.getServerName(),
                     getFromMDC(REQUEST_URI_MDC),
                     getFromMDC(PARAMETER_MAP_MDC),
                     getFromMDC(HEADER_MAP_MDC),

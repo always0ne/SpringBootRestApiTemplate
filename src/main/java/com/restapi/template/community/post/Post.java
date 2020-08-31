@@ -1,6 +1,5 @@
 package com.restapi.template.community.post;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.template.common.Date;
 import com.restapi.template.community.comment.Comment;
 import lombok.Builder;
@@ -25,7 +24,6 @@ public class Post extends Date {
      * pk
      */
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     /**
@@ -49,26 +47,40 @@ public class Post extends Date {
     @Column(nullable = false)
     private Long views;
     /**
+     * 댓글수
+     */
+    @Column(nullable = false)
+    private Long commentNum;
+    /**
      * 댓글들
      *
      * @see com.restapi.template.community.comment.Comment
      */
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
     @Builder
-    public Post(String writerId, String title, String body) {
+    public Post(Long id, String writerId, String title, String body) {
         super();
+        this.postId = id;
         this.writerId = writerId;
         this.title = title;
         this.body = body;
         this.views = (long) 0;
+        this.commentNum = (long) 0;
+    }
+
+    /**
+     * 조회수 증가
+     */
+    public void increaseViews() {
+        this.views++;
     }
 
     /**
      * 게시글 수정
-     * 데이터 변경 후 수정일 갱신
+     * 데이터 변경
      *
      * @param title 글 제목
      * @param body  글 본문
@@ -76,7 +88,7 @@ public class Post extends Date {
     public void updatePost(String title, String body) {
         this.title = title;
         this.body = body;
-        this.update();
+        this.updateModifyDate();
     }
 
     /**
@@ -89,6 +101,7 @@ public class Post extends Date {
         if (this.comments == null)
             this.comments = new ArrayList<Comment>();
         this.comments.add(comment);
+        this.commentNum++;
         return comment.getCommentId();
     }
 
@@ -104,9 +117,12 @@ public class Post extends Date {
     }
 
     /**
-     * 조회수 증가
+     * 댓글 삭제
+     *
+     * @param comment 댓글
      */
-    public void increaseViews() {
-        this.views++;
+    public void deleteComment(Comment comment) {
+        this.comments.remove(comment);
+        this.commentNum--;
     }
 }

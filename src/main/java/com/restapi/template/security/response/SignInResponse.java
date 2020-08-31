@@ -20,4 +20,8 @@ public class SignInResponse {
      * accessToken
      */
     private String accessToken;
+    /**
+     * accessToken
+     */
+    private String refreshToken;
 }

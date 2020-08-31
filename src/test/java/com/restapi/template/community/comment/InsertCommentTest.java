@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -23,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class InsertCommentTest extends BaseControllerTest {
 
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("댓글 쓰기(성공)")
     void saveCommentSuccess() throws Exception {
@@ -31,7 +29,7 @@ class InsertCommentTest extends BaseControllerTest {
         AddCommentRequest addCommentRequest = AddCommentRequest.builder()
                 .message("댓글 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/blog/posts/{postId}", post.getPostId())
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/board/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(addCommentRequest)))
                 .andExpect(status().isCreated())
@@ -43,7 +41,7 @@ class InsertCommentTest extends BaseControllerTest {
                         requestFields(
                                 fieldWithPath("message").description("댓글")
                         )));
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("comments[0].commenterId").value("TestUser1"))
                 .andExpect(jsonPath("comments[0].message").value("댓글 테스트"));

@@ -1,6 +1,7 @@
 package com.restapi.template.community.post.response;
 
 import com.restapi.template.common.DocsController;
+import com.restapi.template.community.comment.controller.CommentController;
 import com.restapi.template.community.post.controller.PostController;
 import com.restapi.template.community.post.dto.PostDetailDto;
 import org.springframework.hateoas.EntityModel;
@@ -26,6 +27,7 @@ public class PostResponse extends EntityModel<PostDetailDto> {
     public PostResponse(PostDetailDto post, Long postId, Link... links) {
         super(post, links);
         add(linkTo(PostController.class).slash(postId).withSelfRel());
+        add(linkTo(CommentController.class, postId).withRel("sendComment"));
         add(linkTo(DocsController.class).slash("#getPost").withRel("profile"));
     }
 }

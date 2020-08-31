@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -15,13 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @DisplayName("게시글 삭제 테스트")
 class DeletePostTest extends BaseControllerTest {
+
     @Test
-    @Transactional
     @WithMockUser("TestUser1")
     @DisplayName("포스트 삭제(성공)")
     void deletePostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/blog/posts/{postId}", post.getPostId()))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("deletePost",

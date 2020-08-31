@@ -9,7 +9,6 @@ import lombok.*;
  * @version 1.0
  */
 @Getter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

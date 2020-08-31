@@ -1,6 +1,7 @@
 package com.restapi.template.common;
 
 import com.restapi.template.common.exception.ThisIsNotYoursException;
+import com.restapi.template.common.response.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class CommonExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorResponse handleNotYours(ThisIsNotYoursException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, 1002, exception.getMessage());
+        return new ErrorResponse(HttpStatus.FORBIDDEN, "1002", exception.getMessage());
     }
 
     /**
@@ -45,6 +46,6 @@ public class CommonExceptionHandler {
     @ResponseBody
     public ErrorResponse handleNotYours(HttpMessageNotReadableException exception) {
         String message = Objects.requireNonNull(exception.getRootCause()).getMessage().split("\\(class")[0];
-        return new ErrorResponse(HttpStatus.BAD_REQUEST, 2001, message);
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, "2001", message);
     }
 }

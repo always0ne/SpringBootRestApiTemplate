@@ -1,17 +1,13 @@
 package com.restapi.template.account;
 
+import com.restapi.template.security.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 계정 엔터티
@@ -24,7 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account implements UserDetails {
+public class Account {
     /**
      * pk
      */
@@ -54,52 +50,22 @@ public class Account implements UserDetails {
     private UserStatus state;
 
     /**
+     * Refresh Token
+     */
+    private String refreshToken;
+
+    /**
      * 사용자 권한
      */
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<UserRole> roles;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.userId;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        if (state == UserStatus.NORMAL)
-            return true;
-        else
-            return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        if (state == UserStatus.NORMAL)
-            return true;
-        else
-            return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        if (state == UserStatus.NORMAL)
-            return true;
-        else
-            return false;
+    /**
+     * Refresh Token 갱신
+     *
+     * @param refreshToken RefreshToken
+     */
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

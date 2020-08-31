@@ -1,11 +1,12 @@
 package com.restapi.template.community.comment.controller;
 
 import com.restapi.template.common.DocsController;
+import com.restapi.template.common.response.LinksResponse;
 import com.restapi.template.community.comment.request.AddCommentRequest;
 import com.restapi.template.community.comment.request.UpdateCommentRequest;
 import com.restapi.template.community.comment.service.CommentService;
+import com.restapi.template.community.post.controller.PostController;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/blog/posts/{postId}", produces = MediaTypes.HAL_JSON_VALUE)
+@RequestMapping(value = "/board/posts/{postId}", produces = MediaTypes.HAL_JSON_VALUE)
 public class CommentController {
 
     private final CommentService commentService;
@@ -34,13 +35,16 @@ public class CommentController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Link addComment(
+    public LinksResponse addComment(
             @PathVariable Long postId,
             @RequestBody AddCommentRequest addCommentRequest
     ) {
         this.commentService.saveComment(postId, addCommentRequest);
 
-        return linkTo(DocsController.class).slash("#sendComment").withRel("profile");
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#sendComment").withRel("profile")
+        );
     }
 
     /**
@@ -53,14 +57,17 @@ public class CommentController {
      */
     @PutMapping("/{commentId}")
     @ResponseStatus(HttpStatus.OK)
-    public Link updateComment(
+    public LinksResponse updateComment(
             @PathVariable Long postId,
             @PathVariable Long commentId,
             @RequestBody UpdateCommentRequest updateCommentRequest
     ) {
         this.commentService.updateComment(postId, commentId, updateCommentRequest);
 
-        return linkTo(DocsController.class).slash("#updateComment").withRel("profile");
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#updateComment").withRel("profile")
+        );
     }
 
     /**
@@ -72,12 +79,15 @@ public class CommentController {
      */
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.OK)
-    public Link deleteComment(
+    public LinksResponse deleteComment(
             @PathVariable Long postId,
             @PathVariable Long commentId
     ) {
         this.commentService.deleteComment(postId, commentId);
 
-        return linkTo(DocsController.class).slash("#deleteComment").withRel("profile");
+        return new LinksResponse(
+                linkTo(PostController.class).slash(postId).withSelfRel(),
+                linkTo(DocsController.class).slash("#deleteComment").withRel("profile")
+        );
     }
 }

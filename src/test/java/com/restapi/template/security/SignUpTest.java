@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -16,7 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class SignUpTest extends BaseControllerTest {
 
     @Test
-    @Transactional
     @DisplayName("회원 가입하기(성공)")
     void signUpSuccess() throws Exception {
         SignUpRequest signUpRequest = SignUpRequest.builder()
@@ -34,7 +32,6 @@ class SignUpTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @DisplayName("아이디 중복 조회하기(사용 가능할 때)")
     void idCheckSuccess() throws Exception {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/auth/checkid/{userId}", "TestUser1"))
@@ -44,14 +41,13 @@ class SignUpTest extends BaseControllerTest {
     }
 
     @Test
-    @Transactional
     @DisplayName("아이디 중복 조회하기(사용 불가능할 때)")
     void idCheckFailBecauseExists() throws Exception {
         this.accountFactory.generateUser(1);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/auth/checkid/{userId}","TestUser1"))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/auth/checkid/{userId}", "TestUser1"))
                 .andExpect(status().isAccepted())
                 .andDo(print())
-                .andDo(document("idcheckfail"));
+                .andDo(document("0001"));
     }
 }

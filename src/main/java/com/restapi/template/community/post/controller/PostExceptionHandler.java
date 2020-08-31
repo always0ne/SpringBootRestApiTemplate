@@ -1,7 +1,7 @@
 package com.restapi.template.community.post.controller;
 
 import com.restapi.template.community.post.exception.PostNotFoundException;
-import com.restapi.template.common.ErrorResponse;
+import com.restapi.template.common.response.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -28,6 +28,6 @@ public class PostExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleCommentNotFound(PostNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, 1101, exception.getMessage());
+        return new ErrorResponse(HttpStatus.NOT_FOUND, "1101", exception.getMessage());
     }
 }

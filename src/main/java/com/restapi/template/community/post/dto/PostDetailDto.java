@@ -4,8 +4,6 @@ import com.restapi.template.community.comment.Comment;
 import com.restapi.template.community.comment.CommentResource;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,8 +17,6 @@ import java.util.List;
  * @version 1.0
  */
 @Getter
-@ToString
-@NoArgsConstructor
 public class PostDetailDto {
     /**
      * 게시글 제목
@@ -46,26 +42,24 @@ public class PostDetailDto {
      * 수정일
      */
     private LocalDateTime modifiedDate;
+
     /**
      * 댓글들
      */
-    private List<CommentResource> comments = new ArrayList<CommentResource>();
+    private List<CommentResource> comments;
 
     @Builder
-    public PostDetailDto(String title, String wirterId, String body, Long views, LocalDateTime createdDate, LocalDateTime modifiedDate, List<Comment> comments) {
+    public PostDetailDto(String title, String writerId, String body, Long views, LocalDateTime createdDate, LocalDateTime modifiedDate, List<Comment> comments) {
         this.title = title;
-        this.writerId = wirterId;
+        this.writerId = writerId;
         this.body = body;
         this.views = views;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
-        if (comments != null) {
-            List<CommentResource> commentList = new ArrayList<CommentResource>();
-            for (Comment comment : comments) {
-                CommentResource commentResource = new CommentResource(comment);
-                commentList.add(commentResource);
-            }
-            this.comments = commentList;
-        }
+        this.comments = new ArrayList<CommentResource>();
+        if (comments != null)
+            for (Comment comment : comments)
+                this.comments.add(new CommentResource(comment));
+
     }
 }

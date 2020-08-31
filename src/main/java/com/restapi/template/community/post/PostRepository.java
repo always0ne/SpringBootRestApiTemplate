@@ -1,8 +1,10 @@
 package com.restapi.template.community.post;
 
+import com.restapi.template.community.post.dto.PostsDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
  * @author always0ne
  * @version 1.0
  */
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     /**
      * 게시글 아이디로 조회
@@ -27,5 +30,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param pageable 페이지 정보
      * @return 모든 게시글(Page)
      */
-    Page<Post> findAll(Pageable pageable);
+    Page<PostsDto> findAllProjectedBy(Pageable pageable);
 }

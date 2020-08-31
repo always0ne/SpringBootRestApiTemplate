@@ -81,8 +81,7 @@ public class CommentService {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(PostNotFoundException::new);
         Comment comment = getMyComment(commentId);
-
-        post.getComments().remove(comment);
+        post.deleteComment(comment);
         this.commentRepository.delete(comment);
     }
 

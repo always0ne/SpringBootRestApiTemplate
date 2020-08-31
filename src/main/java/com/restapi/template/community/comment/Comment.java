@@ -52,6 +52,6 @@ public class Comment extends Date {
      */
     public void updateComment(String message) {
         this.message = message;
-        this.update();
+        this.updateModifyDate();
     }
 }

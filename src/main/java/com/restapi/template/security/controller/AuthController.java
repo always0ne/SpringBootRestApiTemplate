@@ -1,7 +1,9 @@
 package com.restapi.template.security.controller;
 
+import com.restapi.template.security.request.RefreshRequest;
 import com.restapi.template.security.request.SignInRequest;
 import com.restapi.template.security.request.SignUpRequest;
+import com.restapi.template.security.response.RefreshResponse;
 import com.restapi.template.security.response.SignInResponse;
 import com.restapi.template.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +65,20 @@ public class AuthController {
     ) {
         this.authService.idCheck(userId);
         return "사용가능한 아이디입니다.";
+    }
+
+    /**
+     * RefreshToken 으로 AccessToken 재발급 받기
+     *
+     * @param refreshRequest 토큰 갱신 요청
+     * @return AccessToken
+     */
+    @PostMapping("/refresh")
+    @ResponseStatus(HttpStatus.OK)
+    public RefreshResponse getNewAccessToken(
+            @RequestBody RefreshRequest refreshRequest
+    ) {
+        return this.authService.refreshAccessToken(refreshRequest);
     }
 
 }

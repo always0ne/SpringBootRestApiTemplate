@@ -1,6 +1,6 @@
 package com.restapi.template.errorbot;
 
-import com.restapi.template.common.response.ErrorResponse;
+import com.restapi.template.api.common.response.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

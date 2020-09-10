@@ -1,10 +1,11 @@
 package com.restapi.template.security.service;
 
-import com.restapi.template.account.Account;
-import com.restapi.template.account.AccountRepository;
-import com.restapi.template.account.UserStatus;
+import com.restapi.template.api.user.data.Users;
+import com.restapi.template.security.data.Account;
+import com.restapi.template.api.user.data.UsersRepository;
+import com.restapi.template.security.data.UserStatus;
 import com.restapi.template.security.JwtTokenProvider;
-import com.restapi.template.security.UserRole;
+import com.restapi.template.security.data.UserRole;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import com.restapi.template.security.request.RefreshRequest;
@@ -27,7 +28,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final AccountRepository accountRepository;
+    private final UsersRepository usersRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
@@ -42,7 +43,7 @@ public class AuthService {
      */
     @Transactional
     public SignInResponse signIn(String id, String password) {
-        Account account = this.accountRepository.findByUserIdAndState(id, UserStatus.NORMAL)
+        Account account = this.usersRepository.findByUserIdAndState(id, UserStatus.NORMAL)
                 .orElseThrow(() -> new CantSignInException(id));
         if (!passwordEncoder.matches(password, account.getPassword()))
             throw new CantSignInException(id);
@@ -65,14 +66,15 @@ public class AuthService {
      */
     @Transactional
     public SignInResponse signUp(String id, String password, String name) {
-        Account account = this.accountRepository.save(Account.builder()
-                .userId(id)
-                .password(passwordEncoder.encode(password))
-                .name(name)
-                .state(UserStatus.NORMAL)
-                .roles(Collections.singletonList(UserRole.ROLE_USER))
-                .refreshToken(jwtTokenProvider.createRefreshToken(id, Collections.singletonList(UserRole.ROLE_USER)))
-                .build());
+        Account account = this.usersRepository.save(
+                new Users(
+                        id,
+                        passwordEncoder.encode(password),
+                        name,
+                        UserStatus.NORMAL,
+                        Collections.singletonList(UserRole.ROLE_USER),
+                        jwtTokenProvider.createRefreshToken(id, Collections.singletonList(UserRole.ROLE_USER))
+                ));
 
         return SignInResponse.builder()
                 .accessToken(jwtTokenProvider.createAccessToken(account.getUserId(), account.getRoles()))
@@ -88,7 +90,7 @@ public class AuthService {
      */
     @Transactional(readOnly = true)
     public void idCheck(String id) {
-        if (this.accountRepository.findByUserIdAndStateIsNot(id, UserStatus.WITHDRAWAL).isPresent())
+        if (this.usersRepository.findByUserIdAndStateIsNot(id, UserStatus.WITHDRAWAL).isPresent())
             throw new IdAlreadyExistsException(id);
     }
 
@@ -101,7 +103,7 @@ public class AuthService {
     @Transactional
     public RefreshResponse refreshAccessToken(RefreshRequest refreshRequest) {
         String refreshId = jwtTokenProvider.getUserId(jwtTokenProvider.getClaimsFromToken(refreshRequest.getRefreshToken()));
-        Account account = accountRepository.findByUserIdAndStateAndRefreshToken(refreshId, UserStatus.NORMAL, refreshRequest.getRefreshToken())
+        Account account = usersRepository.findByUserIdAndStateAndRefreshToken(refreshId, UserStatus.NORMAL, refreshRequest.getRefreshToken())
                 .orElseThrow(() -> new CantSignInException(refreshId));
 
         return RefreshResponse.builder()

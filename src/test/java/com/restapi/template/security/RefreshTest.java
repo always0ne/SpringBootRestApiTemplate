@@ -1,6 +1,6 @@
 package com.restapi.template.security;
 
-import com.restapi.template.common.BaseControllerTest;
+import com.restapi.template.api.common.BaseControllerTest;
 import com.restapi.template.security.request.RefreshRequest;
 import com.restapi.template.security.response.SignInResponse;
 import org.junit.jupiter.api.Disabled;

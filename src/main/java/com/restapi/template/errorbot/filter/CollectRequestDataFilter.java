@@ -9,6 +9,12 @@ import java.io.IOException;
 import static com.restapi.template.errorbot.util.AgentUtils.getAgentDetail;
 import static com.restapi.template.errorbot.util.MDCUtil.*;
 
+/**
+ * Request 정보들을 수집하여 MDC에 보관하는 필터
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 public class CollectRequestDataFilter implements Filter {
 
     @Override

@@ -1,4 +1,4 @@
-package com.restapi.template.errorbot.filter;
+package com.restapi.template.errorbot.util;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
@@ -10,6 +10,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+/**
+ * Request를 여러번 읽을 수 있도록 복사한 객체
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 public class MultiReadableHttpServletRequest extends HttpServletRequestWrapper {
 
     private ByteArrayOutputStream copiedRequest;
@@ -24,6 +30,10 @@ public class MultiReadableHttpServletRequest extends HttpServletRequestWrapper {
         super(request);
     }
 
+    /**
+     * 복사된 Input Stream을 반환
+     * 값이 복사되어있지 않은 경우는 처음호출된 경우이므로 Stream을 복사
+     */
     @Override
     public ServletInputStream getInputStream() throws IOException {
         if (copiedRequest == null) {
@@ -33,6 +43,9 @@ public class MultiReadableHttpServletRequest extends HttpServletRequestWrapper {
         return new CachedServletInputStream();
     }
 
+    /**
+     * 복사된 Stream을 ServletInputStream으로 변환
+     */
     public class CachedServletInputStream extends ServletInputStream {
         private ByteArrayInputStream input;
 

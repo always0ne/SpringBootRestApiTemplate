@@ -11,6 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * Request 정보를 보기 쉽게 가공
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 public class RequestWrapper {
 
     private HttpServletRequest request;
@@ -27,6 +33,11 @@ public class RequestWrapper {
         return of((HttpServletRequest) request);
     }
 
+    /**
+     * user-agent정보를 제외한 헤더정보를 매핑하여 반환
+     *
+     * @return 매핑된 헤더 정보
+     */
     public Map<String, String> headerMap() {
         Map<String, String> convertedHeaderMap = new HashMap<>();
 
@@ -43,6 +54,11 @@ public class RequestWrapper {
         return convertedHeaderMap;
     }
 
+    /**
+     * 요청의 Parameter를 매핑하여 반환
+     *
+     * @return 매핑된 Parameter 정보
+     */
     public Map<String, String> parameterMap() {
         Map<String, String> convertedParameterMap = new HashMap<>();
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -60,6 +76,12 @@ public class RequestWrapper {
         return convertedParameterMap;
     }
 
+    /**
+     * 요청의 Body를 반환
+     *
+     * @return Request Body
+     * @throws IOException 문자열을 읽는 도중 나올수 있는 예외
+     */
     public String body() throws IOException {
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -93,6 +115,11 @@ public class RequestWrapper {
 
     }
 
+    /**
+     * 요청 URL과 메소드를 반환
+     *
+     * @return [Method] URL
+     */
     public String getRequestUri() {
         return "[" + request.getMethod() + "] " + request.getRequestURI();
     }

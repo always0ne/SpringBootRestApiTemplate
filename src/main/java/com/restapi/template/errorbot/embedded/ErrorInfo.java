@@ -9,17 +9,32 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * 에러 정보
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 @Getter
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorInfo {
+    /**
+     * 사용된 로거
+     */
     @Column(name = "LOGGER_NAME", length = 300)
     private String loggerName;
 
+    /**
+     * 에러 메시지
+     */
     @Column(name = "MESSAGE", columnDefinition = "TEXT")
     private String message;
 
+    /**
+     * Stack Trace
+     */
     @Column(name = "TRACE", columnDefinition = "TEXT")
     private String trace;
 
@@ -30,6 +45,12 @@ public class ErrorInfo {
             this.trace = getStackTrace(eventObject.getThrowableProxy().getStackTraceElementProxyArray());
     }
 
+    /**
+     * stackTrace를 String으로 변환.
+     *
+     * @param stackTraceElements Stack Trace Data
+     * @return String으로 변환된 StackTrace 값
+     */
     public String getStackTrace(StackTraceElementProxy[] stackTraceElements) {
         if (stackTraceElements == null || stackTraceElements.length == 0)
             return null;

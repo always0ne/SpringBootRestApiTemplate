@@ -1,6 +1,6 @@
 package com.restapi.template.security.controller;
 
-import com.restapi.template.common.response.ErrorResponse;
+import com.restapi.template.api.common.response.ErrorResponse;
 import com.restapi.template.security.exception.CantSignInException;
 import com.restapi.template.security.exception.IdAlreadyExistsException;
 import io.jsonwebtoken.ExpiredJwtException;

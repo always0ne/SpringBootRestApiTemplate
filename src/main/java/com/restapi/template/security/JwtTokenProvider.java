@@ -1,5 +1,6 @@
 package com.restapi.template.security;
 
+import com.restapi.template.security.data.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

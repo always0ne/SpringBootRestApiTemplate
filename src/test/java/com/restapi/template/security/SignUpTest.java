@@ -1,6 +1,6 @@
 package com.restapi.template.security;
 
-import com.restapi.template.common.BaseControllerTest;
+import com.restapi.template.api.common.BaseControllerTest;
 import com.restapi.template.security.request.SignUpRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

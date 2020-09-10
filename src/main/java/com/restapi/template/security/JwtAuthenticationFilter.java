@@ -1,7 +1,7 @@
 package com.restapi.template.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restapi.template.common.response.ErrorResponse;
+import com.restapi.template.api.common.response.ErrorResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

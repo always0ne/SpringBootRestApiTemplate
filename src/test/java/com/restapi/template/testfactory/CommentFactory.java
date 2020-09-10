@@ -1,9 +1,9 @@
 package com.restapi.template.testfactory;
 
-import com.restapi.template.community.comment.Comment;
-import com.restapi.template.community.comment.CommentRepository;
-import com.restapi.template.community.post.Post;
-import com.restapi.template.community.post.PostRepository;
+import com.restapi.template.api.community.comment.data.Comment;
+import com.restapi.template.api.community.comment.data.CommentRepository;
+import com.restapi.template.api.community.post.data.Post;
+import com.restapi.template.api.community.post.data.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

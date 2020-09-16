@@ -35,7 +35,7 @@ system		2000
 ## Deployment
 this project build docker image automatically so deploy on docker
 ### login github docker registry
-    sudo docker login https://docker.pkg.github.com --username [userName]  --password
+    sudo docker login https://docker.pkg.github.com --username [userName]
 ### Deploy on server
 - deploy test server(develop branch)
 ```shell script

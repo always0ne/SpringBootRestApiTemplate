@@ -2,7 +2,7 @@ package com.restapi.template.api.community.post.data;
 
 import com.restapi.template.api.common.Date;
 import com.restapi.template.api.community.comment.data.Comment;
-import lombok.Builder;
+import com.restapi.template.api.user.data.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,11 +27,6 @@ public class Post extends Date {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     /**
-     * 작성자 ID
-     */
-    @Column(length = 30, nullable = false)
-    private String writerId;
-    /**
      * 글 제목
      */
     @Column(length = 100, nullable = false)
@@ -52,6 +47,12 @@ public class Post extends Date {
     @Column(nullable = false)
     private Long commentNum;
     /**
+     * 작성자
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author")
+    private Users author;
+    /**
      * 댓글들
      *
      * @see Comment
@@ -60,11 +61,10 @@ public class Post extends Date {
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
-    @Builder
-    public Post(Long id, String writerId, String title, String body) {
+    public Post(Long id, Users author, String title, String body) {
         super();
         this.postId = id;
-        this.writerId = writerId;
+        this.author = author;
         this.title = title;
         this.body = body;
         this.views = (long) 0;
@@ -95,14 +95,12 @@ public class Post extends Date {
      * 댓글 추가
      *
      * @param comment 댓글
-     * @return 댓글ID
      */
-    public Long addComment(Comment comment) {
+    public void addComment(Comment comment) {
         if (this.comments == null)
             this.comments = new ArrayList<Comment>();
         this.comments.add(comment);
         this.commentNum++;
-        return comment.getCommentId();
     }
 
     /**

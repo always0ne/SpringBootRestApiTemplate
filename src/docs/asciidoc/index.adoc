@@ -87,9 +87,9 @@ operation::0006[snippets='response-body']
 
 [[CommunityError]]
 === Community Error
-[[E1002]]
-==== Error1002
-operation::1002[snippets='response-body']
+[[E1001]]
+==== Error1001
+operation::1001[snippets='response-body']
 
 [[PostError]]
 ==== Post Error
@@ -99,9 +99,6 @@ operation::1101[snippets='response-body']
 
 [[CommentError]]
 ==== Comment Error
-[[E1201]]
-===== Error1201
-operation::1201[snippets='response-body']
 
 [[SystemError]]
 === System Error

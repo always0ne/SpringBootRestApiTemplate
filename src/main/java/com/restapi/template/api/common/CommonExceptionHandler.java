@@ -23,16 +23,16 @@ import java.util.Objects;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CommonExceptionHandler {
     /**
-     * 본인 소유가 아닌 컨텐츠 수정 요청 발생
+     * 존재하지 않거나 본인 소유가 아닌 컨텐츠 수정 요청 발생
      *
      * @param exception 수정권한이 없습니다.
      * @return FORBIDDEN
      */
     @ExceptionHandler(ThisIsNotYoursException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorResponse handleNotYours(ThisIsNotYoursException exception) {
-        return new ErrorResponse(HttpStatus.FORBIDDEN, "1002", exception.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, "1001", exception.getMessage());
     }
 
     /**

@@ -2,6 +2,7 @@ package com.restapi.template.api.community.comment.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.template.api.common.Date;
+import com.restapi.template.api.user.data.Users;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,20 +29,21 @@ public class Comment extends Date {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
     /**
-     * 댓글 작성자
-     */
-    @Column(length = 30, nullable = false)
-    private String commenterId;
-    /**
      * 댓글
      */
     @Column(columnDefinition = "TEXT", nullable = false)
     private String message;
 
-    @Builder
-    public Comment(String commenterId, String message) {
+    /**
+     * 댓글 작성자
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author")
+    private Users author;
+
+    public Comment(Users author, String message) {
         super();
-        this.commenterId = commenterId;
+        this.author = author;
         this.message = message;
     }
 

@@ -1,8 +1,8 @@
 package com.restapi.template.api.user.data;
 
+import com.restapi.template.api.user.data.dto.UserIdDto;
 import com.restapi.template.security.data.Account;
 import com.restapi.template.security.data.UserStatus;
-import com.restapi.template.api.user.data.dto.UserIdDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +23,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
      * @param state  조회할 상태
      * @return 계정(Optional)
      */
-    Optional<Account> findByUserIdAndState(String userId, UserStatus state);
+    <T> Optional<T> findByUserIdAndState(String userId, UserStatus state, Class<T> Class);
 
     /**
      * 계정 ID와 제외된 상태로 조회

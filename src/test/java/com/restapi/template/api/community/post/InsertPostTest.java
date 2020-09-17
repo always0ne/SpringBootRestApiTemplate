@@ -22,12 +22,14 @@ class InsertPostTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("포스트 저장(성공)")
     void insertPostSuccess() throws Exception {
+        String accessToken = accountFactory.generateUser(1).getAccessToken();
         ModifyPostRequest modifyPostRequest = ModifyPostRequest.builder()
                 .title("포스트 제목")
                 .body("포스트 입력 테스트입니다.")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/board/posts")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print())

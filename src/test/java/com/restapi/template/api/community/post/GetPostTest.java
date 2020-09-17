@@ -64,8 +64,8 @@ class GetPostTest extends BaseControllerTest {
     @DisplayName("포스트 조회(성공)")
     void getPostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
+        this.commentFactory.addComment(post, 3);
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("게시글1"))
@@ -83,6 +83,7 @@ class GetPostTest extends BaseControllerTest {
                                 fieldWithPath("views").description("조회수"),
                                 fieldWithPath("createdDate").description("작성일"),
                                 fieldWithPath("modifiedDate").description("수정일"),
+                                fieldWithPath("comments[].commentId").description("댓글 Id"),
                                 fieldWithPath("comments[].commenterId").description("댓글 작성자 Id"),
                                 fieldWithPath("comments[].message").description("댓글"),
                                 fieldWithPath("comments[].createdDate").description("댓글 작성시간"),
@@ -108,8 +109,8 @@ class GetPostTest extends BaseControllerTest {
     @DisplayName("나의 포스트 조회(성공)")
     void getMyPostSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        this.commentFactory.addComment(post, 1);
         this.commentFactory.addComment(post, 2);
+        this.commentFactory.addComment(post, 3);
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/board/posts/{postId}", post.getPostId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("게시글1"))
@@ -127,6 +128,7 @@ class GetPostTest extends BaseControllerTest {
                                 fieldWithPath("views").description("조회수"),
                                 fieldWithPath("createdDate").description("작성일"),
                                 fieldWithPath("modifiedDate").description("수정일"),
+                                fieldWithPath("comments[].commentId").description("댓글 Id"),
                                 fieldWithPath("comments[].commenterId").description("댓글 작성자 Id"),
                                 fieldWithPath("comments[].message").description("댓글"),
                                 fieldWithPath("comments[].createdDate").description("댓글 작성시간"),

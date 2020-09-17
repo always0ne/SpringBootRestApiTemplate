@@ -7,10 +7,13 @@ import com.restapi.template.api.community.post.dto.PostDetailDto;
 import com.restapi.template.api.community.post.dto.PostsDto;
 import com.restapi.template.api.community.post.exception.PostNotFoundException;
 import com.restapi.template.api.community.post.request.ModifyPostRequest;
+import com.restapi.template.api.user.data.Users;
+import com.restapi.template.api.user.data.UsersRepository;
+import com.restapi.template.api.user.exception.InvalidUserException;
+import com.restapi.template.security.data.UserStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UsersRepository usersRepository;
 
     /**
      * 모든 게시글 조회(Paged)
@@ -44,14 +48,14 @@ public class PostService {
      * @return 게시글 ID
      */
     @Transactional
-    public Long savePost(ModifyPostRequest modifyPostRequest) {
-        Post newPost = Post.builder()
-                .writerId(SecurityContextHolder.getContext().getAuthentication().getName())
-                .title(modifyPostRequest.getTitle())
-                .body(modifyPostRequest.getBody())
-                .build();
-
-        return this.postRepository.save(newPost).getPostId();
+    public Long savePost(String requestUserId, ModifyPostRequest modifyPostRequest) {
+        return this.postRepository.save(
+                new Post(
+                        null,
+                        usersRepository.findByUserIdAndState(requestUserId, UserStatus.NORMAL, Users.class).orElseThrow(InvalidUserException::new),
+                        modifyPostRequest.getTitle(),
+                        modifyPostRequest.getBody()
+                )).getPostId();
     }
 
     /**
@@ -66,10 +70,11 @@ public class PostService {
         Post post = this.postRepository.findByPostId(postId)
                 .orElseThrow(PostNotFoundException::new);
         post.increaseViews();
+
         return PostDetailDto.builder()
                 .title(post.getTitle())
                 .body(post.getBody())
-                .writerId(post.getWriterId())
+                .writerId(post.getAuthor().getUserId())
                 .comments(post.getComments())
                 .createdDate(post.getCreatedDate())
                 .modifiedDate(post.getModifiedDate())
@@ -84,8 +89,8 @@ public class PostService {
      * @param modifyPostRequest 게시글 정보
      */
     @Transactional
-    public void updatePost(Long postId, ModifyPostRequest modifyPostRequest) {
-        permissionCheck(postId)
+    public void updatePost(Long postId, String requestUserId, ModifyPostRequest modifyPostRequest) {
+        getMyPost(postId, requestUserId)
                 .updatePost(modifyPostRequest.getTitle(), modifyPostRequest.getBody());
     }
 
@@ -95,23 +100,19 @@ public class PostService {
      * @param postId 게시글 ID
      */
     @Transactional
-    public void deletePost(Long postId) {
-        this.postRepository.deleteById(permissionCheck(postId).getPostId());
+    public void deletePost(Long postId, String requestUserId) {
+        this.postRepository.deleteById(getMyPost(postId, requestUserId).getPostId());
     }
 
     /**
-     * 게시글 권한 확인
+     * 내 게시글 가져오기
      *
      * @param postId 게시글 ID
      * @return 게시글 엔터티
-     * @throws PostNotFoundException   존재하지 않는 게시글입니다.
      * @throws ThisIsNotYoursException 수정권한이 없습니다.
      */
-    private Post permissionCheck(Long postId) {
-        Post post = this.postRepository.findByPostId(postId)
-                .orElseThrow(PostNotFoundException::new);
-        if (!SecurityContextHolder.getContext().getAuthentication().getName().equals(post.getWriterId()))
-            throw new ThisIsNotYoursException();
-        return post;
+    private Post getMyPost(Long postId, String requestUserId) {
+        return postRepository.findByPostIdAndAuthor_UserId(postId, requestUserId)
+                .orElseThrow(ThisIsNotYoursException::new);
     }
 }

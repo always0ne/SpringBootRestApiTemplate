@@ -43,7 +43,7 @@ public class AuthService {
      */
     @Transactional
     public SignInResponse signIn(String id, String password) {
-        Account account = this.usersRepository.findByUserIdAndState(id, UserStatus.NORMAL)
+        Account account = this.usersRepository.findByUserIdAndState(id, UserStatus.NORMAL, Account.class)
                 .orElseThrow(() -> new CantSignInException(id));
         if (!passwordEncoder.matches(password, account.getPassword()))
             throw new CantSignInException(id);

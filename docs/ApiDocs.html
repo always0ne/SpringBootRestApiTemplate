@@ -483,9 +483,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#CommunityError">Community Error</a>
 <ul class="sectlevel3">
-<li><a href="#E1002">Error1002</a>
+<li><a href="#E1001">Error1001</a>
 <ul class="sectlevel4">
-<li><a href="#E1002_response_body">Response body</a></li>
+<li><a href="#E1001_response_body">Response body</a></li>
 </ul>
 </li>
 <li><a href="#PostError">Post Error</a>
@@ -693,7 +693,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:59.1944377",
+  "timestamp" : "2020-09-17T12:31:17.918392",
   "status" : 202,
   "error" : "0001",
   "message" : "ID: TestUser1 이미 사용중인 아이디입니다."
@@ -709,7 +709,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:57.9930916",
+  "timestamp" : "2020-09-17T12:31:15.4186063",
   "status" : 403,
   "error" : "0002",
   "message" : "ID: TestUser1 회원가입이 되어있지 않거나 잠긴 계정입니다."
@@ -725,7 +725,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:56.6248518",
+  "timestamp" : "2020-09-17T12:31:09.6501337",
   "status" : 403,
   "error" : "0003",
   "message" : "유효하지 않은 토큰입니다."
@@ -741,7 +741,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:56.7176108",
+  "timestamp" : "2020-09-17T12:31:09.9144561",
   "status" : 403,
   "error" : "0004",
   "message" : "손상된 토큰입니다."
@@ -757,7 +757,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:55.1793073",
+  "timestamp" : "2020-09-17T12:31:04.5018771",
   "status" : 403,
   "error" : "0005",
   "message" : "잘못된 인증입니다."
@@ -773,7 +773,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:55.3019787",
+  "timestamp" : "2020-09-17T12:31:04.7801321",
   "status" : 403,
   "error" : "0006",
   "message" : "만료된 토큰입니다."
@@ -786,16 +786,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="CommunityError"><a class="link" href="#CommunityError">Community Error</a></h3>
 <div class="sect3">
-<h4 id="E1002"><a class="link" href="#E1002">Error1002</a></h4>
+<h4 id="E1001"><a class="link" href="#E1001">Error1001</a></h4>
 <div class="sect4">
-<h5 id="E1002_response_body"><a class="link" href="#E1002_response_body">Response body</a></h5>
+<h5 id="E1001_response_body"><a class="link" href="#E1001_response_body">Response body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:44.318489",
-  "status" : 403,
-  "error" : "1002",
-  "message" : "수정 권한이 없습니다."
+  "timestamp" : "2020-09-17T12:30:33.8696568",
+  "status" : 400,
+  "error" : "1001",
+  "message" : "존재하지 않거나 수정 권한이 없습니다."
 }</code></pre>
 </div>
 </div>
@@ -810,7 +810,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:44.4431575",
+  "timestamp" : "2020-09-17T12:30:34.6371289",
   "status" : 404,
   "error" : "1101",
   "message" : "존재하지 않는 게시글입니다."
@@ -826,15 +826,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h5 id="E1201"><a class="link" href="#E1201">Error1201</a></h5>
 <div class="sect5">
 <h6 id="E1201_response_body"><a class="link" href="#E1201_response_body">Response body</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:44.1921927",
-  "status" : 404,
-  "error" : "1201",
-  "message" : "존재하지 않는 댓글입니다."
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::1201</p>
 </div>
 </div>
 </div>
@@ -849,7 +842,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-09-11T01:57:42.0743529",
+  "timestamp" : "2020-09-17T12:30:29.5787125",
   "status" : 400,
   "error" : "2001",
   "message" : "Unrecognized field \"message\" "
@@ -909,8 +902,8 @@ X-Frame-Options: DENY
 Content-Length: 380
 
 {
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk5NzU3MDc3LCJleHAiOjE1OTk3NTc2Nzd9.L_DkEJq5GN70JUwsrxpirv0o7Efwmwayev8PHN-vu98",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk5NzU3MDc3LCJleHAiOjE2MDAzNjE4Nzd9.UbO-KVsQRIYO3YXwSAQwocT_bXiYi8ti_OiWBu6qLv4"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAwMzEzNDc1LCJleHAiOjE2MDAzMTQwNzV9.IFl7ZA-hcC8r72fiXj3568fSNTeIIU0Qp4JS87fyQ-E",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAwMzEzNDc1LCJleHAiOjE2MDA5MTgyNzV9.HIgDGMsh-alDB-dwUO86cg5Q8qRmo1PUwFYxH7lX9g4"
 }</code></pre>
 </div>
 </div>
@@ -957,8 +950,8 @@ X-Frame-Options: DENY
 Content-Length: 380
 
 {
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk5NzU3MDc5LCJleHAiOjE1OTk3NTc2Nzl9.90Tu3L3yj8357Uj23ouQg1m50SXrG7dTD0Zqcct7XbI",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk5NzU3MDc5LCJleHAiOjE2MDAzNjE4Nzl9.Z1Q8W3LPLT1EyNFS7f45fpFQ0R74tRl_u6amwSXs8x8"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAwMzEzNDc3LCJleHAiOjE2MDAzMTQwNzd9.EcSJ10DWfYKzXUgmNZT3UQ_u6_rmRCNw7hMRknF-_18",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAwMzEzNDc3LCJleHAiOjE2MDA5MTgyNzd9.HrmVop4VPDJLl8MZMrtmlUmoYM0LNENOXN5IIMIHoHM"
 }</code></pre>
 </div>
 </div>
@@ -1031,7 +1024,7 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 1468
+Content-Length: 1469
 
 {
   "_embedded" : {
@@ -1041,7 +1034,7 @@ Content-Length: 1468
       "writerId" : "TestUser4",
       "views" : 0,
       "commentNum" : 0,
-      "modifiedDate" : "2020-09-11T01:57:50.90954",
+      "modifiedDate" : "2020-09-17T12:30:49.891257",
       "_links" : {
         "self" : {
           "href" : "https://templet.restapi.com/board/posts/5"
@@ -1053,7 +1046,7 @@ Content-Length: 1468
       "writerId" : "TestUser3",
       "views" : 0,
       "commentNum" : 0,
-      "modifiedDate" : "2020-09-11T01:57:50.908545",
+      "modifiedDate" : "2020-09-17T12:30:49.788532",
       "_links" : {
         "self" : {
           "href" : "https://templet.restapi.com/board/posts/4"
@@ -1103,6 +1096,7 @@ Content-Length: 1468
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /board/posts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjAwMzEzNDUzLCJleHAiOjE2MDAzMTQwNTN9.-zbPQq56fM9kyqhBeV1h_iFnLgWRjfmUzWyzM26c1JA
 Content-Length: 88
 Host: templet.restapi.com
 
@@ -1198,20 +1192,21 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 1519
+Content-Length: 1563
 
 {
   "title" : "게시글1",
   "writerId" : "TestUser1",
   "body" : "게시글 본문입니다.",
   "views" : 1,
-  "createdDate" : "2020-09-11T01:57:50.8207788",
-  "modifiedDate" : "2020-09-11T01:57:50.8207788",
+  "createdDate" : "2020-09-17T12:30:49.1113438",
+  "modifiedDate" : "2020-09-17T12:30:49.1113438",
   "comments" : [ {
-    "createdDate" : "2020-09-11T01:57:50.8257664",
-    "modifiedDate" : "2020-09-11T01:57:50.8257664",
-    "commenterId" : "TestUser1",
-    "message" : "1번째 댓글",
+    "commentId" : 1,
+    "message" : "2번째 댓글",
+    "commenterId" : "TestUser2",
+    "createdDate" : "2020-09-17T12:30:49.2080851",
+    "modifiedDate" : "2020-09-17T12:30:49.2080851",
     "_links" : {
       "self" : {
         "href" : "https://templet.restapi.com/board/posts/1"
@@ -1224,10 +1219,11 @@ Content-Length: 1519
       }
     }
   }, {
-    "createdDate" : "2020-09-11T01:57:50.8307512",
-    "modifiedDate" : "2020-09-11T01:57:50.8307512",
-    "commenterId" : "TestUser2",
-    "message" : "2번째 댓글",
+    "commentId" : 2,
+    "message" : "3번째 댓글",
+    "commenterId" : "TestUser3",
+    "createdDate" : "2020-09-17T12:30:49.3277647",
+    "modifiedDate" : "2020-09-17T12:30:49.3277647",
     "_links" : {
       "self" : {
         "href" : "https://templet.restapi.com/board/posts/2"
@@ -1628,7 +1624,7 @@ Content-Length: 211
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-21 23:08:16 +0900
+Last updated 2020-09-17 12:18:32 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">

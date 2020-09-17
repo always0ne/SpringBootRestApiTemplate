@@ -14,10 +14,10 @@ import java.util.Optional;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     /**
-     * 게시글 아이디로 조회
+     * 사용자의 댓글인지 확인하며 댓글조회
      *
      * @param commentId 댓글 ID
      * @return 댓글(Optional)
      */
-    Optional<Comment> findByCommentId(Long commentId);
+    Optional<Comment> findByAuthor_UserIdAndCommentId(String userId, Long commentId);
 }

@@ -22,11 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UpdateCommentTest extends BaseControllerTest {
 
     @Test
-    @WithMockUser("TestUser1")
+    @WithMockUser("TestUser2")
     @DisplayName("댓글 수정하기(성공)")
     void updateCommentSuccess() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        long commentId = this.commentFactory.addComment(post, 1);
+        long commentId = this.commentFactory.addComment(post, 2);
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
@@ -49,13 +49,13 @@ class UpdateCommentTest extends BaseControllerTest {
     }
 
     @Test
-    @WithMockUser("TestUser1")
+    @WithMockUser("TestUser2")
     @DisplayName("댓글 수정하기(포스트가 없을때)")
     void updateCommentFailBecausePostNotExist() throws Exception {
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", 1, 1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", 1, 2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
                 .andExpect(status().isNotFound())
@@ -74,25 +74,25 @@ class UpdateCommentTest extends BaseControllerTest {
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", post.getPostId(), 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("error").value("1201"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("error").value("1001"))
                 .andDo(print());
     }
 
     @Test
-    @WithMockUser("TestUser2")
+    @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기(내 댓글이 아닐때)")
     void updateCommentFailBecauseCommentIsNotMine() throws Exception {
         Post post = this.postFactory.generatePost(1);
-        long commentId = this.commentFactory.addComment(post, 1);
+        long commentId = this.commentFactory.addComment(post, 2);
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .message("댓글 수정 테스트")
                 .build();
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}/{commentId}", post.getPostId(), commentId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("error").value("1002"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("error").value("1001"))
                 .andDo(print());
     }
 }

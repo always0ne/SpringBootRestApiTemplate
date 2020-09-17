@@ -63,8 +63,8 @@ class UpdatePostTest extends BaseControllerTest {
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("error").value("1101"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("error").value("1001"))
                 .andDo(print());
     }
 
@@ -81,8 +81,8 @@ class UpdatePostTest extends BaseControllerTest {
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/board/posts/{postId}", post.getPostId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(modifyPostRequest)))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("error").value("1002"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("error").value("1001"))
                 .andDo(print());
     }
 }

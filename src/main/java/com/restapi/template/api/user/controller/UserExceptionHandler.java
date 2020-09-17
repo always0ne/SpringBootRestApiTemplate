@@ -1,7 +1,7 @@
-package com.restapi.template.api.community.comment.controller;
+package com.restapi.template.api.user.controller;
 
 import com.restapi.template.api.common.response.ErrorResponse;
-import com.restapi.template.api.community.comment.exception.CommentNotFoundException;
+import com.restapi.template.api.user.exception.InvalidUserException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * 댓글 서비스에서 발생하는 Exception Handler
+ * 사용자 서비스에서 발생하는 Exception Handler
  *
  * @author always0ne
  * @version 1.0
  */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class CommentExceptionHandler {
+public class UserExceptionHandler {
     /**
-     * 없는 댓글 예외 발생
+     * 존재하지 않거나 제제된 화원입니다.
      *
      * @param exception 없는 댓글 예외
      * @return NOT_FOUND
      */
-    @ExceptionHandler(CommentNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(InvalidUserException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResponse handleCommentNotFound(CommentNotFoundException exception) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND, "1201", exception.getMessage());
+    public ErrorResponse handleCommentNotFound(InvalidUserException exception) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, "1001", exception.getMessage());
     }
 }

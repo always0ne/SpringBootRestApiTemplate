@@ -9,6 +9,7 @@ import com.restapi.template.api.community.post.controller.PostController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -39,7 +40,8 @@ public class CommentController {
             @PathVariable Long postId,
             @RequestBody AddCommentRequest addCommentRequest
     ) {
-        this.commentService.saveComment(postId, addCommentRequest);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.commentService.saveComment(postId, requestUserId, addCommentRequest);
 
         return new LinksResponse(
                 linkTo(PostController.class).slash(postId).withSelfRel(),
@@ -62,7 +64,8 @@ public class CommentController {
             @PathVariable Long commentId,
             @RequestBody UpdateCommentRequest updateCommentRequest
     ) {
-        this.commentService.updateComment(postId, commentId, updateCommentRequest);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.commentService.updateComment(postId, commentId, requestUserId, updateCommentRequest);
 
         return new LinksResponse(
                 linkTo(PostController.class).slash(postId).withSelfRel(),
@@ -83,7 +86,8 @@ public class CommentController {
             @PathVariable Long postId,
             @PathVariable Long commentId
     ) {
-        this.commentService.deleteComment(postId, commentId);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.commentService.deleteComment(postId, commentId, requestUserId);
 
         return new LinksResponse(
                 linkTo(PostController.class).slash(postId).withSelfRel(),

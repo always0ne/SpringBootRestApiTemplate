@@ -70,7 +70,8 @@ public class PostController {
             HttpServletResponse response
 
     ) {
-        Long postId = this.postService.savePost(modifyPostRequest);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long postId = this.postService.savePost(requestUserId, modifyPostRequest);
 
         response.setHeader("Location", linkTo(PostController.class).slash(postId).toUri().toString());
         return new LinksResponse(
@@ -112,7 +113,8 @@ public class PostController {
             @PathVariable Long postId,
             @RequestBody ModifyPostRequest modifyPostRequest
     ) {
-        this.postService.updatePost(postId, modifyPostRequest);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.postService.updatePost(postId, requestUserId, modifyPostRequest);
 
         return new LinksResponse(
                 linkTo(PostController.class).slash(postId).withSelfRel(),
@@ -131,7 +133,8 @@ public class PostController {
     public LinksResponse deletePost(
             @PathVariable Long postId
     ) {
-        this.postService.deletePost(postId);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.postService.deletePost(postId, requestUserId);
 
         return new LinksResponse(
                 linkTo(PostController.class).slash(postId).withSelfRel(),

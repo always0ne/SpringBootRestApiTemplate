@@ -10,8 +10,6 @@
   - [Deployment](#deployment)
   - [Used or Referenced Projects](Used-or-Referenced-Projects)
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate?ref=badge_large)
-
 ## About SpringBootRestApiTemplate
 This Project is for Quick Start Spring boot Restful Api Server  
 This project provides a simple community functions.
@@ -93,3 +91,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate?ref=badge_large)

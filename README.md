@@ -1,6 +1,4 @@
 # SpringBootRestApiTemplate
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate?ref=badge_shield)
-
 ## Index
   - [Overview](#overview) 
   - [Getting Started](#getting-started)
@@ -91,4 +89,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Falways0ne%2FSpringBootRestApiTemplate?ref=badge_large)

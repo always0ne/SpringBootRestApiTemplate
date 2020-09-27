@@ -59,7 +59,7 @@ of conduct, and the process for submitting pull requests to us.
 ## Authors
   - [Always0ne](https://github.com/Always0ne) - **SangIl Hwang** - <si8363@soongsil.ac.kr>
 
-See also the list of [contributors](https://github.com/always0ne/readmeTemplate/contributors)
+See also the list of [contributors](https://github.com/always0ne/SpringBootRestApiTemplate/contributors)
 who participated in this project.
 ## Used or Referenced Projects
  - [spring-logback-slack-notification-example](https://github.com/brant-hwang/spring-logback-slack-notification-example) - **LICENSE ?** 

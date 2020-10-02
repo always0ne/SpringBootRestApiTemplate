@@ -2,10 +2,10 @@ package com.restapi.template.api.community.post.dto;
 
 import com.restapi.template.api.community.comment.data.Comment;
 import com.restapi.template.api.community.comment.data.CommentResource;
+import com.restapi.template.api.community.post.data.Post;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -47,19 +47,21 @@ public class PostDetailDto {
    */
   private List<CommentResource> comments;
 
-  @Builder
-  public PostDetailDto(String title, String writerId, String body, Long views,
-                       LocalDateTime createdDate, LocalDateTime modifiedDate,
-                       List<Comment> comments) {
-    this.title = title;
-    this.writerId = writerId;
-    this.body = body;
-    this.views = views;
-    this.createdDate = createdDate;
-    this.modifiedDate = modifiedDate;
+  /**
+   * Post to PostDetail Dto.
+   *
+   * @param post 게시글
+   */
+  public PostDetailDto(Post post) {
+    this.title = post.getTitle();
+    this.writerId = post.getAuthor().getUserId();
+    this.body = post.getBody();
+    this.views = post.getViews();
+    this.createdDate = post.getCreatedDate();
+    this.modifiedDate = post.getModifiedDate();
     this.comments = new ArrayList<CommentResource>();
-    if (comments != null) {
-      for (Comment comment : comments) {
+    if (post.getComments() != null) {
+      for (Comment comment : post.getComments()) {
         this.comments.add(new CommentResource(comment));
       }
     }

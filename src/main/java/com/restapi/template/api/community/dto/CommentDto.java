@@ -14,6 +14,11 @@ public class CommentDto {
   private LocalDateTime createdDate;
   private LocalDateTime modifiedDate;
 
+  /**
+   * Comment to Dto.
+   *
+   * @param comment 댓글
+   */
   public CommentDto(Comment comment) {
     this.commentId = comment.getCommentId();
     this.message = comment.getMessage();

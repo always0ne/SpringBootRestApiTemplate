@@ -37,12 +37,18 @@ public class SystemInfo {
   @Column(name = "HOST_NAME", length = 50)
   private String hostName;
 
+  /**
+   * 서버 정보.
+   *
+   * @param serverName 서버명
+   */
   public SystemInfo(String serverName) {
     this.system = System.getProperty("os.name");
     this.serverName = serverName;
     try {
       this.hostName = ContextUtil.getLocalHostName();
     } catch (Exception ignored) {
+      this.hostName = "UNKNOWN";
     }
   }
 }

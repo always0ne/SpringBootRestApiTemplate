@@ -73,6 +73,17 @@ public class ErrorLogs {
   @Column(name = "ERROR_DATETIME")
   private final LocalDateTime errorDatetime = LocalDateTime.now();
 
+  /**
+   * Create ErrorLogs.
+   *
+   * @param eventObject error 정보
+   * @param serverName  서버이름
+   * @param uri         request URi
+   * @param parameter   request Parameter
+   * @param header      request header
+   * @param body        request body
+   * @param agent       request agent
+   */
   public ErrorLogs(ILoggingEvent eventObject, String serverName, String uri, String parameter,
                    String header, String body, String agent) {
     this.userInfo = SecurityContextHolder.getContext().getAuthentication().getName();

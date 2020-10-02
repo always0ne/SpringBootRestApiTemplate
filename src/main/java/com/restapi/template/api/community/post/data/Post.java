@@ -68,6 +68,14 @@ public class Post extends Date {
   @JoinColumn(name = "post_id")
   private List<Comment> comments;
 
+  /**
+   * 게시글.
+   *
+   * @param id     게시글  ID
+   * @param author 작성자
+   * @param title  제목
+   * @param body   본문
+   */
   public Post(Long id, Users author, String title, String body) {
     super();
     this.postId = id;

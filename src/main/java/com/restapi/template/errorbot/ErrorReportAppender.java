@@ -1,12 +1,12 @@
 package com.restapi.template.errorbot;
 
 import static com.restapi.template.errorbot.util.JsonUtils.toPrettyJson;
-import static com.restapi.template.errorbot.util.MDCUtil.AGENT_DETAIL_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.BODY_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.HEADER_MAP_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.PARAMETER_MAP_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.REQUEST_URI_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.getFromMDC;
+import static com.restapi.template.errorbot.util.MdcUtil.AGENT_DETAIL_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.BODY_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.HEADER_MAP_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.PARAMETER_MAP_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.REQUEST_URI_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.getFromMdc;
 import static org.apache.commons.text.StringEscapeUtils.unescapeJava;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -46,11 +46,11 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
       ErrorLogs errorLog = new ErrorLogs(
           eventObject,
           logConfig.getServerName(),
-          getFromMDC(REQUEST_URI_MDC),
-          getFromMDC(PARAMETER_MAP_MDC),
-          getFromMDC(HEADER_MAP_MDC),
-          getFromMDC(BODY_MDC),
-          getFromMDC(AGENT_DETAIL_MDC)
+          getFromMdc(REQUEST_URI_MDC),
+          getFromMdc(PARAMETER_MAP_MDC),
+          getFromMdc(HEADER_MAP_MDC),
+          getFromMdc(BODY_MDC),
+          getFromMdc(AGENT_DETAIL_MDC)
       );
       if (logConfig.getDatabase().isEnabled()) {
         errorLogsRepository.save(errorLog);
@@ -71,7 +71,6 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
    */
   private void sendSlackMessage(ErrorLogs errorLog) {
     errorLog.markAsAlert();
-    SlackApi slackApi = new SlackApi(logConfig.getSlack().getWebHookUrl());
 
     SlackMessage slackMessage = new SlackMessage("");
     slackMessage.setChannel("#" + logConfig.getSlack().getChannel());
@@ -143,7 +142,8 @@ public class ErrorReportAppender extends UnsynchronizedAppenderBase<ILoggingEven
 
     slackAttachment.setFields(fields);
     slackMessage.setAttachments(Collections.singletonList(slackAttachment));
-    slackApi.call(slackMessage);
+
+    new SlackApi(logConfig.getSlack().getWebHookUrl()).call(slackMessage);
   }
 
   /**

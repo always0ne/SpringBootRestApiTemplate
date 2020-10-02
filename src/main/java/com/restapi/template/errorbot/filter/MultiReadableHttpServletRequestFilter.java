@@ -16,7 +16,13 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 public class MultiReadableHttpServletRequestFilter implements Filter {
-
+  /**
+   * generate MultiReadable Request.
+   *
+   * @param req   요청
+   * @param res   응답
+   * @param chain 체인
+   */
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
       throws IOException, ServletException {
     MultiReadableHttpServletRequest multiReadRequest =

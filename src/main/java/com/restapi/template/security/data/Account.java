@@ -69,6 +69,16 @@ public class Account {
     this.refreshToken = refreshToken;
   }
 
+  /**
+   * 계정.
+   *
+   * @param userId       사용자 ID
+   * @param password     비밀번호
+   * @param name         사용자 이름
+   * @param state        사용자 상태
+   * @param roles        사용자 권한
+   * @param refreshToken refresh 토큰
+   */
   public Account(String userId, String password, String name, UserStatus state,
                  List<UserRole> roles, String refreshToken) {
     this.userId = userId;

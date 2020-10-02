@@ -11,7 +11,7 @@ import org.slf4j.spi.MDCAdapter;
  * @author always0ne
  * @version 1.0
  */
-public class MDCUtil {
+public class MdcUtil {
   private static final MDCAdapter mdc = MDC.getMDCAdapter();
 
   public static final String HEADER_MAP_MDC = "HEADER_MAP_MDC";
@@ -24,7 +24,7 @@ public class MDCUtil {
 
   public static final String BODY_MDC = "BODY_MDC";
 
-  public static void putMDC(String key, String value) {
+  public static void putMdc(String key, String value) {
     mdc.put(key, value);
   }
 
@@ -34,12 +34,9 @@ public class MDCUtil {
    * @param key   키값
    * @param value 추가할 데이터
    */
-  public static void setJsonValueAndPutMDC(String key, Object value) {
-    try {
-      if (value != null) {
-        mdc.put(key, toJson(value));
-      }
-    } catch (Exception ignored) {
+  public static void setJsonValueAndPutMdc(String key, Object value) {
+    if (value != null) {
+      mdc.put(key, toJson(value));
     }
   }
 
@@ -49,7 +46,7 @@ public class MDCUtil {
    * @param key 키값
    * @return key에 매핑된 값
    */
-  public static String getFromMDC(String key) {
+  public static String getFromMdc(String key) {
     return mdc.get(key);
   }
 

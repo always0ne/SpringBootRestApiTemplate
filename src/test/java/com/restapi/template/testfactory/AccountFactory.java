@@ -12,27 +12,40 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class AccountFactory {
 
-    @Autowired
-    private AuthService authService;
-    @Autowired
-    protected UsersRepository usersRepository;
+  @Autowired
+  private AuthService authService;
+  @Autowired
+  protected UsersRepository usersRepository;
 
-    @Transactional
-    public SignInResponse generateUser(int i) {
-         return authService.signUp(
-                 "TestUser" + i,
-                "password",
-                "테스트 유저 " + i
-        );
-    }
-    @Transactional
-    public Users generateUserAndGetUser(int i) {
-        authService.signUp(
-                "TestUser" + i,
-                "password",
-                "테스트 유저 " + i
-        );
-        return usersRepository.findByUserIdAndState("TestUser"+ i, UserStatus.NORMAL, Users.class)
-                .get();
-    }
+  /**
+   * user 생성.
+   *
+   * @param index index
+   * @return SignInResponse
+   */
+  @Transactional
+  public SignInResponse generateUser(int index) {
+    return authService.signUp(
+        "TestUser" + index,
+        "password",
+        "테스트 유저 " + index
+    );
+  }
+
+  /**
+   * user 생성후 User 반환.
+   *
+   * @param index index
+   * @return SignInResponse
+   */
+  @Transactional
+  public Users generateUserAndGetUser(int index) {
+    authService.signUp(
+        "TestUser" + index,
+        "password",
+        "테스트 유저 " + index
+    );
+    return usersRepository.findByUserIdAndState("TestUser" + index, UserStatus.NORMAL, Users.class)
+        .get();
+  }
 }

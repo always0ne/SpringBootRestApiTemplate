@@ -20,6 +20,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
    *
    * @param userId 사용자 ID
    * @param state  조회할 상태
+   * @param dataType projection할 데이터 타입
    * @return 계정(Optional)
    */
   <T> Optional<T> findByUserIdAndState(String userId, UserStatus state, Class<T> dataType);

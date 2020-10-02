@@ -44,6 +44,7 @@ public class PostService {
   /**
    * 게시글 작성.
    *
+   * @param requestUserId     요청한 사용자 ID
    * @param modifyPostRequest 게시글 정보
    * @return 게시글 ID
    */
@@ -79,6 +80,7 @@ public class PostService {
    * 게시글 수정.
    *
    * @param postId            게시글 ID
+   * @param requestUserId     요청한 사용자 ID
    * @param modifyPostRequest 게시글 정보
    */
   @Transactional
@@ -90,7 +92,8 @@ public class PostService {
   /**
    * 게시글 삭제.
    *
-   * @param postId 게시글 ID
+   * @param postId        게시글 ID
+   * @param requestUserId 요청한 사용자 ID
    */
   @Transactional
   public void deletePost(Long postId, String requestUserId) {
@@ -100,7 +103,8 @@ public class PostService {
   /**
    * 내 게시글 가져오기.
    *
-   * @param postId 게시글 ID
+   * @param postId        게시글 ID
+   * @param requestUserId 요청한 사용자 ID
    * @return 게시글 엔터티
    * @throws ThisIsNotYoursException 수정권한이 없습니다.
    */

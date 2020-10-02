@@ -34,6 +34,7 @@ public class CommentService {
    * 댓글 입력.
    *
    * @param postId            게시글 ID
+   * @param requestUserId     요청한 사용자 ID
    * @param addCommentRequest 댓글 작성 요청
    * @throws PostNotFoundException 존재하지 않는 게시글입니다.
    */
@@ -55,6 +56,7 @@ public class CommentService {
    *
    * @param postId               게시글 ID
    * @param commentId            댓글 ID
+   * @param requestUserId        요청한 사용자 ID
    * @param updateCommentRequest 댓글 수정 요청
    * @throws PostNotFoundException   존재하지 않는 게시글입니다.
    * @throws ThisIsNotYoursException 수정권한이 없습니다.
@@ -73,8 +75,9 @@ public class CommentService {
   /**
    * 댓글 삭제.
    *
-   * @param postId    게시글 ID
-   * @param commentId 댓글 ID
+   * @param postId        게시글 ID
+   * @param commentId     댓글 ID
+   * @param requestUserId 요청한 사용자 ID
    * @throws PostNotFoundException   존재하지 않는 게시글입니다.
    * @throws ThisIsNotYoursException 수정권한이 없습니다.
    */
@@ -90,7 +93,8 @@ public class CommentService {
   /**
    * 내 댓글 가져오기.
    *
-   * @param commentId 댓글 ID
+   * @param commentId     댓글 ID
+   * @param requestUserId 요청한 사용자 ID
    * @return 댓글 엔터티
    * @throws ThisIsNotYoursException 수정권한이 없습니다.
    */

@@ -28,6 +28,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
    * 사용자의 게시글인지 확인하며 포스트 조회.
    *
    * @param postId 게시글 아이디
+   * @param userId 작성자 ID
    * @return 게시글(Optional)
    */
   Optional<Post> findByPostIdAndAuthor_UserId(Long postId, String userId);

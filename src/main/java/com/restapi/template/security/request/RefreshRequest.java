@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 인증토큰 갱신 요청
+ * 인증토큰 갱신 요청.
  *
  * @author always0ne
  * @version 1.0
@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RefreshRequest {
-    /**
-     * accessToken
-     */
-    private String refreshToken;
+  /**
+   * accessToken.
+   */
+  private String refreshToken;
 }

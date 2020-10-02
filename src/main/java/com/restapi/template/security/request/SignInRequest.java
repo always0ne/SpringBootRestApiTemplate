@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 인증토큰 발급 요청
+ * 인증토큰 발급 요청.
  *
  * @author always0ne
  * @version 1.0
@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SignInRequest {
-    /**
-     * 사용자 ID
-     */
-    private String id;
-    /**
-     * 사용자 비밀번호
-     */
-    private String password;
+  /**
+   * 사용자 ID.
+   */
+  private String id;
+  /**
+   * 사용자 비밀번호.
+   */
+  private String password;
 }

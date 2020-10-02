@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 사용자 컨트롤러
+ * 사용자 컨트롤러.
  *
  * @author always0ne
  * @version 1.0
@@ -17,6 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/users", produces = MediaTypes.HAL_JSON_VALUE)
 public class UserController {
 
-    private final PostService postService;
+  private final PostService postService;
 
 }

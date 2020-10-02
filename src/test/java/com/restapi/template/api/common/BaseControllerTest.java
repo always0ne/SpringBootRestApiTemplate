@@ -23,19 +23,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Disabled
 public class BaseControllerTest {
 
-    @Autowired
-    protected MockMvc mockMvc;
+  @Autowired
+  protected MockMvc mockMvc;
 
-    @Autowired
-    protected ObjectMapper objectMapper;
+  @Autowired
+  protected ObjectMapper objectMapper;
 
-    @Autowired
-    protected PostFactory postFactory;
+  @Autowired
+  protected PostFactory postFactory;
 
-    @Autowired
-    protected CommentFactory commentFactory;
+  @Autowired
+  protected CommentFactory commentFactory;
 
-    @Autowired
-    protected AccountFactory accountFactory;
+  @Autowired
+  protected AccountFactory accountFactory;
 
 }

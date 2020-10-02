@@ -9,17 +9,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class PostFactory extends AccountFactory {
 
-    @Autowired
-    protected PostRepository postRepository;
+  @Autowired
+  protected PostRepository postRepository;
 
-    @Transactional
-    public Post generatePost(int i) {
-        return this.postRepository.save(
-                new Post(
-                        null,
-                        generateUserAndGetUser(i),
-                        "게시글" + i,
-                        "게시글 본문입니다."
-                ));
-    }
+  /**
+   * Post 생성.
+   *
+   * @param index index
+   * @return 생성된 Post
+   */
+  @Transactional
+  public Post generatePost(int index) {
+    return this.postRepository.save(
+        new Post(
+            null,
+            generateUserAndGetUser(index),
+            "게시글" + index,
+            "게시글 본문입니다."
+        ));
+  }
 }

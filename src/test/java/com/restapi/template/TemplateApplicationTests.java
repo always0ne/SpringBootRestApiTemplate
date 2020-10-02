@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @DisplayName("어플리케이션 로드 테스트")
 class TemplateApplicationTests {
 
-    @Test
-    @DisplayName("서버 실행")
-    void contextLoads() {
-    }
+  @Test
+  @DisplayName("서버 실행")
+  void contextLoads() {
+  }
 
 }

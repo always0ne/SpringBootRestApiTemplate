@@ -14,7 +14,12 @@ import org.springframework.hateoas.Link;
  * @version 1.0
  */
 public class CommentResource extends EntityModel<CommentDto> {
-
+  /**
+   * 댓글 Resource(for Hateoas).
+   *
+   * @param comment 댓글
+   * @param links   링크
+   */
   public CommentResource(Comment comment, Link... links) {
     super(new CommentDto(comment), links);
     add(linkTo(PostController.class).slash(comment.getCommentId()).withSelfRel());

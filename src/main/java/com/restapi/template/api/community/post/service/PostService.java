@@ -72,15 +72,7 @@ public class PostService {
         .orElseThrow(PostNotFoundException::new);
     post.increaseViews();
 
-    return PostDetailDto.builder()
-        .title(post.getTitle())
-        .body(post.getBody())
-        .writerId(post.getAuthor().getUserId())
-        .comments(post.getComments())
-        .createdDate(post.getCreatedDate())
-        .modifiedDate(post.getModifiedDate())
-        .views(post.getViews())
-        .build();
+    return new PostDetailDto(post);
   }
 
   /**

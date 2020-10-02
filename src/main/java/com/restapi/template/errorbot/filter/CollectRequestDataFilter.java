@@ -1,14 +1,14 @@
 package com.restapi.template.errorbot.filter;
 
 import static com.restapi.template.errorbot.util.AgentUtils.getAgentDetail;
-import static com.restapi.template.errorbot.util.MDCUtil.AGENT_DETAIL_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.BODY_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.HEADER_MAP_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.PARAMETER_MAP_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.REQUEST_URI_MDC;
-import static com.restapi.template.errorbot.util.MDCUtil.clear;
-import static com.restapi.template.errorbot.util.MDCUtil.putMDC;
-import static com.restapi.template.errorbot.util.MDCUtil.setJsonValueAndPutMDC;
+import static com.restapi.template.errorbot.util.MdcUtil.AGENT_DETAIL_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.BODY_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.HEADER_MAP_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.PARAMETER_MAP_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.REQUEST_URI_MDC;
+import static com.restapi.template.errorbot.util.MdcUtil.clear;
+import static com.restapi.template.errorbot.util.MdcUtil.putMdc;
+import static com.restapi.template.errorbot.util.MdcUtil.setJsonValueAndPutMdc;
 
 import com.restapi.template.errorbot.util.RequestWrapper;
 import java.io.IOException;
@@ -32,11 +32,11 @@ public class CollectRequestDataFilter implements Filter {
       throws IOException, ServletException {
     RequestWrapper requestWrapper = RequestWrapper.of(request);
 
-    setJsonValueAndPutMDC(HEADER_MAP_MDC, requestWrapper.headerMap());
-    setJsonValueAndPutMDC(PARAMETER_MAP_MDC, requestWrapper.parameterMap());
-    setJsonValueAndPutMDC(BODY_MDC, requestWrapper.body());
-    setJsonValueAndPutMDC(AGENT_DETAIL_MDC, getAgentDetail((HttpServletRequest) request));
-    putMDC(REQUEST_URI_MDC, requestWrapper.getRequestUri());
+    setJsonValueAndPutMdc(HEADER_MAP_MDC, requestWrapper.headerMap());
+    setJsonValueAndPutMdc(PARAMETER_MAP_MDC, requestWrapper.parameterMap());
+    setJsonValueAndPutMdc(BODY_MDC, requestWrapper.body());
+    setJsonValueAndPutMdc(AGENT_DETAIL_MDC, getAgentDetail((HttpServletRequest) request));
+    putMdc(REQUEST_URI_MDC, requestWrapper.getRequestUri());
 
     try {
       chain.doFilter(request, response);

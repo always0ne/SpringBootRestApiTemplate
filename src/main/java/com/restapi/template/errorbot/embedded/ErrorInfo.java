@@ -37,6 +37,11 @@ public class ErrorInfo {
   @Column(name = "TRACE", columnDefinition = "TEXT")
   private String trace;
 
+  /**
+   * Error 정보.
+   *
+   * @param eventObject 로그 정보
+   */
   public ErrorInfo(ILoggingEvent eventObject) {
     this.loggerName = eventObject.getLoggerName();
     this.message = eventObject.getMessage();

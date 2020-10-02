@@ -46,6 +46,12 @@ public class Comment extends Date {
   @JoinColumn(name = "author")
   private Users author;
 
+  /**
+   * 댓글.
+   *
+   * @param author  댓글 작성자
+   * @param message 댓글 본문
+   */
   public Comment(Users author, String message) {
     super();
     this.author = author;

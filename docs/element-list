@@ -4,9 +4,9 @@ com.restapi.template.api.common.exception
 com.restapi.template.api.common.response
 com.restapi.template.api.community.comment.controller
 com.restapi.template.api.community.comment.data
-com.restapi.template.api.community.comment.exception
 com.restapi.template.api.community.comment.request
 com.restapi.template.api.community.comment.service
+com.restapi.template.api.community.dto
 com.restapi.template.api.community.post.controller
 com.restapi.template.api.community.post.data
 com.restapi.template.api.community.post.dto
@@ -17,6 +17,7 @@ com.restapi.template.api.community.post.service
 com.restapi.template.api.user.controller
 com.restapi.template.api.user.data
 com.restapi.template.api.user.data.dto
+com.restapi.template.api.user.exception
 com.restapi.template.api.user.service
 com.restapi.template.configs
 com.restapi.template.errorbot

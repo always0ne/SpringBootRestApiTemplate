@@ -15,6 +15,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
   /**
    * 사용자의 댓글인지 확인하며 댓글조회.
    *
+   * @param userId 작성자 ID
    * @param commentId 댓글 ID
    * @return 댓글(Optional)
    */

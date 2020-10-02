@@ -8,10 +8,10 @@ package com.restapi.template.api.community.post.exception;
  * @version 1.0
  */
 public class PostNotFoundException extends RuntimeException {
-    /**
-     * 존재하지 않는 게시글입니다.
-     */
-    public PostNotFoundException() {
-        super("존재하지 않는 게시글입니다.");
-    }
+  /**
+   * 존재하지 않는 게시글입니다.
+   */
+  public PostNotFoundException() {
+    super("존재하지 않는 게시글입니다.");
+  }
 }

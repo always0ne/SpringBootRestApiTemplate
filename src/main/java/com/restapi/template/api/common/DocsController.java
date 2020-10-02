@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * API Docs 링크 제공을 위한 컨트롤러
+ * API Docs 링크 제공을 위한 컨트롤러.
  *
  * @author always0ne
  * @version 1.0

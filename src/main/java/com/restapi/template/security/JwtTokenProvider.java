@@ -87,11 +87,10 @@ public class JwtTokenProvider {
    * @return AccessToken
    */
   protected String generateToken(String userId, List<UserRole> roles, long tokenValidMilSecond) {
-    Claims claims = Jwts.claims().setSubject(userId);
-    claims.put("roles", roles);
     Date now = new Date();
     return Jwts.builder()
-        .setClaims(claims)
+        .claim("userId",userId)
+        .claim("roles",roles)
         .setIssuedAt(now)
         .setExpiration(new Date(now.getTime() + tokenValidMilSecond))
         .signWith(this.key, SignatureAlgorithm.HS256)
